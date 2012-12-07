@@ -8,6 +8,10 @@ sudo apt-get install vim vim-nox
 # Ensure system ruby is installed
 sudo apt-get install ruby rubygems rake
 
+# Ensure submodules are loaded
+git submodule init
+git submodule update
+
 # Use system ruby to compile command-t, if rvm is installed
 if [ "`type rvm`" != "" ]; then
   echo "You appear to be using RVM. Running 'rvm use system'."
