@@ -99,8 +99,11 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 :set t_Co=256 " 256 colors
-:set background=dark
-:color grb256
+set background=dark
+" :color grb256
+" :color molokai
+" :color solarized
+:color Tomorrow-Night-Bright
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -353,3 +356,22 @@ au BufNewFile,BufReadPost *.handlebars setl shiftwidth=2 expandtab
 
 " Enable folding for coffeescript files
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
+" Copy and paste from clipboard with ,y and ,p
+" nnoremap <leader>y "+y
+" vnoremap <leader>y "+y
+" nnoremap <leader>p "+p
+" vnoremap <leader>p "+p
+
+" jj exits insert mode
+imap jj <esc>
+
+" Toggle relative/absolute numbers with C+n
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
