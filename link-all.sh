@@ -2,7 +2,7 @@
 set -e
 
 # Define files to copy
-FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf"
+FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf .zshrc .oh-my-zsh"
 
 # Current directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
