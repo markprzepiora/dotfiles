@@ -28,3 +28,5 @@
 [core]
 	; editor = mate -w
 	editor = vi
+[color]
+	ui = true
