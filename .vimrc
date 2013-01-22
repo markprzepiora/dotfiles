@@ -375,3 +375,6 @@ function! NumberToggle()
   endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
+
+" Toggle folds with space
+nnoremap <Space> za
