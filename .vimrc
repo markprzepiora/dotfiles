@@ -378,3 +378,8 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 " Toggle folds with space
 nnoremap <Space> za
+
+" Set up eregex
+" nnoremap / :M/ 
+" nnoremap ,/ / 
+
