@@ -5,7 +5,7 @@ set -e
 # Make sure full vim is installed
 sudo apt-get install vim vim-nox
 
-# Ensure system ruby is installed
+# Ensure system ruby 1.8 is installed
 sudo apt-get install ruby rubygems rake
 
 # Ensure submodules are loaded
@@ -18,7 +18,10 @@ if [ "`type rvm`" != "" ]; then
   rvm use system
 fi
 
-# Compile command-t
-cd ~/.vim/bundle/command-t/ruby/command-t && rake make
+# Compile command-t using system Ruby 1.8
+cd ~/.vim/bundle/command-t/ruby/command-t 
+make clean
+ruby1.8 extconf.rb
+make
 
 echo "Done"
