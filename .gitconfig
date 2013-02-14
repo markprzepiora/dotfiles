@@ -26,7 +26,8 @@
   la = !git l --all
 
 [core]
-	; editor = mate -w
-	editor = vi
+  ; editor = mate -w
+  ; editor = vi
+  editor = mvim -v
 [color]
 	ui = true

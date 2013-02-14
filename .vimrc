@@ -383,3 +383,12 @@ nnoremap <Space> za
 " nnoremap / :M/ 
 " nnoremap ,/ / 
 
+" XMPfilter annotations
+map <silent> <F8> !xmpfilter -a<cr>
+nmap <silent> <F8> V<F10>
+imap <silent> <F8> <ESC><F10>a
+
+" Annotate the full buffer
+" I actually prefer ggVG to %; it's a sort of poor man's visual bell 
+nmap <silent> <F7> mzggVG!xmpfilter -a<cr>'z
+imap <silent> <F7> <ESC><F7>
