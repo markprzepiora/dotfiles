@@ -391,6 +391,7 @@ imap <silent> <F8> <ESC><F10>a
 " Annotate the full buffer
 " I actually prefer ggVG to %; it's a sort of poor man's visual bell 
 nmap <silent> <F7> mzggVG!xmpfilter -a<cr>'z
+" nmap <silent> <F7> mz%;!xmpfilter -a<cr>'z
 imap <silent> <F7> <ESC><F7>
 
 
@@ -405,3 +406,21 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a> :Tabularize /=><CR>
 vmap <Leader>a> :Tabularize /=><CR>
+
+
+" Select the current line's indent level
+function SelectIndent()
+  let cur_line = line(".")
+  let cur_ind = indent(cur_line)
+  let line = cur_line
+  while indent(line - 1) >= cur_ind
+    let line = line - 1
+  endw
+  exe "normal " . line . "G"
+  exe "normal V"
+  let line = cur_line
+  while indent(line + 1) >= cur_ind
+    let line = line + 1
+  endw
+  exe "normal " . line . "G"
+endfunction
