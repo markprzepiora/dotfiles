@@ -14,6 +14,6 @@ cd ~/dotfiles
 ./setup-ubuntu.sh
 
 # Setup zsh as default shell
-chsh -s `which zsh`
-
-echo "Should be ready to go!"
+echo "Done! If you wish to enable zsh as your defualt shell, please run the following:"
+echo "  chsh -s `which zsh`"
+echo "Otherwise, you may give it a test run simply by running 'zsh' from the terminal."
