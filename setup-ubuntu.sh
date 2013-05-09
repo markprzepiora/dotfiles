@@ -3,10 +3,13 @@
 set -e
 
 # Make sure full vim is installed
-sudo apt-get install vim vim-nox
+sudo apt-get install -y vim vim-nox
 
 # Ensure system ruby 1.8 is installed
-sudo apt-get install ruby rubygems rake
+sudo apt-get install -y ruby rubygems rake
+
+# Install zsh
+sudo apt-get install -y zsh
 
 # Ensure submodules are loaded
 git submodule init
