@@ -13,14 +13,13 @@ git submodule init
 git submodule update
 
 # Use system ruby to compile command-t, if rvm is installed
-if [ "`type rvm`" != "" ]; then
+if [ "`which rvm`" != "" ]; then
   echo "You appear to be using RVM. Running 'rvm use system'."
   rvm use system
 fi
 
 # Compile command-t using system Ruby 1.8
 cd ~/.vim/bundle/command-t/ruby/command-t 
-make clean
 ruby1.8 extconf.rb
 make
 
