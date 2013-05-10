@@ -3,8 +3,12 @@
 # Stop on errors
 set -e
 
-# Clone repo
-cd ~ && git clone https://github.com/markprzepiora/dotfiles.git
+# Clone repo if it does not exist
+if [ ! -d "$HOME/dotfiles" ]; then
+  cd ~ && git clone https://github.com/markprzepiora/dotfiles.git
+fi
+
+# Chdir to it
 cd ~/dotfiles
 
 # Link files
