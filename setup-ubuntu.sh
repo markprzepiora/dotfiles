@@ -6,7 +6,7 @@ set -e
 sudo apt-get install -y vim vim-nox
 
 # Ensure system ruby 1.8 is installed
-sudo apt-get install -y ruby rubygems rake
+sudo apt-get install -y ruby ruby1.8-dev rubygems rake
 
 # Install zsh
 sudo apt-get install -y zsh
