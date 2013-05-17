@@ -31,3 +31,5 @@
   editor = mvim -v
 [color]
 	ui = true
+[push]
+	default = simple
