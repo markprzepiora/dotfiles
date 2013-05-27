@@ -25,6 +25,9 @@
   l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
 
+  # Add untracked files only
+  au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
+
 [core]
   ; editor = mate -w
   ; editor = vi
