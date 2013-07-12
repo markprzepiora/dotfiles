@@ -218,8 +218,12 @@ map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
 map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+" map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+" map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+" map <leader>f :CtrlPClearCache<cr>\|:CtrlP<cr>
+" map <leader>F :CtrlPClearCache<cr>\|:CtrlP %%<cr>
+map <leader>f :CtrlP<cr>
+map <leader>F :CtrlP %%<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
