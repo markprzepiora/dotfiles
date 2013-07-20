@@ -428,3 +428,8 @@ function SelectIndent()
   endw
   exe "normal " . line . "G"
 endfunction
+
+" set the cursor to a vertical line in insert mode and a solid block
+" in command mode
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
