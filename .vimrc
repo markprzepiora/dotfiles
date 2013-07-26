@@ -433,3 +433,9 @@ endfunction
 " in command mode
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+
+" Vundle stuff
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'plasticboy/vim-markdown'
