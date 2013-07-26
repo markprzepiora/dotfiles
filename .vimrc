@@ -439,3 +439,5 @@ let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'plasticboy/vim-markdown'
+Bundle 'scrooloose/nerdtree'
+Bundle 'slim-template/vim-slim'
