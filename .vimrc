@@ -434,6 +434,10 @@ endfunction
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
 
 " Vundle stuff
 set rtp+=~/.vim/bundle/vundle/
@@ -458,3 +462,4 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'kien/ctrlp.vim'
+Bundle 'jtratner/vim-flavored-markdown'
