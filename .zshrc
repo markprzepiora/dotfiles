@@ -1,3 +1,8 @@
+# From the zsh docs:
+#
+# `.zshrc' is sourced in interactive shells. It should contain commands to set
+# up aliases, functions, options, key bindings, etc.
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -15,7 +20,7 @@ ZSH_THEME="robbyrussell"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -40,11 +45,6 @@ source $ZSH/oh-my-zsh.sh
 unsetopt autopushd
 unsetopt correct_all
 
-source ~/.profile
-
-# PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-# PROMPT='%{$fg_bold[red]%}╭─%n@%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}
-# %{$fg_bold[red]%}╰─➜ %{$reset_color%}'
 PROMPT='%{$fg_bold[red]%}╭─%n@%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}
 %{$fg_bold[red]%}╰─→ %{$reset_color%}'
 
@@ -52,3 +52,6 @@ PROMPT='%{$fg_bold[red]%}╭─%n@%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$H
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
+
+# Load personalized zshrc files if they exist.
+[[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
