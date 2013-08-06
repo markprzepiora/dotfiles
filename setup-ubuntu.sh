@@ -22,8 +22,8 @@ if [ "`which rvm`" != "" ]; then
 fi
 
 # Compile command-t using system Ruby 1.8
-cd ~/.vim/bundle/command-t/ruby/command-t 
-ruby1.8 extconf.rb
-make
+#cd ~/.vim/bundle/command-t/ruby/command-t 
+#ruby1.8 extconf.rb
+#make
 
 echo "Done"
