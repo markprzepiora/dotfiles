@@ -59,6 +59,7 @@ set wildmenu
 let mapleader=","
 
 set wildignore+=public/system/**,.git,.svn,tmp/**
+set wildignore+=bower_components/**,public/uploads/photo
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
