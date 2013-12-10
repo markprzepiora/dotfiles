@@ -29,9 +29,7 @@
   au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
 
 [core]
-  ; editor = mate -w
-  ; editor = vi
-  editor = mvim -v
+  editor = vim
 [color]
 	ui = true
 [push]
