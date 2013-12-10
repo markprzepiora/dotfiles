@@ -4,7 +4,7 @@
 [alias]
   co = checkout
   aa = add --all
-  st = status
+  st = status --short
   ci = commit
   dc = diff --cached
   di = diff
