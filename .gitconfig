@@ -1,6 +1,6 @@
 [user]
-	name = Mark Przepiora
-	email = mark.przepiora@gmail.com
+  name = Mark Przepiora
+  email = mark.przepiora@gmail.com
 [alias]
   co = checkout
   aa = add --all
@@ -27,10 +27,11 @@
 
   # Add untracked files only
   au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
+  lg = log --color --graph --pretty=format:'%Cred%h %Cgreen(%ci)%Creset%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [core]
   editor = vim
 [color]
-	ui = true
+  ui = true
 [push]
-	default = simple
+  default = simple
