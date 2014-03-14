@@ -57,5 +57,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
 
+alias scum="sed 's/^/.+/' | bc"
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
