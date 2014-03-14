@@ -189,6 +189,17 @@ endfunction
 :map <leader>p :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" USEFUL GETTER MACRO FOR EMBER.JS APPLICATIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! EmberGetter()
+  :.s/\(\w\+\)$/\1 = @get('\1')/
+  :normal! +
+  silent! call repeat#set(",l", -1)  " Allow us to do it multiple times
+endfunction
+:command! EmberGetter :call EmberGetter()
+:map <leader>l :EmberGetter<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>gr :topleft :split config/routes.rb<cr>
