@@ -446,6 +446,11 @@ augroup markdown
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
+augroup yaml
+  au!
+  au BufNewFile,BufRead *.yml setlocal filetype=xxx
+augroup END
+
 " Vundle stuff
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
