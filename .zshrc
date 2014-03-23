@@ -59,5 +59,37 @@ bindkey '^X^e' edit-command-line
 
 alias scum="sed 's/^/.+/' | bc"
 
+# Workflow:
+#
+#   # Hack away finding stuff to replace
+#   $ ack someregex
+#
+#   # Replace everything
+#   $ ackr someregex replace directory
+#
+function ackr() {(
+  if (( $# < 3 )); then
+    echo "Usage: ackr search replace ackargs..."
+    echo "Example: ackr dinner supper spec"
+    exit
+  fi
+
+  if `/usr/bin/which -s ack-grep`; then
+    ack=ack-grep
+  elif `/usr/bin/which -s ack`; then
+    ack=ack
+  else
+    echo "You don't seem to have ack installed"
+    exit
+  fi
+
+  search="$1"
+  replace="$2"
+  shift 2
+  ackargs="$@"
+
+  $ack "$search" $ackargs -l | xargs sed -i '' -E "s/$search/$replace/g"
+)}
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
