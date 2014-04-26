@@ -58,6 +58,13 @@ set wildmode=longest,list
 set wildmenu
 let mapleader=","
 
+
+" Try to fix slow syntax highlighting
+set re=1
+set nocursorcolumn
+set nocursorline
+syntax sync minlines=256
+
 set wildignore+=public/system/**,.git,.svn,tmp/**
 set wildignore+=bower_components/**,public/uploads/photo,node_modules/**
 
