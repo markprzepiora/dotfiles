@@ -24,6 +24,7 @@
   ra = !git r --all
   l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
+  lac = "!. ~/.githelpers && pretty_git_log2"
 
   # Add untracked files only
   au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
