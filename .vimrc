@@ -380,6 +380,10 @@ au BufNewFile,BufReadPost *.handlebars setl shiftwidth=2 expandtab
 " Enable folding for coffeescript files
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
+" Allow auto-completion of names with dashes in CSS and HTML (useful for class
+" names)
+au BufNewFile,BufReadPost *.css,*.scss,*.html,*.handlebars,*.hbs,*.html.erb setl iskeyword+=-
+
 " Copy and paste from clipboard with ,y and ,p
 " nnoremap <leader>y "+y
 " vnoremap <leader>y "+y
