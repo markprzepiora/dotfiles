@@ -23,3 +23,5 @@
 /.vim/bundle/vim-vroom/
 /.vim/bundle/zencoding-vim/
 /.vim/bundle/editorconfig-vim/
+/.vim/bundle/matchit/
+/.vim/bundle/vim-go/
