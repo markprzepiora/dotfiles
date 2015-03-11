@@ -20,8 +20,8 @@ AUTHOR="%C(bold blue)<%an>%Creset"
 REFS="%C(red)%d%Creset"
 SUBJECT="%s"
 
-FORMAT="$HASH}$RELATIVE_TIME}$AUTHOR}$REFS $SUBJECT"
-FORMAT2="$HASH}$RELATIVE_TIME}XXX<$PLAINHASH>XXX}$AUTHOR}$REFS $SUBJECT"
+FORMAT="$HASH}}}}$RELATIVE_TIME}}}}$AUTHOR}}}}$REFS $SUBJECT"
+FORMAT2="$HASH}}}}$RELATIVE_TIME}}}}XXX<$PLAINHASH>XXX}}}}$AUTHOR}}}}$REFS $SUBJECT"
 
 show_git_head() {
     pretty_git_log -1
@@ -34,8 +34,10 @@ pretty_git_log() {
         sed -Ee 's/(^[^<]*) ago\)/\1)/' |
         # Replace (2 years, 5 months) with (2 years)
         sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
-        # Line columns up based on } delimiter
-        column -s '}' -t |
+        # Replace }}}}s with daggers
+        sed -Ee 's/}}}}/†/g' |
+        # Line columns up based on dagger
+        column -s '†' -t |
         # Page only if we need to
         less -FXRS
 }
@@ -63,8 +65,10 @@ pretty_git_log2() {
         sed -Ee 's/(^[^<]*) ago\)/\1)/' |
         # Replace (2 years, 5 months) with (2 years)
         sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
+        # Replace }}}}s with daggers
+        sed -Ee 's/}}}}/†/g' |
         # Line columns up based on } delimiter
-        column -s '}' -t |
+        column -s '†' -t |
         # Page only if we need to
         filestats |
         less -FXRS
