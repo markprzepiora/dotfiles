@@ -88,7 +88,14 @@ function ackr() {(
   shift 2
   ackargs="$@"
 
-  $ack "$search" $ackargs -l | xargs sed -i '' -E "s/$search/$replace/g"
+  if `/usr/bin/which -s gsed`; then
+    $ack "$search" $ackargs -l | xargs gsed -r -i -e "s/$search/$replace/g"
+  elif `/usr/bin/which -s sed`; then
+    $ack "$search" $ackargs -l | xargs sed -i '' -E "s/$search/$replace/g"
+  else
+    echo "You don't seem to have sed installed"
+    exit
+  fi
 )}
 
 # Load personalized zshrc files if they exist.
