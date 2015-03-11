@@ -507,6 +507,8 @@ augroup yaml
   au BufNewFile,BufRead *.yml setlocal filetype=xxx
 augroup END
 
+let g:UltiSnipsExpandTrigger="<c-b>"
+
 " Vundle stuff
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -535,3 +537,4 @@ Bundle 'bronson/vim-visual-star-search'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'fatih/vim-go'
+Bundle 'SirVer/ultisnips'

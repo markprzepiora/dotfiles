@@ -1,0 +1,14 @@
+snippet #!
+#!/usr/bin/env bash
+
+set -eu
+set -o pipefail
+
+readonly ARGS="\$@"
+readonly LONGPROGNAME="\$(type \$0 | awk '{print \$3}')"
+readonly PROGDIR="\${LONGPROGNAME%/*}"     # get directory component (remove short match)
+readonly PROGNAME="\${LONGPROGNAME##*/}"   # get basename component (remove long match)
+
+set -x
+
+endsnippet
