@@ -335,6 +335,47 @@ function! RunTests(filename)
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Wrapping stuff in HTML/Handlebars
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Wrap visual selection in a Handlebars tag.
+" http://vim.wikia.com/wiki/Wrap_a_visual_selection_in_an_HTML_tag
+vmap <Leader>W <Esc>:call VisualHTMLTagWrap()<CR>
+function! VisualHTMLTagWrap()
+  let tag = input("Tag to wrap block: ")
+  if len(tag) > 0
+    normal `>
+    if &selection == 'exclusive'
+      exe "normal O</".tag.">"
+    else
+      exe "normal a</".tag.">"
+    endif
+    normal `<
+    exe "normal i<".tag.">"
+    normal `<
+  endif
+endfunction
+
+" Wrap visual selection in a Handlebars tag.
+" http://vim.wikia.com/wiki/Wrap_a_visual_selection_in_an_HTML_tag
+vmap <Leader>w <Esc>:call VisualHandlebarsTagWrap()<CR>
+function! VisualHandlebarsTagWrap()
+  let tag = input("Tag to wrap block: ")
+  if len(tag) > 0
+    normal `>
+    if &selection == 'exclusive'
+      exe "normal O{{/".tag."}}"
+    else
+      exe "normal a{{/".tag."}}"
+    endif
+    normal `<
+    exe "normal i{{#".tag."}}"
+    normal `<
+  endif
+endfunction
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Md5 COMMAND
 " Show the MD5 of the current buffer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
