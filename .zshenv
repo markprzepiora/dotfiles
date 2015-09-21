@@ -12,4 +12,4 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Load autojump if homebrew is installed.
-[ -n "`command -v brew`" -a -s `brew --prefix`/etc/autojump.sh ] && . `brew --prefix`/etc/autojump.zsh
+[ -n "`command -v brew`" -a -s `brew --prefix`/etc/autojump.sh ] && . `brew --prefix`/etc/autojump.sh
