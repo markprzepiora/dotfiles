@@ -1,0 +1,38 @@
+global !p
+def camelcase(filename):
+	underscored_name = re.sub(r'\.rb$', r'', fn)
+	titleized = underscored_name.title()
+	camelcased = titleized.replace('_', '')
+	return camelcased
+
+def return_camelcase():
+	snip.rv = camelcase(fn).replace("Spec", "")
+endglobal
+
+snippet model
+class ${1:`!p return_camelcase() `} < ActiveRecord::Base
+	$0
+end
+endsnippet
+
+snippet apicontroller
+class Api::${1:`!p return_camelcase() `} < Api::ApiController
+	$0
+end
+endsnippet
+
+snippet spec
+require 'spec_helper'
+
+describe ${1:`!p return_camelcase() `} do
+	$0
+end
+endsnippet
+
+snippet policy
+module Policies
+	module ${1:`!p return_camelcase() `}
+		$0
+	end
+end
+endsnippet
