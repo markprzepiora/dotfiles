@@ -66,7 +66,7 @@ set nocursorline
 syntax sync minlines=256
 
 set wildignore+=public/system/**,.git,.svn,tmp/**
-set wildignore+=bower_components/**,public/uploads/photo,node_modules/**
+set wildignore+=bower_components/**,public/uploads/photo,node_modules/**,frontend/node_modules/**
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|tmp$\|\.bundle$',
