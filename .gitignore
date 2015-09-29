@@ -25,3 +25,9 @@
 /.vim/bundle/editorconfig-vim/
 /.vim/bundle/matchit/
 /.vim/bundle/vim-go/
+/.vim/bundle/elm.vim/
+/.vim/bundle/rust.vim/
+/.vim/bundle/ultisnips/
+/.vim/bundle/vim-abolish/
+/.vim/bundle/vim-jsx/
+/.vim/bundle/vim-toml/

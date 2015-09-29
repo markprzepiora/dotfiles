@@ -15,7 +15,7 @@
 
 PLAINHASH="%h"
 HASH="%C(yellow)%h%Creset"
-RELATIVE_TIME="%Cgreen(%ar)%Creset"
+RELATIVE_TIME="%Cgreen(%ai)%Creset"
 AUTHOR="%C(bold blue)<%an>%Creset"
 REFS="%C(red)%d%Creset"
 SUBJECT="%s"

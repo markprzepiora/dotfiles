@@ -98,5 +98,30 @@ function ackr() {(
   fi
 )}
 
+# The two settings below taken from
+# http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
+
+# Use M-= to delete backwards in a flag-friendly way. Example:
+# $ git push origin master --force
+# Above, M-del would delete only to --.
+# M-= will delete to the space.
+function _backward_kill_default_word() {
+  WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' zle backward-kill-word
+}
+zle -N backward-kill-default-word _backward_kill_default_word
+bindkey '\e=' backward-kill-default-word   # = is next to backspace
+
+# Interactive move.
+# Example: imv "some long filename that's annoying to move manually"
+imv() {
+  local src dst
+  for src; do
+    [[ -e $src ]] || { print -u2 "$src does not exist"; continue }
+    dst=$src
+    vared dst
+    [[ $src != $dst ]] && mkdir -p $dst:h && mv -n $src $dst
+  done
+}
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"

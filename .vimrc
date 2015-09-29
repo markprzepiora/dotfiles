@@ -382,6 +382,13 @@ endfunction
 command! -range Md5 :echo system('echo '.shellescape(join(getline(<line1>, <line2>), '\n')) . '| md5')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sudo write with w!!
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+cmap w!! w !sudo tee > /dev/null %
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OpenChangedFiles COMMAND
 " Open a split for each dirty file in git
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -537,5 +544,9 @@ Bundle 'bronson/vim-visual-star-search'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'fatih/vim-go'
+Bundle 'mxw/vim-jsx'
+Bundle 'cespare/vim-toml'
+Bundle 'lambdatoast/elm.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'rust-lang/rust.vim'
+Bundle 'tpope/vim-abolish'

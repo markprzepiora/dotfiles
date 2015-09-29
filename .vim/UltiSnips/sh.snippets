@@ -3,9 +3,10 @@ snippet #!
 
 set -eu
 set -o pipefail
+set -x
 
 readonly ARGS="\$@"
-readonly LONGPROGNAME="\$(type \$0 | awk '{print \$3}')"
+readonly LONGPROGNAME=\$(perl -m'Cwd' -e 'print Cwd::abs_path(@ARGV[0])' "\$0")
 readonly PROGDIR="\${LONGPROGNAME%/*}"     # get directory component (remove short match)
 readonly PROGNAME="\${LONGPROGNAME##*/}"   # get basename component (remove long match)
 
