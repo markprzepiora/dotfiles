@@ -68,6 +68,11 @@ syntax sync minlines=256
 set wildignore+=public/system/**,.git,.svn,tmp/**
 set wildignore+=bower_components/**,public/uploads/photo,node_modules/**
 
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|tmp$\|\.bundle$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
