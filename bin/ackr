@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+
+# Example usage (command line):
+#
+#     $ ackr '\bfoo\b' bar .
+#
+# The above replaces all instances of the regexp /\bfoo\b/ (word boundary, foo,
+# word boundary) with the string "bar", in all files found by ack in the
+# current directory.
+#
+# Example usage: (interactive mode):
+#
+# You can specify fewer than all three inputs (even zero) on the command line,
+# and instead they will be read interactively.
+#
+#     $ ackr '\bfoo\b' bar
+#     search: \bfoo\b
+#     replace: bar
+#     where: <prompt>
+
+require 'readline'
+require 'json'
+require 'fileutils'
+
+ackr_dir = Dir.home + "/.ackr"
+history_file = ackr_dir + "/history"
+
+# Make sure we have our ~/.ackr directory and the history file.
+FileUtils.mkdir_p(ackr_dir)
+FileUtils.touch(history_file)
+
+# Read the existing history, and load it into Readline.
+File.open(history_file, "r") do |f|
+  f.each_line do |line|
+    Readline::HISTORY.push(line.chomp)
+  end
+end
+
+# Read a variable with the given name, using the default if present.
+def get_input(name, default)
+  if default
+    $stderr.puts "#{name}: #{default}"
+    default
+  else
+    Readline.readline("#{name}: ", true)
+  end
+end
+
+# Push any of the three inputs (search, replace, location) given on the command
+# line into Readline history, if present.
+ARGV.each do |line|
+  Readline::HISTORY.push(line)
+end
+
+# Get the inputs.
+search  = get_input('search', ARGV[0])
+replace = get_input('replace', ARGV[1])
+where   = get_input('where', ARGV[2])
+
+# Write out the updated history before continuing.
+File.open(history_file, 'w') do |f|
+  f.write(Readline::HISTORY.to_a.last(1000).join("\n"))
+end
+
+# Shell out to ack to find matching files.
+files = IO.popen(["ack", search, '-l', *where.split(" ")]) do |io|
+  io.each_line.to_a.map(&:chomp)
+end
+
+files.each do |filename|
+  # Perform the substitution in-memory. (Hoping these files aren't huge.)
+  replaced_contents = File.read(filename).gsub(Regexp.new(search), replace)
+
+  # Write out the substituted contents.
+  File.open(filename, 'w') { |f| f.write(replaced_contents) }
+
+  # Show the user what we've modified.
+  puts filename
+end
+
+$stderr.puts "performed substitutions in #{files.count} files"

@@ -67,36 +67,10 @@ alias scum="sed 's/^/.+/' | bc"
 #   # Replace everything
 #   $ ackr someregex replace directory
 #
-function ackr() {(
-  if (( $# < 3 )); then
-    echo "Usage: ackr search replace ackargs..."
-    echo "Example: ackr dinner supper spec"
-    exit
-  fi
-
-  if `/usr/bin/which -s ack-grep`; then
-    ack=ack-grep
-  elif `/usr/bin/which -s ack`; then
-    ack=ack
-  else
-    echo "You don't seem to have ack installed"
-    exit
-  fi
-
-  search="$1"
-  replace="$2"
-  shift 2
-  ackargs="$@"
-
-  if `/usr/bin/which -s gsed`; then
-    $ack "$search" $ackargs -l | xargs gsed -r -i -e "s/$search/$replace/g"
-  elif `/usr/bin/which -s sed`; then
-    $ack "$search" $ackargs -l | xargs sed -i '' -E "s/$search/$replace/g"
-  else
-    echo "You don't seem to have sed installed"
-    exit
-  fi
-)}
+#   # Or gather inputs interactively
+#   $ ackr
+#
+alias ackr="~/dotfiles/bin/ackr"
 
 # The two settings below taken from
 # http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
