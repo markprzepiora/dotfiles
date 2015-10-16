@@ -19,7 +19,6 @@
 #     where: <prompt>
 
 require 'readline'
-require 'json'
 require 'fileutils'
 
 ackr_dir = Dir.home + "/.ackr"
