@@ -7,10 +7,10 @@ FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf .zshrc .zshenv .oh-my-zsh .
 # Current directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# On OSX, make sure we use gnutar
-if [ "`which gnutar`" != "" ]; then
-  TAR="`which gnutar`"
-  echo using gnutar
+# On OSX, make sure we use gtar
+if [ "`which gtar`" != "" ]; then
+  TAR="`which gtar`"
+  echo using gtar
 else
   TAR="`which tar`"
   echo using tar
