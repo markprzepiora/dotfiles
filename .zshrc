@@ -97,5 +97,8 @@ imv() {
   done
 }
 
+# Use Selecta to interactively select a branch to check out.
+alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"

@@ -66,7 +66,7 @@ set nocursorline
 syntax sync minlines=256
 
 set wildignore+=public/system/**,.git,.svn,tmp/**
-set wildignore+=bower_components/**,public/uploads/photo,node_modules/**
+set wildignore+=bower_components/**,public/uploads/photo,node_modules/**,frontend/node_modules/**
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc$\|tmp$\|\.bundle$',
@@ -286,9 +286,6 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
-" map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
     if a:0
