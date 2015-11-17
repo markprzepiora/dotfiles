@@ -21,7 +21,6 @@
 /.vim/bundle/vim-unimpaired/
 /.vim/bundle/vim-visual-star-search/
 /.vim/bundle/vim-vroom/
-/.vim/bundle/zencoding-vim/
 /.vim/bundle/editorconfig-vim/
 /.vim/bundle/matchit/
 /.vim/bundle/vim-go/
@@ -31,3 +30,4 @@
 /.vim/bundle/vim-abolish/
 /.vim/bundle/vim-jsx/
 /.vim/bundle/vim-toml/
+/.vim/bundle/emmet-vim/
