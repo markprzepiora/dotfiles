@@ -62,7 +62,7 @@ File.open(history_file, 'w') do |f|
 end
 
 # Shell out to ack to find matching files.
-files = IO.popen(["ack", search, '-l', *where.split(" ")]) do |io|
+files = IO.popen(["ag", search, '-l', *where.split(" ")]) do |io|
   io.each_line.to_a.map(&:chomp)
 end
 
