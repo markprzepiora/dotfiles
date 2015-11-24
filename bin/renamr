@@ -1,0 +1,260 @@
+#!/usr/bin/env ruby
+
+require 'pstore'
+require 'pathname'
+require 'optparse'
+require 'readline'
+require 'fileutils'
+
+renamr_dir = Dir.home + "/.mrp/renamr"
+history_file = renamr_dir + "/history.pstore"
+
+FileUtils.mkdir_p(renamr_dir)
+
+# ============================================================================
+# CLASSES
+# ============================================================================
+
+class RenameMany
+  attr_reader :performed_at
+  attr_reader :renamed_files
+
+  def initialize(renamed_files = [])
+    @performed_at = Time.now
+    @renamed_files = []
+    @_targets = {}
+
+    renamed_files.each do |rf|
+      queue_rename(rf)
+    end
+  end
+
+  def undo
+    self.class.new(renamed_files.map(&:undo))
+  end
+
+  def queue_rename(renamed_file)
+    if @_targets.key?(renamed_file.to)
+      $stderr.puts <<-SQL
+Warning: skipping rename of #{renamed_file.from.to_s} => #{renamed_file.to.basename.to_s}.
+We are already renaming #{@_targets[renamed_file.to].from.to_s} to this.
+      SQL
+      return false
+    end
+
+    @_targets[renamed_file.to] = renamed_file
+    @renamed_files << renamed_file
+    true
+  end
+
+  def perform!(report = false)
+    @renamed_files.each do |rf|
+      rf.perform!
+      puts rf.report if report
+    end
+  end
+
+  def report!
+    @renamed_files.each do |rf|
+      puts rf.report
+    end
+  end
+end
+
+class RenameFile
+  attr_reader :from, :to
+
+  # from and to should be Pathnames
+  def initialize(from, to)
+    @from = from
+    @to = to
+
+    @performed = false
+    @ok = nil
+    @error = nil
+  end
+
+  def undo
+    self.class.new(to, from)
+  end
+
+  def report
+    status_icon = if !performed?
+      " "
+    elsif ok?
+      "✓"
+    else
+      "✖"
+    end
+
+    to_string = if @to.dirname == @from.dirname
+      @to.basename.to_s
+    else
+      @to.to_s
+    end
+
+    "[#{status_icon}] #{@from} => #{to_string}"
+  end
+
+  def realpath
+    if performed? && ok?
+      @to.realpath
+    else
+      @from.realpath
+    end
+  end
+
+  def from_realpath
+    @from.realpath
+  end
+
+  def perform!
+    if performed?
+      fail "already performed rename #{inspect}"
+    end
+
+    @performed = true
+
+    begin
+      @from.rename(@to)
+      @ok = true
+      true
+    rescue SystemCallError => e
+      @ok = false
+      @error = e
+      false
+    end
+  end
+
+  def performed?
+    @performed
+  end
+
+  def ok?
+    if !performed?
+      fail "did not yet try to rename #{inspect}"
+    end
+
+    @ok
+  end
+
+  def error
+    if ok?
+      fail "no error to report for #{inspect}"
+    end
+  end
+end
+
+class HistoryEntry
+  attr_reader :renamer, :pwd, :performed_at
+
+  def initialize(renamer, pwd = Pathname.pwd.realpath, performed_at = Time.now)
+    @renamer = renamer
+    @pwd = pwd
+    @performed_at = performed_at
+  end
+end
+
+# Read a variable with the given name, using the default if present.
+def get_input(name, default)
+  if default
+    $stderr.puts "#{name}: #{default}"
+    default
+  else
+    Readline.readline("#{name}: ", true)
+  end
+end
+
+# =============================================================================
+# PARSE OPTIONS
+# =============================================================================
+
+$options = { dry_run: false, verbose: true }
+OptionParser.new do |opts|
+  opts.banner = "Usage: renamr [options] search replace [file...]"
+
+  opts.on("-t", "--[no-]dry-run", "Only print what we're going to do") do |v|
+    $options[:dry_run] = v
+    $options[:verbose] = true if v
+  end
+
+  opts.on("-v", "--[no-]verbose", "Print what we do (default true)") do |v|
+    $options[:verbose] = v
+  end
+
+  opts.on("-u", "--undo", "Undo the last operation") do
+    $options[:undo] = true
+  end
+end.parse!
+
+# =============================================================================
+# LOAD HISTORY
+# =============================================================================
+
+$store            = PStore.new(history_file)
+$rename_history   = $store.transaction{ $store[:rename_history] || [] }
+$readline_history = $store.transaction{ $store[:readline_history] || [] }
+
+$readline_history.each do |line|
+  Readline::HISTORY.push(line.chomp)
+end
+
+# =============================================================================
+# MAIN
+# =============================================================================
+
+# Push any of the three inputs (search, replace, files) given on the command
+# line into Readline history, if present.
+ARGV.each do |line|
+  Readline::HISTORY.push(line)
+end
+
+if $options[:undo] && $rename_history.any?
+  descriptions = $rename_history.first(10).map.with_index do |h, index|
+    "Entry #{index + 1}\n" +
+    "- pwd: #{h.pwd}\n" +
+    "- at: #{h.performed_at}"
+  end
+
+  puts descriptions.reverse.join("\n")
+
+  index = get_input('index', nil).to_i
+
+  if (0...($rename_history.length)).include?(index - 1)
+    renamer = $rename_history[index - 1].renamer.undo
+  else
+    fail "that is not a valid choice"
+  end
+else
+  search  = get_input('search', ARGV[0])
+  replace = get_input('replace', ARGV[1])
+
+  files = if ARGV.length > 2
+    ARGV[2..-1]
+  else
+    Dir.glob(get_input('files', nil))
+  end
+
+  renamer = RenameMany.new
+  files.each{ |name|
+    from_path = Pathname.new(name).realpath rescue next
+    dir, name = from_path.split
+    to_path = dir + Pathname.new(name.to_s.gsub(Regexp.new(search), replace))
+
+    if from_path != to_path
+      renamer.queue_rename(RenameFile.new(from_path, to_path))
+    end
+  }
+end
+
+if $options[:dry_run]
+  renamer.report!
+else
+  renamer.perform!($options[:verbose])
+  $rename_history.unshift(HistoryEntry.new(renamer))
+end
+
+$store.transaction do
+  $store[:readline_history] = Readline::HISTORY.to_a.last(1000)
+  $store[:rename_history] = $rename_history
+end
