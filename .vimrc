@@ -114,11 +114,10 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 :set t_Co=256 " 256 colors
-set background=dark
-" :color grb256
-" :color molokai
-" :color solarized
-:color Tomorrow-Night-Bright
+
+syntax enable
+set background=light
+colorscheme solarized
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
