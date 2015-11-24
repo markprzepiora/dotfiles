@@ -31,7 +31,7 @@
   lg = log --color --graph --pretty=format:'%Cred%h %Cgreen(%ci)%Creset%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [core]
-  editor = /Applications/MacVim.app/Contents/MacOS/Vim
+  editor = vim
   excludesfile = /Users/mark/.gitignore_global
 [color]
   ui = true
