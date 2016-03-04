@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+ignored_files=$(git check-ignore * | paste -sd "|" -)
+
+if [ "$ignored_files" == "" ]; then
+  ignored_files="node_modules|tmp"
+fi
+
+ls -1 | grep -vE "$ignored_files" | xargs -I '#' find '#' -type f
