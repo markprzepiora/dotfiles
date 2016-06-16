@@ -177,16 +177,25 @@ map <leader>v :view %%
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RenameFile()
-    let old_name = expand('%')
+function! RenameFileAsk()
     let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
+    call RenameFileTo(new_name)
+endfunction
+
+function! RenameFileTo(new_name)
+    let old_name = expand('%')
+    call RenameFile(old_name, a:new_name)
+endfunction
+
+function! RenameFile(old_name, new_name)
+    if a:new_name != '' && a:new_name != a:old_name
+        exec ':saveas ' . a:new_name
+        exec ':silent !rm ' . a:old_name
         redraw!
     endif
 endfunction
-map <leader>n :call RenameFile()<cr>
+
+map <leader>n :call RenameFileAsk()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET
