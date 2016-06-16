@@ -16,3 +16,6 @@ endfunction
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find_src_files", "", ":e")<cr>
+
+" Find what are other, probably related files.
+nnoremap <leader>c :call SelectaCommand("find_src_files \| grep -v -F " . expand('%'), "-s " . substitute(expand('%:t:r'), "\\v(s?_controller\|_route\|_component\|[-_])", "", "g"), ":e")<cr>
