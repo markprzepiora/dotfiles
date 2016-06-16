@@ -9,6 +9,7 @@
   dc = diff --cached
   di = diff
   pullff = pull --ff-only
+  pf = push --force
 
   # Fancy logging.
   #   h = head
