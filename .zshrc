@@ -97,6 +97,12 @@ imv() {
   done
 }
 
+try_until() {
+  while ! "$@"; do
+    sleep 1
+  done
+}
+
 # Use Selecta to interactively select a branch to check out.
 alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
 
