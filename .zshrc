@@ -106,5 +106,28 @@ try_until() {
 # Use Selecta to interactively select a branch to check out.
 alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
 
+# An ISO8601-esque timestamp in the format 2016-01-10_10-53-17, usable in filenames!
+alias timestamp='date +"%Y-%m-%d_%H-%M-%S"'
+
+# Check out a remote branch and rebase it on top of master.
+checkout_remote() {
+  local master=${2:-master}
+  git checkout $master &&
+  git pull --ff-only &&
+  git fetch origin &&
+  git branch -f "$1" "origin/$1" &&
+  git checkout "$1" &&
+  git rebase $master --autostash
+}
+
+# Merge the current branch into master or the given branch.
+merge_current() {
+  local master=${1:-master}
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+  git checkout $master &&
+  git pull --ff-only &&
+  git merge --no-ff "$current_branch"
+}
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
