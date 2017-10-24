@@ -210,11 +210,23 @@ endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " USEFUL GETTER MACRO FOR EMBER.JS APPLICATIONS
+"
+" Example:
+"
+"   foo
+"   model.foo
+"
+" Outputs:
+"
+"   const foo = this.get('foo');
+"   const foo = this.get('model.foo');
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! EmberGetter()
-  :.s/\(\w\+\)$/\1 = @get('\1')/
+  :.s/\v^ *((.+\.)?([^.]+)$)/const \3 = this.get('\1');/
   :normal! +
   silent! call repeat#set(",l", -1)  " Allow us to do it multiple times
 endfunction
