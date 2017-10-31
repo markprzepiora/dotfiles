@@ -10,7 +10,7 @@ def return_camelcase():
 endglobal
 
 snippet model
-class ${1:`!p return_camelcase() `} < ActiveRecord::Base
+class ${1:`!p return_camelcase() `} < ApplicationRecord
 	$0
 end
 endsnippet
