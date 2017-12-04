@@ -112,6 +112,10 @@ class Selecta
     # results when there are more characters already buffered.
     tty.get_available_input.chars.each do |char|
       is_query_char = !!(char =~ /[[:print:]]/)
+      is_ignored_char = %w( : ).include?(char)
+
+      next if is_ignored_char
+
       if is_query_char
         new_query_chars << char
       else
