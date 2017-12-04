@@ -169,6 +169,9 @@ fi
 
 cd ~/dotfiles
 
+# Make sure we have the latest dotfiles
+git pull --ff-only
+
 # Make sure oh-my-zsh is loaded
 git submodule init
 git submodule update
