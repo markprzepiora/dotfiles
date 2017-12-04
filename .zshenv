@@ -11,8 +11,5 @@ PATH="$PATH:$HOME/dotfiles/bin"
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
 
-# Load RVM if we have it.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 # Load autojump if homebrew is installed.
 [ -n "`command -v brew`" -a -s `brew --prefix`/etc/autojump.sh ] && . `brew --prefix`/etc/autojump.sh
