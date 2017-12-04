@@ -9,8 +9,13 @@ readonly LONGPROGNAME=$(perl -m'Cwd' -e 'print Cwd::abs_path(@ARGV[0])' "$RELLON
 readonly PROGDIR="${LONGPROGNAME%/*}"     # get directory component (remove short match)
 readonly PROGNAME="${LONGPROGNAME##*/}"   # get basename component (remove long match)
 
+# Ensure submodules are loaded
 ( set -x
-  vim +BundleInstall +qall
+  git submodule init
+  git submodule update
 )
 
-echo "Vim plugins installed"
+echo "Submodules updated"
+
+"$PROGDIR"/link-all.sh
+"$PROGDIR"/vundle.sh

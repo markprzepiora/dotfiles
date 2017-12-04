@@ -10,10 +10,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # On OSX, make sure we use gtar
 if [ "`which gtar`" != "" ]; then
   TAR="`which gtar`"
-  echo using gtar
 else
   TAR="`which tar`"
-  echo using tar
 fi
 
 # Backup existing dotfiles
@@ -29,5 +27,3 @@ tr ' ' "\n" |
 while read file; do
   ln -s "$DIR"/"$file" ~/
 done
-
-

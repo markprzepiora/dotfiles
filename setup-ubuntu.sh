@@ -1,29 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -eu
+set -o pipefail
 
-# Make sure full vim is installed
-sudo apt-get install -y vim vim-nox
+readonly ARGS="$@"
+readonly RELLONGPROGNAME="$(type $0 | awk '{print $3}')"
+readonly LONGPROGNAME=$(perl -m'Cwd' -e 'print Cwd::abs_path(@ARGV[0])' "$RELLONGPROGNAME")
+readonly PROGDIR="${LONGPROGNAME%/*}"     # get directory component (remove short match)
+readonly PROGNAME="${LONGPROGNAME##*/}"   # get basename component (remove long match)
 
-# Ensure system ruby 1.8 is installed
-sudo apt-get install -y ruby1.8 ruby1.8-dev rubygems1.8 rake
+( set -x
 
-# Install zsh
-sudo apt-get install -y zsh
+  # Make sure full vim is installed,
+  # as well as zsh
+  # as well as ag
+  sudo apt install -y vim vim-nox zsh silversearcher-ag
+)
 
-# Ensure submodules are loaded
-git submodule init
-git submodule update
+"$PROGDIR"/setup-generic.sh
 
-# Use system ruby to compile command-t, if rvm is installed
-if [ "`which rvm`" != "" ]; then
-  echo "You appear to be using RVM. Running 'rvm use system'."
-  rvm use system
-fi
-
-# Compile command-t using system Ruby 1.8
-#cd ~/.vim/bundle/command-t/ruby/command-t 
-#ruby1.8 extconf.rb
-#make
-
-echo "Done"
+echo "Dependencies installed"
