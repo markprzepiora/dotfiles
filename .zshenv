@@ -5,6 +5,9 @@
 # important environment variables. `.zshenv' should not contain commands that
 # produce output or assume the shell is attached to a tty.
 
+# Add dotfiles executables
+PATH="$PATH:$HOME/dotfiles/bin"
+
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
 

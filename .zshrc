@@ -59,19 +59,6 @@ bindkey '^X^e' edit-command-line
 
 alias scum="sed 's/^/.+/' | bc"
 
-# Workflow:
-#
-#   # Hack away finding stuff to replace
-#   $ ack someregex
-#
-#   # Replace everything
-#   $ ackr someregex replace directory
-#
-#   # Or gather inputs interactively
-#   $ ackr
-#
-alias ackr="~/dotfiles/bin/ackr"
-
 # The two settings below taken from
 # http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
 
