@@ -12,4 +12,6 @@ PATH="$PATH:$HOME/dotfiles/bin"
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
 
 # Load autojump if homebrew is installed.
-[ -n "`command -v brew`" -a -s `brew --prefix`/etc/autojump.sh ] && . `brew --prefix`/etc/autojump.sh
+(command -v brew > /dev/null 2>&1) &&
+test -s "$(brew --prefix)/etc/autojump.sh" &&
+. "$(brew --prefix)/etc/autojump.sh"
