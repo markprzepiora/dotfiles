@@ -226,7 +226,7 @@ endfunction
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! EmberGetter()
-  :.s/\v^ *((.+\.)?([^.]+)$)/const \3 = this.get('\1');/
+  :.s/\v^( *)((.+\.)?([^.]+)$)/\1const \4 = this.get('\2');/
   :normal! +
   silent! call repeat#set(",l", -1)  " Allow us to do it multiple times
 endfunction
