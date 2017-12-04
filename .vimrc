@@ -249,6 +249,9 @@ endfunction
 :command Wq wq
 :command W w
 :command Q q
+:command Qa qa
+:command! -bar -bang Q quit<bang>
+:command! -bar -bang Qa qall<bang>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
