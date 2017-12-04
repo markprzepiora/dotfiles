@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-ignored_files=$(git check-ignore * | paste -sd "|" -)
-
-if [ "$ignored_files" == "" ]; then
-  ignored_files="node_modules|tmp"
-fi
-
-ls -1 | grep -vE "$ignored_files" | xargs -I '#' find '#' -type f
+find . \
+  -not \( -path '*/.git/*' -prune \) \
+  -not \( -path '*/.svn/*' -prune \) \
+  -not \( -path '*/.bundle/*' -prune \) \
+  -not \( -path '*/node_modules/*' -prune \) \
+  -not \( -path '*/bower_components/*' -prune \) \
+  -not \( -path '*/public/assets/*' -prune \) \
+  -not \( -path '*/tmp*' -prune \) \
+  -not \( -name '*.png' -prune \) \
+  -type f
