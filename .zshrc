@@ -54,7 +54,13 @@ zle_highlight=(
   paste:standout
 )
 
-alias scum="sed 's/^/.+/' | bc"
+function extract_numbers() {
+  cat "$@" | grep -Eo '(\d+(\.\d+)?)'
+}
+
+function add() {
+  cat "$@" | extract_numbers | grep -E '^\s*(\d+(\.\d+)?)\s*$' | paste -sd '+' - | bc
+}
 
 # The two settings below taken from
 # http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
