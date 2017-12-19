@@ -57,6 +57,15 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
 
+# Highlight Ctrl+R (isearch)
+zle_highlight=(
+  region:standout
+  special:standout
+  suffix:bold
+  isearch:fg=blue,standout
+  paste:standout
+)
+
 alias scum="sed 's/^/.+/' | bc"
 
 # The two settings below taken from
