@@ -29,3 +29,13 @@ Add **environment-related customizations** (such as PATH customization) to
 `~/.zshenv_private`. This will be loaded after the contents of the supplied
 `.zshenv` file.
 
+ZSH Dotfile Load Order
+----------------------
+
+(From StackOverflow) The ultimate order is:
+
+1. `.zshenv`
+2. [`.zprofile` if login]
+3. [`.zshrc` if interactive]
+4. [`.zlogin` if login]
+5. [`.zlogout` when login shells exit].
