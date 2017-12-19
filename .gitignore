@@ -32,6 +32,7 @@
 /.vim/bundle/vim-toml/
 /.vim/bundle/emmet-vim/
 /.vim/bundle/ag.vim
+/.vim/bundle/vim-action-ag
 /.vim/bundle/vim-elixir
 /.vim/bundle/vim-mustache-handlebars
 /.vim/plugin/marvim.vim
