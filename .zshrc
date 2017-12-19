@@ -121,7 +121,7 @@ merge_current() {
   git merge --no-ff "$current_branch"
 }
 
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
-
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
