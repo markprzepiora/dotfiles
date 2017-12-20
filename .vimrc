@@ -2,7 +2,6 @@
 filetype off " Pathogen needs to run before plugin indent on
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " generate helptags for everything in 'runtimepath'
-filetype plugin indent on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -560,36 +559,37 @@ augroup END
 let g:UltiSnipsExpandTrigger="<c-b>"
 
 " Vundle stuff
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'tpope/vim-markdown'
-Bundle 'scrooloose/nerdtree'
-Bundle 'slim-template/vim-slim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-rails'
-Bundle 'skalnik/vim-vroom'
-Bundle 'groenewege/vim-less'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'godlygeek/tabular'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'kien/ctrlp.vim'
-Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'bronson/vim-visual-star-search'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'tmhedberg/matchit'
-Bundle 'fatih/vim-go'
-Bundle 'mxw/vim-jsx'
-Bundle 'cespare/vim-toml'
-Bundle 'lambdatoast/elm.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'rust-lang/rust.vim'
-Bundle 'tpope/vim-abolish'
-Bundle 'mattn/emmet-vim'
-Bundle 'rking/ag.vim'
-Bundle 'Chun-Yang/vim-action-ag'
-Bundle 'elixir-lang/vim-elixir'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'slim-template/vim-slim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-rails'
+Plugin 'skalnik/vim-vroom'
+Plugin 'groenewege/vim-less'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'godlygeek/tabular'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'bronson/vim-visual-star-search'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tmhedberg/matchit'
+Plugin 'fatih/vim-go'
+Plugin 'mxw/vim-jsx'
+Plugin 'cespare/vim-toml'
+Plugin 'lambdatoast/elm.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'rust-lang/rust.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'rking/ag.vim'
+Plugin 'Chun-Yang/vim-action-ag'
+Plugin 'elixir-lang/vim-elixir'
+call vundle#end()
+filetype plugin indent on
