@@ -141,7 +141,8 @@ case $(operating_system) in
           "git /usr/local/bin/git" \
           "vim /usr/local/bin/vim" \
           "zsh /usr/local/bin/zsh" \
-          "ag ag"
+          "ag ag" \
+          "ripgrep /usr/local/bin/rg"
         ;;
 
     ubuntu)
