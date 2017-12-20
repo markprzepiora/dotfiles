@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -eu
+set -o pipefail
+
+log=$(mktemp)
+vim --startuptime "$log" -c ':q'
+cat "$log" | sort -nk2
+rm "$log"
