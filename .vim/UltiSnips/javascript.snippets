@@ -1,0 +1,30 @@
+global !p
+def camelcase(filename):
+	underscored_name = re.sub(r'\.rb$', r'', filename)
+	titleized = underscored_name.title()
+	camelcased = titleized.replace('_', '')
+	return camelcased
+
+def rallio_ember_controller():
+	controller_path = path.split("ember-app/controllers/")[1].replace('.jsx', '')
+	snip.rv = camelcase(controller_path).replace('/', '')
+endglobal
+
+snippet fcontroller
+//= require ember-app/mixins/franchisor_controller
+
+Sw.${1:`!p rallio_ember_controller()`}Controller = Ember.Controller.extend(Sw.FranchisorControllerMixin, {
+  actions: {
+  },
+});
+endsnippet
+
+snippet acontroller
+//= require ember-app/mixins/enduser_controller
+const { computed } = Ember;
+
+Sw.${1:`!p rallio_ember_controller()`}Controller = Ember.Controller.extend(Sw.EnduserControllerMixin, {
+  actions: {
+  },
+});
+endsnippet
