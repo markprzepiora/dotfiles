@@ -144,3 +144,37 @@ esac
 set -x
 
 endsnippet
+
+
+snippet rubyshell
+#!/usr/bin/env ruby
+
+require 'open3'
+require 'fileutils'
+require 'pathname'
+
+def shell(*args, stdin: nil)
+  stdout_result = err_result = exit_status = nil
+
+  Open3.popen3(*args) do |i, o, err, thread|
+    if stdin
+      i.puts(stdin)
+      i.close
+    end
+
+    stdout_result = o.read.chomp
+    err_result = err.read.chomp
+    exit_status = thread.value
+  end
+
+  [exit_status, stdout_result, err_result]
+end
+
+def shell_o(*args)
+  shell(*args)[1]
+end
+
+def hostname
+  shell_o('hostname -s')
+end
+endsnippet
