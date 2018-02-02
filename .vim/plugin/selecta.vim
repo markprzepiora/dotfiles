@@ -20,4 +20,4 @@ nnoremap <leader>f :call SelectaCommand("find_src_files", "", ":e")<cr>
 " Find what are other, probably related files.
 nnoremap <leader>c :call SelectaCommand("find_src_files \| grep -v -F " . expand('%'), "-s " . substitute(expand('%:t:r'), "\\v(s?_controller\|_route\|_component\|[-_])", "", "g"), ":e")<cr>
 
-nnoremap <leader>C :call SelectaCommand("find_src_files \| grep -F $(~/dotfiles/bin/related_ember_files " . expand('%') . ")", "", ":e")<cr>
+nnoremap <leader>C :call SelectaCommand("find_src_files \| ~/dotfiles/bin/filter_related_files " . expand('%'), "", ":e")<cr>

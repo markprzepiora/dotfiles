@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-puts ARGV[0].match(%r(
-  (templates|routes|controllers)/
-  (?<path>.*)\.
-  (jsx?|handlebars|hbs)
-)x)&.captures&.first

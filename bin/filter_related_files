@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'shell'
+
+if ARGV.empty?
+  $stderr.puts "must specify a filename as the first arg"
+  exit 1
+end
+
+resource = ARGV[0].match(%r(
+  (templates|routes|controllers)/
+  (?<path>.*)\.
+  (jsx?|handlebars|hbs)
+)x)&.captures&.first.to_s
+
+regex = Regexp.new(resource.gsub(/[-_]/, '[-_]').gsub(/\//, '\/'))
+
+$stdin.each_line do |line|
+  puts line if line.match(regex)
+end
