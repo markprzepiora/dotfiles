@@ -121,6 +121,10 @@ merge_current() {
   git merge --no-ff "$current_branch"
 }
 
+git-modified() {
+  git status --short | grep -E '^( M| M )' | cut -c4-
+}
+
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 # Load personalized zshrc files if they exist.
