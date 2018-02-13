@@ -6,7 +6,6 @@
 /.vim/bundle/nerdtree/
 /.vim/bundle/tabular/
 /.vim/bundle/vim-coffee-script/
-/.vim/bundle/vim-colors-solarized/
 /.vim/bundle/vim-commentary/
 /.vim/bundle/vim-flavored-markdown/
 /.vim/bundle/vim-fugitive/
@@ -36,3 +35,4 @@
 /.vim/bundle/vim-elixir
 /.vim/bundle/vim-mustache-handlebars
 /.vim/plugin/marvim.vim
+/.vim/bundle/stellarized

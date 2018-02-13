@@ -108,7 +108,7 @@ syntax on
 
 syntax enable
 set background=light
-colorscheme solarized
+colorscheme stellarized_dark
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -575,7 +575,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-rails'
 Plugin 'skalnik/vim-vroom'
 Plugin 'groenewege/vim-less'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'godlygeek/tabular'
@@ -596,5 +595,6 @@ Plugin 'tpope/vim-abolish'
 Plugin 'rking/ag.vim'
 Plugin 'Chun-Yang/vim-action-ag'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'nightsense/stellarized'
 call vundle#end()
 filetype plugin indent on
