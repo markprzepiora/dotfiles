@@ -37,8 +37,8 @@ source $ZSH/oh-my-zsh.sh
 unsetopt autopushd
 unsetopt correct_all
 
-PROMPT='%{$fg_bold[red]%}%n%{$fg_bold[red]%}@%{$fg_bold[red]%}%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}
-%{$fg_bold[blue]%}→ %{$reset_color%}'
+PROMPT='%{$fg_bold[blue]%}%n%{$fg_bold[blue]%}@%{$fg_bold[blue]%}%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[red]%}$(git_prompt_info)%{$fg_bold[red]%}
+%{$fg_bold[blue]%}◈ %{$reset_color%}'
 
 # C-x e to edit the current line in the editor
 autoload edit-command-line
