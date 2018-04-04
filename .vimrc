@@ -534,6 +534,19 @@ vmap <Leader>a> :Tabularize /=><CR>
 nmap <Leader>a, :Tabularize /,\zs<CR>
 vmap <Leader>a, :Tabularize /,\zs<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Commentary Shortcuts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Comment out lines of code with \ <motion>
+nmap \ gc
+
+" Comment out a single line of code with \\
+nmap \\ gcc
+
+" Comment out a visual selection with \
+vmap \ gc
+
 
 " Select the current line's indent level
 function SelectIndent()
