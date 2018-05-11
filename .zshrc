@@ -105,6 +105,9 @@ alias youtube-dl-mp4='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[
 # Fast traceroute by default
 alias traceroute='traceroute -q1 -w1'
 
+# e.g. 2018-04-17
+alias today='date +%Y-%m-%d'
+
 # Check out a remote branch and rebase it on top of master.
 checkout_remote() {
   local master=${2:-master}
