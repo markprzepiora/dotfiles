@@ -102,6 +102,9 @@ alias timestamp='date +"%Y-%m-%d_%H-%M-%S"'
 # An alias to download YouTube videos with the best quality audio and video
 alias youtube-dl-mp4='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 
+# Fast traceroute by default
+alias traceroute='traceroute -q1 -w1'
+
 # Check out a remote branch and rebase it on top of master.
 checkout_remote() {
   local master=${2:-master}
