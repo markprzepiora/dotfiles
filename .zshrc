@@ -99,6 +99,7 @@ alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
 # An ISO8601-esque timestamp in the format 2016-01-10_10-53-17, usable in filenames!
 alias timestamp='date +"%Y-%m-%d_%H-%M-%S"'
 
+# An alias to download YouTube videos with the best quality audio and video
 alias youtube-dl-mp4='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 
 # Check out a remote branch and rebase it on top of master.
