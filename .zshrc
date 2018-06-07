@@ -101,6 +101,7 @@ alias timestamp='date +"%Y-%m-%d_%H-%M-%S"'
 
 # An alias to download YouTube videos with the best quality audio and video
 alias youtube-dl-mp4='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
+alias youtube-dl-mp3='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -x --audio-format mp3'
 
 # Fast traceroute by default
 alias traceroute='traceroute -q1 -w1'
