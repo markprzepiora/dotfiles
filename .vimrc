@@ -120,8 +120,18 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc Key Maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Copy to clipboard with ,y
-map <leader>y "*y
+
+if has('unix')
+    " work-around to copy selected text to system clipboard
+    " and prevent it from clearing clipboard when using ctrl+z (depends on xsel)
+    function! CopyText()
+      normal gv"*y
+      :call system('xsel -ib', getreg('*'))
+    endfunction
+    vmap <leader>y :call CopyText()<Cr>
+else
+    map <leader>y "*y
+endif
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
