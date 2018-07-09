@@ -15,21 +15,17 @@ SAVEHIST=5000
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx sublime sudo web-search dirhistory dircycle)
+
+# super dirty OS check so we don't have to execute uname
+if [ -e /Library ]; then
+  plugins=(git ruby osx sublime sudo web-search dirhistory dircycle)
+else
+  plugins=(git ruby sublime sudo web-search dirhistory dircycle)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
