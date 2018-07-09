@@ -107,8 +107,8 @@ syntax on
 :set t_Co=256 " 256 colors
 
 syntax enable
-set background=light
-colorscheme stellarized_dark
+colorscheme stellarized
+set background=dark
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
