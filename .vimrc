@@ -109,6 +109,7 @@ syntax on
 syntax enable
 colorscheme stellarized
 set background=dark
+hi MatchParen cterm=none ctermbg=green ctermfg=blue
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
