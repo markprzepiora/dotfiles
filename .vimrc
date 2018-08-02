@@ -134,6 +134,9 @@ else
     map <leader>y "*y
 endif
 
+" do not automatically copy visual selections to the clipboard
+set clipboard-=autoselect
+
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
