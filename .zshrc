@@ -22,9 +22,9 @@ DISABLE_AUTO_UPDATE="true"
 
 # super dirty OS check so we don't have to execute uname
 if [ -e /Library ]; then
-  plugins=(git ruby osx sublime sudo web-search dirhistory dircycle)
+  plugins=(git ruby osx sublime sudo web-search dirhistory dircycle autojump)
 else
-  plugins=(git ruby sublime sudo web-search dirhistory dircycle)
+  plugins=(git ruby sublime sudo web-search dirhistory dircycle autojump)
 fi
 
 # In WSL, disable BG_NICE because it fails with errors
