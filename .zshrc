@@ -27,6 +27,11 @@ else
   plugins=(git ruby sublime sudo web-search dirhistory dircycle)
 fi
 
+# In WSL, disable BG_NICE because it fails with errors
+if [ -e /mnt/c ]; then
+  unsetopt BG_NICE
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # !@^&**#*@^&% autopushd and autocorrect
