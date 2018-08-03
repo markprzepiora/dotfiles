@@ -584,6 +584,7 @@ augroup yaml
 augroup END
 
 let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsEnableSnipMate = 0
 
 " Vundle stuff
 set rtp+=~/.vim/bundle/Vundle.vim
