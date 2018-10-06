@@ -40,6 +40,7 @@
 [core]
   editor = vim
   excludesfile = /Users/mark/.gitignore_global
+  pager = "less -F -X"
 [color]
   ui = true
 [push]
