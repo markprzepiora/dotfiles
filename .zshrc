@@ -136,8 +136,11 @@ checkout_remote_merge() {
 merge_current() {
   local master=${1:-master}
   local current_branch=$(git rev-parse --abbrev-ref HEAD)
-  git checkout $master &&
+  git checkout "$master" &&
   git pull --ff-only &&
+  git checkout "$current_branch" &&
+  git rebase --autostash "$master" &&
+  git checkout "$master" &&
   git merge --no-ff "$current_branch"
 }
 
