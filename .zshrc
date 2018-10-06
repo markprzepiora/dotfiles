@@ -148,6 +148,16 @@ git-modified() {
   git status --short | grep -E '^( M| M )' | cut -c4-
 }
 
+findf() {
+  local filename="$1"
+  shift
+  find . -iname '*'"$filename"'*' "$@"
+}
+
+findd() {
+  cd "$(findf "$@" -type d | selecta)"
+}
+
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 # Load personalized zshrc files if they exist.
