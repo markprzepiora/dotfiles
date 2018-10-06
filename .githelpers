@@ -28,6 +28,20 @@ show_git_head() {
     git show -p --pretty="tformat:"
 }
 
+pretty_git_topo_log() {
+    git log --pretty="tformat:${FORMAT}" $* |
+        # Replace (2 years ago) with (2 years)
+        sed -Ee 's/(^[^<]*) ago\)/\1)/' |
+        # Replace (2 years, 5 months) with (2 years)
+        sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
+        # Replace }}}}s with daggers
+        sed -Ee 's/}}}}/†/g' |
+        # Line columns up based on dagger
+        column -s '†' -t |
+        # Page only if we need to
+        less -FXRS
+}
+
 pretty_git_log() {
     git log --graph --pretty="tformat:${FORMAT}" $* |
         # Replace (2 years ago) with (2 years)
@@ -40,6 +54,23 @@ pretty_git_log() {
         column -s '†' -t |
         # Page only if we need to
         less -FXRS
+}
+
+pretty_git_branches() {
+  git for-each-ref \
+    --sort=-committerdate refs/heads/ refs/remotes/ \
+    --format='%(color:red)%(objectname:short)%(color:reset)}}}}(%(color:green)%(committerdate:iso8601)%(color:reset))}}}}%(authorname)}}}}%(color:yellow)%(refname:short)%(color:reset)}}}}%(contents:subject)' \
+    $* |
+    # Replace (2 years ago) with (2 years)
+    sed -Ee 's/(^[^<]*) ago\)/\1)/' |
+    # Replace (2 years, 5 months) with (2 years)
+    sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
+    # Replace }}}}s with daggers
+    sed -Ee 's/}}}}/†/g' |
+    # Line columns up based on dagger
+    column -s '†' -t |
+    # Page only if we need to
+    less -FXRS
 }
 
 filestats() {
