@@ -1,14 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'shell'
-
 if ARGV.empty?
   $stderr.puts "must specify a filename as the first arg"
   exit 1
 end
 
 resource = ARGV[0].match(%r(
-  (templates|routes|controllers)/
+  (templates|routes|controllers|components)/
   (?<path>.*)\.
   (jsx?|handlebars|hbs)
 )x)&.captures&.first.to_s
