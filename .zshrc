@@ -122,6 +122,16 @@ checkout_remote() {
   git rebase $master --autostash --preserve-merge
 }
 
+checkout_remote_merge() {
+  local master=${2:-master}
+  git checkout $master &&
+  git pull --ff-only &&
+  git fetch origin &&
+  git branch -f "$1" "origin/$1" &&
+  git checkout "$1" &&
+  git merge $master
+}
+
 # Merge the current branch into master or the given branch.
 merge_current() {
   local master=${1:-master}
