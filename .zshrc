@@ -119,7 +119,7 @@ checkout_remote() {
   git fetch origin &&
   git branch -f "$1" "origin/$1" &&
   git checkout "$1" &&
-  git rebase $master --autostash
+  git rebase $master --autostash --preserve-merge
 }
 
 # Merge the current branch into master or the given branch.
