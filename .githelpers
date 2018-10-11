@@ -73,6 +73,15 @@ pretty_git_branches() {
     less -FXRS
 }
 
+branch_commits_range_from_head() {
+  (
+    set -eu
+    branch="$1"
+    head="${2:-HEAD}"
+    git tl "$(git merge-base "$branch" HEAD)".."$branch"
+  )
+}
+
 filestats() {
   while read entry; do
     line="$(printf "%s" "$entry" | sed -e 's/XXX<.*>XXX//g')"
