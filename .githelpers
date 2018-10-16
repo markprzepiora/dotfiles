@@ -78,7 +78,7 @@ branch_commits_range_from_head() {
     set -eu
     branch="$1"
     head="${2:-HEAD}"
-    git tl "$(git merge-base "$branch" HEAD)".."$branch"
+    git tl "$(git merge-base "$branch" "$head")".."$branch"
   )
 }
 
