@@ -17,6 +17,9 @@ SAVEHIST=5000
 ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE="true"
 
+# Less annoying pager in psql
+PSQL_PAGER="less -FS"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 
