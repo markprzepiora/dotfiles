@@ -81,7 +81,7 @@ case $(operating_system) in
 esac
 
 # Define files to copy
-FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf .zshrc .zshenv .oh-my-zsh .zprofile .irbrc .psqlrc"
+FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf .zshrc .zshenv .oh-my-zsh .zprofile .irbrc .psqlrc .npmrc"
 
 # Backup existing dotfiles
 mkdir -p ~/backups

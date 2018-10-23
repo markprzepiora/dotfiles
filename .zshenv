@@ -8,6 +8,9 @@
 # Add dotfiles executables
 PATH="$PATH:$HOME/dotfiles/bin"
 
+# Add globally-installed npm binaries to path
+PATH="$PATH:$HOME/.npm_global/bin"
+
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
 
