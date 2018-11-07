@@ -73,12 +73,36 @@ pretty_git_branches() {
     less -FXRS
 }
 
+commits_range_from_head() {
+  local branch="$1"
+  local head="${2:-HEAD}"
+  echo "$(git merge-base "$branch" "$head")".."$branch"
+}
+
 branch_commits_range_from_head() {
   (
     set -eu
     branch="$1"
     head="${2:-HEAD}"
-    git tl "$(git merge-base "$branch" "$head")".."$branch"
+    git tl "$(commits_range_from_head "$branch" "$head")"
+  )
+}
+
+files_in_branch() {
+  (
+    set -eu
+    branch="$1"
+    head="${2:-HEAD}"
+
+    files_in_range "$(commits_range_from_head "$branch" "$head")"
+  )
+}
+
+files_in_range() {
+  # git diff-tree --no-commit-id --name-only -r "$(. ~/.githelpers && commits_range_from_head HEAD develop)"
+  (
+    set -eu
+    git diff-tree --no-commit-id --name-only -r "$1"
   )
 }
 

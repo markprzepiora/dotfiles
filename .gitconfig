@@ -33,6 +33,7 @@
   pb = "!. ~/.githelpers && pretty_git_branches"
   # git branch-commits = see commits that will be merged
   branch-commits = "!. ~/.githelpers && branch_commits_range_from_head"
+  branch-files = "!. ~/.githelpers && files_in_branch"
 
   # Add untracked files only
   au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
