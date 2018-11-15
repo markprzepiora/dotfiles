@@ -12,6 +12,13 @@
 -- limit paging
 -- \pset pager off
 
+-- wrap long lines
+\pset format wrapped
+
+-- add a blank line before output, which stops the first line of paged text
+-- from being cut off upon quitting from less
+\pset title ''
+
 -- replace nulls
 \pset null ¤
 

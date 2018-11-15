@@ -17,9 +17,6 @@ SAVEHIST=5000
 ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE="true"
 
-# Less annoying pager in psql
-PSQL_PAGER="less -FS"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 
@@ -159,6 +156,11 @@ findd() {
 }
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
+# Less annoying pager in psql
+PAGER="less"
+PSQL_PAGER="less"
+LESS="-iMSx4 -FX"
 
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
