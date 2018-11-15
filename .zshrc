@@ -145,6 +145,10 @@ git-modified() {
   git status --short | grep -E '^( M| M )' | cut -c4-
 }
 
+git-conflicts() {
+  git status --short | grep -E '^UU' | cut -c4-
+}
+
 findf() {
   local filename="$1"
   shift
