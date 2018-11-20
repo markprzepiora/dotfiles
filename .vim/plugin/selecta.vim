@@ -18,7 +18,7 @@ endfunction
 nnoremap <leader>f :call SelectaCommand("find_src_files", "", ":e")<cr>
 
 " Find files in the current file's directory
-nnoremap <leader>F :call SelectaCommand("cd '" . expand('%:h') . "' && find_src_files", "", ":e")<cr>
+nnoremap <leader>F :call SelectaCommand("find_src_files \| grep -F '" . expand('%:h') . "'", "", ":e")<cr>
 
 " Find what are other, probably related files.
 nnoremap <leader>C :call SelectaCommand("find_src_files \| ~/dotfiles/bin/filter_related_files " . expand('%'), "", ":e")<cr>
