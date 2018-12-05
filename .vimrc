@@ -147,6 +147,9 @@ nnoremap <c-l> <c-w>l
 set splitbelow
 set splitright
 
+" Use gF to open the matching file in a new vsplit
+map gF :vert sfind <Plug><cfile><CR>
+
 " Insert a hash rocket with <c-l>
 imap <c-l> <space>=><space>
 
