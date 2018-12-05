@@ -143,6 +143,10 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" Open new splits to the right/below the current one instead of the left/above
+set splitbelow
+set splitright
+
 " Insert a hash rocket with <c-l>
 imap <c-l> <space>=><space>
 
