@@ -17,6 +17,12 @@ endfunction
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find_src_files", "", ":e")<cr>
 
+" Find only production files (exclude tests)
+nnoremap <leader>cp :call SelectaCommand("find_src_files \| grep -vE '^\./(spec\|test)/'", "", ":e")<cr>
+
+" Find only tests (exclude production files)
+nnoremap <leader>ct :call SelectaCommand("find_src_files \| grep -E '^\./(spec\|test)/'", "", ":e")<cr>
+
 " Find files in the current file's directory
 nnoremap <leader>F :call SelectaCommand("find_src_files \| grep -F '" . expand('%:h') . "'", "", ":e")<cr>
 
