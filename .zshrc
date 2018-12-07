@@ -27,9 +27,14 @@ if [ -e /Library ]; then
   plugins+=(osx)
 fi
 
-# In WSL, disable BG_NICE because it fails with errors
 if [ -e /mnt/c ]; then
+  # In WSL, disable BG_NICE because it fails with errors
   unsetopt BG_NICE
+
+  # In WSL, add `wcd` command for changing into a Windows directory
+  wcd() {
+    cd "$(~/Dropbox/bin/windows-to-wsl-path "$1")"
+  }
 fi
 
 source $ZSH/oh-my-zsh.sh
