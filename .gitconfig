@@ -47,3 +47,7 @@
   ui = true
 [push]
   default = simple
+[oh-my-zsh]
+	# disable showing dirty status in zsh prompt since this can be quite slow in
+	# slow filesystems (like WSL)
+	hide-dirty = 1
