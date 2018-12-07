@@ -20,11 +20,11 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 
+plugins=(git ruby autojump)
+
 # super dirty OS check so we don't have to execute uname
 if [ -e /Library ]; then
-  plugins=(git ruby osx sublime sudo web-search dirhistory dircycle autojump)
-else
-  plugins=(git ruby sublime sudo web-search dirhistory dircycle autojump)
+  plugins+=(osx)
 fi
 
 # In WSL, disable BG_NICE because it fails with errors
