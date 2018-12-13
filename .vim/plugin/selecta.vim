@@ -1,8 +1,14 @@
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
+  if has('macunix')
+    let l:selecta = $HOME . '/dotfiles/bin/fzy-osx'
+  elseif has('unix')
+    let l:selecta = $HOME . '/dotfiles/bin/fzy-linux'
+  endif
+
   try
-    let selection = system(a:choice_command . " | selecta 2>/dev/null" . a:selecta_args)
+    let l:selection = system(a:choice_command . " | " . l:selecta . " 2>/dev/null" . a:selecta_args)
   catch /Vim:Interrupt/
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
@@ -10,7 +16,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
     return
   endtry
   redraw!
-  exec a:vim_command . " " . selection
+  exec a:vim_command . " " . l:selection
 endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
