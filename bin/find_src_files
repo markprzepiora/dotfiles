@@ -9,4 +9,7 @@ find . \
   -not \( -path '*/public/assets/*' -prune \) \
   -not \( -path '*/tmp*' -prune \) \
   -not \( -name '*.png' -prune \) \
+  -not \( -name '*.gif' -prune \) \
+  -not \( -name '*.jpg' -prune \) \
+  -not \( -name '*.jpeg' -prune \) \
   -type f
