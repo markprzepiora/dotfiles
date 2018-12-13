@@ -3,8 +3,7 @@
 set -eu
 set -o pipefail
 
-# Generate absolute path from relative path. Portable! Requires only  and
-# /Users/mark/dotfiles, unlike solutions that use readlink, etc.
+# Generate absolute path from relative path.
 #
 # $1     : relative filename
 # output : absolute path
@@ -126,11 +125,6 @@ operating_system() {
   echo unknown
 }
 
-readonly ARGS="$@"
-readonly LONGPROGNAME=$(abspath "$0")
-readonly PROGDIR="${LONGPROGNAME%/*}"     # get directory component (remove short match)
-readonly PROGNAME="${LONGPROGNAME##*/}"   # get basename component (remove long match)
-
 case $(operating_system) in
     osx)
         if ! has_executable brew; then
@@ -177,8 +171,8 @@ git pull --ff-only
 git submodule init
 git submodule update
 
-# On Windows Bash, these directories get pulled in with global-writteable
-# permissions sometimes, causing oh-my-zsh to complain.
+# In WSL, these directories get pulled in with global-writteable permissions
+# sometimes, causing oh-my-zsh to complain.
 find .oh-my-zsh -type d -print0 | xargs -0 chmod 755
 
 # Create links to all the directories and files
