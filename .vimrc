@@ -122,16 +122,16 @@ hi MatchParen cterm=none ctermbg=green ctermfg=blue
 " Misc Key Maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if has('unix')
+if has('macunix')
+    map <leader>y "*y
+elseif has('unix')
     " work-around to copy selected text to system clipboard
     " and prevent it from clearing clipboard when using ctrl+z (depends on xsel)
     function! CopyText()
       normal gv"*y
       :call system('xsel -ib', getreg('*'))
     endfunction
-    vmap <leader>y :call CopyText()<Cr>
-else
-    map <leader>y "*y
+    xmap <leader>y <esc>:call CopyText()<Cr>
 endif
 
 " do not automatically copy visual selections to the clipboard
