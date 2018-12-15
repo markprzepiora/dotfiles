@@ -1,15 +1,44 @@
 #!/usr/bin/env bash
 
-find . \
-  -not \( -path '*/.git/*' -prune \) \
-  -not \( -path '*/.svn/*' -prune \) \
-  -not \( -path '*/.bundle/*' -prune \) \
-  -not \( -path '*/node_modules/*' -prune \) \
-  -not \( -path '*/bower_components/*' -prune \) \
-  -not \( -path '*/public/assets/*' -prune \) \
-  -not \( -path '*/tmp*' -prune \) \
-  -not \( -name '*.png' -prune \) \
-  -not \( -name '*.gif' -prune \) \
-  -not \( -name '*.jpg' -prune \) \
-  -not \( -name '*.jpeg' -prune \) \
-  -type f
+# The `fd` utility (https://github.com/sharkdp/fd) performs the same search in
+# about half the time of `find` (45ms vs 75ms on my machine), so we use it when
+# available.
+
+has_executable() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+if has_executable fd; then
+  fd \
+    -E '.git' \
+    -E '.svn' \
+    -E '.bundle' \
+    -E 'node_modules' \
+    -E 'bower_components' \
+    -E 'public/assets' \
+    -E '__pycache__' \
+    -E 'tmp' \
+    -E '*.png' \
+    -E '*.gif' \
+    -E '*.jpg' \
+    -E '*.jpeg' \
+    --type f \
+    --hidden \
+    --no-ignore-vcs
+else
+  find . \
+    -not '(' -path '*/.git' -prune ')' \
+    -not '(' -path '*/.svn' -prune ')' \
+    -not '(' -path '*/.bundle' -prune ')' \
+    -not '(' -path '*/node_modules' -prune ')' \
+    -not '(' -path '*/bower_components' -prune ')' \
+    -not '(' -path '*/public/assets' -prune ')' \
+    -not '(' -path '*/__pycache__' -prune ')' \
+    -not '(' -path '*/tmp*' -prune ')' \
+    -not '(' -name '*.png' -prune ')' \
+    -not '(' -name '*.gif' -prune ')' \
+    -not '(' -name '*.jpg' -prune ')' \
+    -not '(' -name '*.jpeg' -prune ')' \
+    -type f |
+  cut -c3-
+fi
