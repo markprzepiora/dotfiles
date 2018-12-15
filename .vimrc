@@ -580,6 +580,9 @@ function SelectIndent()
   exe "normal " . line . "G"
 endfunction
 
+" Select the current line's indent level with ,i
+map <leader>i :call SelectIndent()<cr>
+
 augroup markdown
   au!
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
