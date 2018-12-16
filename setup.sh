@@ -136,12 +136,13 @@ case $(operating_system) in
           "vim /usr/local/bin/vim" \
           "zsh /usr/local/bin/zsh" \
           "ag ag" \
-          "ripgrep /usr/local/bin/rg"
+          "ripgrep /usr/local/bin/rg" \
+          "jq jq"
         ;;
 
     ubuntu)
         sudo apt update
-        sudo apt install -y git vim vim-nox zsh silversearcher-ag
+        sudo apt install -y git vim vim-nox zsh silversearcher-ag jq
         ;;
 
     *)
@@ -152,6 +153,7 @@ case $(operating_system) in
         require_executable vim
         require_executable zsh
         require_executable ag
+        require_executable jq
         ;;
 esac
 
