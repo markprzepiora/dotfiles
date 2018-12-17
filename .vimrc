@@ -5,7 +5,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rails'
-Plug 'groenewege/vim-less'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'godlygeek/tabular'
