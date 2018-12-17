@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+fd \
+  -E '.git' \
+  -E '.svn' \
+  -E '.bundle' \
+  -E 'node_modules' \
+  -E 'bower_components' \
+  -E 'public/assets' \
+  -E '__pycache__' \
+  -E 'tmp' \
+  -E '*.png' \
+  -E '*.gif' \
+  -E '*.jpg' \
+  -E '*.jpeg' \
+  --type f \
+  --hidden \
+  --no-ignore-vcs
