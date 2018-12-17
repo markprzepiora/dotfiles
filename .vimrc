@@ -1,7 +1,29 @@
-" Pathogen
-filetype off " Pathogen needs to run before plugin indent on
-execute pathogen#helptags()
-execute pathogen#infect()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/bundle')
+Plug 'tpope/vim-markdown'
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-rails'
+Plug 'groenewege/vim-less'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'godlygeek/tabular'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'bronson/vim-visual-star-search'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tmhedberg/matchit'
+Plug 'mxw/vim-jsx'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-abolish'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
+Plug 'nightsense/stellarized'
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -596,31 +618,3 @@ augroup END
 
 let g:UltiSnipsExpandTrigger="<c-b>"
 let g:UltiSnipsEnableSnipMate = 0
-
-" Vundle stuff
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-markdown'
-Plugin 'slim-template/vim-slim'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-rails'
-Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'godlygeek/tabular'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'bronson/vim-visual-star-search'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'mxw/vim-jsx'
-Plugin 'SirVer/ultisnips'
-Plugin 'tpope/vim-abolish'
-Plugin 'rking/ag.vim'
-Plugin 'Chun-Yang/vim-action-ag'
-Plugin 'nightsense/stellarized'
-call vundle#end()
-filetype plugin indent on
