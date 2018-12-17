@@ -2,26 +2,66 @@
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/bundle')
+
+" Vim Markdown runtime files
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'godlygeek/tabular'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+
+" Add-on to Tim Pope's markdown.vim to highlight using Github Flavored Markdown
 Plug 'jtratner/vim-flavored-markdown'
+
+" commentary.vim: comment stuff out
+Plug 'tpope/vim-commentary'
+
+" rails.vim: Ruby on Rails power tools
+Plug 'tpope/vim-rails'
+
+" fugitive.vim: A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-fugitive'
+
+" unimpaired.vim: Pairs of handy bracket mappings
+Plug 'tpope/vim-unimpaired'
+
+" Vim script for text filtering and alignment
+Plug 'godlygeek/tabular'
+
+" Vastly improved Javascript indentation and syntax support in Vim
+Plug 'pangloss/vim-javascript', { 'for': ['js', 'javascript'] }
+
+" React JSX syntax highlighting and indenting for vim
+Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx', 'javascript'] }
+
+" surround.vim: quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
+
+" repeat.vim: enable repeating supported plugin maps with "."
+Plug 'tpope/vim-repeat'
+
+" Start a * or # search from a visual block
 Plug 'bronson/vim-visual-star-search'
+
+" EditorConfig plugin for Vim
 Plug 'editorconfig/editorconfig-vim'
+
+" extended % matching for HTML, LaTeX, and many other languages
 Plug 'tmhedberg/matchit'
-Plug 'mxw/vim-jsx'
+
+" UltiSnips - The ultimate snippet solution for Vim
 Plug 'SirVer/ultisnips'
+
+" abolish.vim: easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
+
+" Vim plugin for the_silver_searcher, 'ag'
 Plug 'rking/ag.vim'
+
+" Easier ag searching
 Plug 'Chun-Yang/vim-action-ag'
+
+" Color scheme
 Plug 'nightsense/stellarized'
+
 call plug#end()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
