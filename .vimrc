@@ -277,11 +277,12 @@ endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fix fucking :w typos
+" Fix fucking :w and :q typos
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 :command WQ wq
 :command Wq wq
+:command Wa wa
 :command W w
 :command Q q
 :command Qa qa
