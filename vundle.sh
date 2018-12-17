@@ -3,14 +3,6 @@
 set -eu
 set -o pipefail
 
-readonly ARGS="$@"
-readonly RELLONGPROGNAME="$(type $0 | awk '{print $3}')"
-readonly LONGPROGNAME=$(perl -m'Cwd' -e 'print Cwd::abs_path(@ARGV[0])' "$RELLONGPROGNAME")
-readonly PROGDIR="${LONGPROGNAME%/*}"     # get directory component (remove short match)
-readonly PROGNAME="${LONGPROGNAME##*/}"   # get basename component (remove long match)
-
-( set -x
-  vim +BundleInstall +qall
-)
+vim +PlugUpdate +PlugClean +qall
 
 echo "Vim plugins installed"
