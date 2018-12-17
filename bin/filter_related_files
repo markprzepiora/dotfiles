@@ -1,15 +1,45 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env bash
+# vim: set ft=ruby:
+
+# This file executes as a bash script, which turns around and executes Ruby via
+# the line below. The -x argument to Ruby makes it discard everything before
+# the second "!ruby" shebang. This allows us to work on Linux, where the
+# shebang can only have one argument so we can't directly say
+# "#!/usr/bin/env ruby --disable-gems". Thanks for that, Linux.
+#
+# If this seems confusing, don't worry. You can treat it as a normal Ruby file
+# starting with the "!ruby" shebang below.
+
+exec /usr/bin/env ruby --disable-gems -x "$0" $*
+#!ruby
 
 if ARGV.empty?
   $stderr.puts "must specify a filename as the first arg"
   exit 1
 end
 
-resource = ARGV[0].match(%r(
+filename = ARGV[0]
+
+ember_resource = filename.match(%r(
   (templates|routes|controllers|components)/
   (?<path>.*)\.
   (jsx?|handlebars|hbs)
-)x)&.captures&.first.to_s
+)x)&.captures&.first
+
+rails_resource = filename.match(%r(
+  (
+    models|
+    controllers|
+    finders|
+    policies|
+  )/                             # controllers/
+  (?<path>.*/)?                  # api/
+  (?<resource>[^/]+)             # enduser_linkedin_post_stat_rows_controller
+  \.                             # .
+  (rb)                           # rb
+)x)&.captures&.last&.gsub(/_controller|_finder|_policy/, '')&.gsub(/s\z/, '')
+
+resource = ember_resource || rails_resource || ""
 
 regex = Regexp.new(resource.gsub(/[-_]/, '[-_]').gsub(/\//, '\/'))
 
