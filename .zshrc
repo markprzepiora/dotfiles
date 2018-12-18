@@ -33,6 +33,9 @@ if [ -e /mnt/c ]; then
   # Disable BG_NICE because it fails with errors
   unsetopt BG_NICE
 
+  # Set umask since it's $&#*ed up by default in WSL
+  umask 022
+
   # Add `wcd` command for changing into a Windows directory
   wcd() {
     cd "$(~/Dropbox/bin/windows-to-wsl-path "$1")"
