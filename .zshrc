@@ -22,16 +22,18 @@ DISABLE_AUTO_UPDATE="true"
 
 plugins=(git)
 
-# super dirty OS check so we don't have to execute uname
+# In OSX...
 if [ -e /Library ]; then
+  # Enable the osx plugin
   plugins+=(osx)
 fi
 
+# In WSL...
 if [ -e /mnt/c ]; then
-  # In WSL, disable BG_NICE because it fails with errors
+  # Disable BG_NICE because it fails with errors
   unsetopt BG_NICE
 
-  # In WSL, add `wcd` command for changing into a Windows directory
+  # Add `wcd` command for changing into a Windows directory
   wcd() {
     cd "$(~/Dropbox/bin/windows-to-wsl-path "$1")"
   }
@@ -71,10 +73,10 @@ function add() {
 # The two settings below taken from
 # http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
 
-# Use M-= to delete backwards in a flag-friendly way. Example:
+# Use alt= to delete backwards in a flag-friendly way. Example:
 # $ git push origin master --force
-# Above, M-del would delete only to --.
-# M-= will delete to the space.
+# Above, alt-del would delete only to --.
+# alt= will delete to the space.
 function _backward_kill_default_word() {
   WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' zle backward-kill-word
 }
