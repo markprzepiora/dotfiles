@@ -1,0 +1,8 @@
+# Check out a remote branch and rebase it on top of master.
+local master=${2:-master}
+git checkout $master &&
+git pull --ff-only &&
+git fetch origin &&
+git branch -f "$1" "origin/$1" &&
+git checkout "$1" &&
+git rebase $master --autostash --preserve-merge

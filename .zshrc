@@ -65,13 +65,8 @@ zle_highlight=(
   paste:standout
 )
 
-function extract_numbers() {
-  cat "$@" | grep -Eo '(\d+(\.\d+)?)'
-}
-
-function add() {
-  cat "$@" | extract_numbers | grep -E '^\s*(\d+(\.\d+)?)\s*$' | paste -sd '+' - | bc
-}
+fpath+=( ~/dotfiles/zsh_functions )
+autoload -Uz imv try_until extract_numbers add checkout_remote checkout_remote_merge merge_current findf findd
 
 # The two settings below taken from
 # http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
@@ -85,24 +80,6 @@ function _backward_kill_default_word() {
 }
 zle -N backward-kill-default-word _backward_kill_default_word
 bindkey '\e=' backward-kill-default-word   # = is next to backspace
-
-# Interactive move.
-# Example: imv "some long filename that's annoying to move manually"
-imv() {
-  local src dst
-  for src; do
-    [[ -e $src ]] || { print -u2 "$src does not exist"; continue }
-    dst=$src
-    vared dst
-    [[ $src != $dst ]] && mkdir -p $dst:h && mv -n $src $dst
-  done
-}
-
-try_until() {
-  while ! "$@"; do
-    sleep 1
-  done
-}
 
 # Use Selecta to interactively select a branch to check out.
 alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
@@ -123,46 +100,6 @@ alias now='date +%Y-%m-%d--%H-%M-%S'
 
 # I type "g st" constantly, this saves two keystrokes
 alias st='git status --short'
-
-# Check out a remote branch and rebase it on top of master.
-checkout_remote() {
-  local master=${2:-master}
-  git checkout $master &&
-  git pull --ff-only &&
-  git fetch origin &&
-  git branch -f "$1" "origin/$1" &&
-  git checkout "$1" &&
-  git rebase $master --autostash --preserve-merge
-}
-
-checkout_remote_merge() {
-  local master=${2:-master}
-  git checkout $master &&
-  git pull --ff-only &&
-  git fetch origin &&
-  git branch -f "$1" "origin/$1" &&
-  git checkout "$1" &&
-  git merge $master
-}
-
-# Merge the current branch into master or the given branch.
-merge_current() {
-  local master=${1:-master}
-  local current_branch=$(git rev-parse --abbrev-ref HEAD)
-  git checkout "$master" &&
-  git pull --ff-only &&
-  git merge --no-ff "$current_branch"
-}
-
-findf() {
-  local filename="$1"
-  shift
-  find . -iname '*'"$filename"'*' "$@"
-}
-
-findd() {
-  cd "$(findf "$@" -type d | selecta)"
-}
 
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"

@@ -1,0 +1,1 @@
+cat "$@" | extract_numbers | grep -E '^\s*([0-9]+(\.[0-9]+)?)\s*$' | paste -sd '+' - | bc

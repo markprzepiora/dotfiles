@@ -1,0 +1,6 @@
+# Merge the current branch into master or the given branch.
+local master=${1:-master}
+local current_branch=$(git rev-parse --abbrev-ref HEAD)
+git checkout "$master" &&
+git pull --ff-only &&
+git merge --no-ff "$current_branch"

@@ -1,0 +1,1 @@
+cd "$(fd -HI --type d "$@" | ~/dotfiles/bin/selecta)"
