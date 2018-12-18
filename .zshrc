@@ -159,10 +159,12 @@ findd() {
   cd "$(findf "$@" -type d | selecta)"
 }
 
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
-
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
+
+# Load iterm2 shell integrations if present
+test -e ${HOME}/.iterm2_shell_integration.zsh &&
+  source ${HOME}/.iterm2_shell_integration.zsh
 
 # Load autojump if present
 if (command -v brew > /dev/null 2>&1) && test -r "$(brew --prefix)/etc/autojump.sh"; then
