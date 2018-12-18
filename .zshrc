@@ -116,6 +116,9 @@ alias traceroute='traceroute -q1 -w1'
 alias today='date +%Y-%m-%d'
 alias now='date +%Y-%m-%d--%H-%M-%S'
 
+# I type "g st" constantly, this saves two keystrokes
+alias st='git status --short'
+
 # Check out a remote branch and rebase it on top of master.
 checkout_remote() {
   local master=${2:-master}
