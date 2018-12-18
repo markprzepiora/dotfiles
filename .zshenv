@@ -11,5 +11,17 @@ PATH="$PATH:$HOME/dotfiles/bin"
 # Add globally-installed npm binaries to path
 PATH="$PATH:$HOME/.npm_global/bin"
 
+# Enable linuxbrew if present
+test -d ~/.linuxbrew && \
+  PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+test -d /home/linuxbrew/.linuxbrew && \
+  PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+
+# Enable chruby if present
+test -r /usr/local/share/chruby/chruby.sh && \
+  source /usr/local/share/chruby/chruby.sh
+test -r /usr/local/share/chruby/auto.sh && \
+  source /usr/local/share/chruby/auto.sh
+
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
