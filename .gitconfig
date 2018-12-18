@@ -34,6 +34,8 @@
   # git branch-commits = see commits that will be merged
   branch-commits = "!. ~/.githelpers && branch_commits_range_from_head"
   branch-files = "!. ~/.githelpers && files_in_branch"
+  modified = "! git status --short | grep -E '^( M| M )' | cut -c4-"
+  conflicts = "! git status --short | grep -E '^UU' | cut -c4-"
 
   # Add untracked files only
   au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
