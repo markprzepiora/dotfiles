@@ -164,5 +164,12 @@ test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_in
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
 
+# Load autojump if present
+if (command -v brew > /dev/null 2>&1) && test -r "$(brew --prefix)/etc/autojump.sh"; then
+  . "$(brew --prefix)/etc/autojump.sh"
+elif test -r /usr/share/autojump/autojump.sh; then
+  . /usr/share/autojump/autojump.sh
+fi
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"

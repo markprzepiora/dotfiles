@@ -13,8 +13,3 @@ PATH="$PATH:$HOME/.npm_global/bin"
 
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
-
-# Load autojump if homebrew is installed.
-(command -v brew > /dev/null 2>&1) &&
-test -s "$(brew --prefix)/etc/autojump.sh" &&
-. "$(brew --prefix)/etc/autojump.sh"
