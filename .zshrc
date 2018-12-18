@@ -20,7 +20,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 
-plugins=(git ruby autojump)
+plugins=(git)
 
 # super dirty OS check so we don't have to execute uname
 if [ -e /Library ]; then
