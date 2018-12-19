@@ -4,7 +4,9 @@
 # up aliases, functions, options, key bindings, etc.
 
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH="$HOME"/.oh-my-zsh
+ZSH_CUSTOM="$HOME"/dotfiles/zsh_custom
+ZSH_DISABLE_COMPFIX=true
 
 # Shorter history plox
 HISTSIZE=5000
