@@ -1,36 +1,7 @@
 export AUTOJUMP_SOURCED=1
 
-# set user installation paths
-if [[ -d ~/.autojump/bin ]]; then
-    path=(~/.autojump/bin ${path})
-fi
-if [[ -d ~/.autojump/functions ]]; then
-    fpath=(~/.autojump/functions ${fpath})
-fi
-
-
-# set homebrew installation paths
-if command -v brew &>/dev/null; then
-  local brew_prefix=${BREW_PREFIX:-$(brew --prefix)}
-  if [[ -d "${brew_prefix}/share/zsh/site-functions" ]]; then
-    fpath=("${brew_prefix}/share/zsh/site-functions" ${fpath})
-  fi
-fi
-
-
-# set error file location
-if [[ "$(uname)" == "Darwin" ]]; then
-    export AUTOJUMP_ERROR_PATH=~/Library/autojump/errors.log
-elif [[ -n "${XDG_DATA_HOME}" ]]; then
-    export AUTOJUMP_ERROR_PATH="${XDG_DATA_HOME}/autojump/errors.log"
-else
-    export AUTOJUMP_ERROR_PATH=~/.local/share/autojump/errors.log
-fi
-
-if [[ ! -d ${AUTOJUMP_ERROR_PATH:h} ]]; then
-    mkdir -p ${AUTOJUMP_ERROR_PATH:h}
-fi
-
+path=(~/dotfiles/autojump ${path})
+export AUTOJUMP_ERROR_PATH=~/dotfiles/autojump/errors.log
 
 # change pwd hook
 autojump_chpwd() {
