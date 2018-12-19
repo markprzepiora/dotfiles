@@ -54,6 +54,9 @@ source $ZSH/oh-my-zsh.sh
 unsetopt autopushd
 unsetopt correct_all
 
+# turn off this awful feature
+unsetopt AUTO_CD
+
 PROMPT='%{$fg_bold[blue]%}%n%{$fg_bold[blue]%}@%{$fg_bold[blue]%}%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[red]%}$(git_prompt_info)%{$fg_bold[red]%}
 %{$fg_bold[blue]%}◈ %{$reset_color%}'
 
