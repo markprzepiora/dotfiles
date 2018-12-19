@@ -10,11 +10,5 @@
 # not change the shell environment at all. Rather, it should be used to set the
 # terminal type and run a series of external commands (fortune, msgs, etc).
 
-# Load chruby if we have it.
-if [[ -e /usr/local/share/chruby ]]; then
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-fi
-
 # Make our ~/bin directory override everything else
 export PATH="$HOME/bin":"$PATH"
