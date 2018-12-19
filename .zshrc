@@ -1,3 +1,7 @@
+if [ "$ZSH_PROFILE" = "true" ]; then
+  zmodload zsh/zprof
+fi
+
 # From the zsh docs:
 #
 # `.zshrc' is sourced in interactive shells. It should contain commands to set
@@ -115,3 +119,7 @@ source ~/dotfiles/autojump/autojump.zsh
 
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
+
+if [ "$ZSH_PROFILE" = "true" ]; then
+  zprof
+fi
