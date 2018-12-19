@@ -14,9 +14,6 @@ curl https://raw.githubusercontent.com/markprzepiora/dotfiles/master/setup.sh | 
 This should set everything up on OSX and Ubuntu, and on other Unix systems as
 long as you have some dependencies installed.
 
-If you are planning to use tmux, you will probably have to edit `.tmux.conf`
-and remove the OSX-specific fixes at the top if you aren't using OSX.
-
 
 Customization
 -------------
