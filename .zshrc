@@ -1,10 +1,16 @@
+if [ "$ZSH_PROFILE" = "true" ]; then
+  zmodload zsh/zprof
+fi
+
 # From the zsh docs:
 #
 # `.zshrc' is sourced in interactive shells. It should contain commands to set
 # up aliases, functions, options, key bindings, etc.
 
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH="$HOME"/.oh-my-zsh
+ZSH_CUSTOM="$HOME"/dotfiles/zsh_custom
+ZSH_DISABLE_COMPFIX=true
 
 # Shorter history plox
 HISTSIZE=5000
@@ -108,12 +114,12 @@ PSQL_PAGER="less -iMSx4 -FX"
 test -e ${HOME}/.iterm2_shell_integration.zsh &&
   source ${HOME}/.iterm2_shell_integration.zsh
 
-# Load autojump if present
-if (command -v brew > /dev/null 2>&1) && test -r "$(brew --prefix)/etc/autojump.sh"; then
-  . "$(brew --prefix)/etc/autojump.sh"
-elif test -r /usr/share/autojump/autojump.sh; then
-  . /usr/share/autojump/autojump.sh
-fi
+# Load patched, vendored autojump
+source ~/dotfiles/autojump/autojump.zsh
 
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
+
+if [ "$ZSH_PROFILE" = "true" ]; then
+  zprof
+fi
