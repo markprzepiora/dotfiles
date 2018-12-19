@@ -2,3 +2,4 @@
 /.vim/.netrwhist
 /.vim/bundle
 __pycache__
+/autojump/*.pyc
