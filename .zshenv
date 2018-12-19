@@ -26,5 +26,8 @@ test -r /usr/local/share/chruby/auto.sh && \
 # Add ~/bin and ~/Dropbox/bin to PATH
 PATH="$PATH":~/bin:~/Dropbox/bin
 
+# Add rust/cargo dir
+PATH="$PATH":~/.cargo/bin
+
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
