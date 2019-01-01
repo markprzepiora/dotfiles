@@ -303,7 +303,10 @@ function! PromoteToLet()
   :normal ==
 endfunction
 :command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
+augroup PromoteTolet
+  autocmd!
+  autocmd FileType ruby nnoremap <buffer> <leader>l :PromoteToLet<cr>
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -326,7 +329,10 @@ function! EmberGetter()
   silent! call repeat#set(",l", -1)  " Allow us to do it multiple times
 endfunction
 :command! EmberGetter :call EmberGetter()
-:map <leader>l :EmberGetter<cr>
+augroup EmberGetter
+  autocmd!
+  autocmd FileType javascript nnoremap <buffer> <leader>l :EmberGetter<cr>
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
