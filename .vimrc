@@ -182,8 +182,23 @@ hi MatchParen cterm=none ctermbg=green ctermfg=blue
 " Misc Key Maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" macOS
 if has('macunix')
     map <leader>y "*y
+    map <leader>p "*p
+" WSL
+elseif !empty(glob("/mnt/c"))
+    " We used to use xsel to copy and paste but this only works when running
+    " an X server, not if you are using the native ubuntu.exe / wsl.exe
+    " terminal (or hyperfine) which is a problem. So instead we use clip.exe
+    " and paste.exe.
+    function! CopyText()
+      normal gv"*y
+      :call system('~/Dropbox/bin/windows/clip.exe', getreg('*'))
+    endfunction
+    xmap <leader>y <esc>:call CopyText()<cr>
+    map <leader>p :read !~/Dropbox/bin/windows/paste.exe<cr>
+" Other Linux/Unix
 elseif has('unix')
     " work-around to copy selected text to system clipboard
     " and prevent it from clearing clipboard when using ctrl+z (depends on xsel)
@@ -192,6 +207,7 @@ elseif has('unix')
       :call system('xsel -ib', getreg('*'))
     endfunction
     xmap <leader>y <esc>:call CopyText()<Cr>
+    map <leader>p "*p
 endif
 
 " do not automatically copy visual selections to the clipboard
@@ -563,12 +579,6 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 " Allow auto-completion of names with dashes in CSS and HTML (useful for class
 " names)
 au BufNewFile,BufReadPost *.css,*.scss,*.html,*.handlebars,*.hbs,*.html.erb setl iskeyword+=-
-
-" Copy and paste from clipboard with ,y and ,p
-" nnoremap <leader>y "+y
-" vnoremap <leader>y "+y
-" nnoremap <leader>p "+p
-" vnoremap <leader>p "+p
 
 " jj exits insert mode
 imap jj <esc>
