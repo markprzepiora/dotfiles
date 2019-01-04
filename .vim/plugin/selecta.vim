@@ -34,3 +34,12 @@ nnoremap <leader>F :call SelectaCommand("find_src_files \| grep -F '" . expand('
 
 " Find what are other, probably related files.
 nnoremap <leader>C :call SelectaCommand("find_src_files \| ~/dotfiles/bin/filter_related_files " . expand('%'), "", ":e")<cr>
+
+" These two are a bit different. Mark uses these to try to find where an Ember
+" class is defined. If the word under the cursor is FooBar then this will
+" search for the regex /\vFooBar *=/
+"
+" Eventually I want to make this a little more generalized to replace gf with
+" something smarter.
+nnoremap <leader>cd "zyiw:call SelectaCommand("rg -l '\\b" . @z . " *='", "", ":e")<cr>
+vnoremap <leader>cd "zy:call SelectaCommand("rg -l '\\b" . @z . " *='", "", ":e")<cr>
