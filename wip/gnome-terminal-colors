@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -eu
+set -o pipefail
+
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
+
+set -x
+
+profile_uuid=$(dconf read /org/gnome/terminal/legacy/profiles:/default | grep -oE "[0-9a-f-]+")
+exit
+
+dconf write /org/gnome/terminal/legacy/profiles:/:"$profile_uuid"/cursor-shape "'block'"
+dconf write /org/gnome/terminal/legacy/profiles:/:"$profile_uuid"/background-color "'#16160f0f2121'"
+dconf write /org/gnome/terminal/legacy/profiles:/:"$profile_uuid"/foreground-color "'#d9d9e6e6f2f2'"
+dconf write /org/gnome/terminal/legacy/profiles:/:"$profile_uuid"/palette "['#000000000000', '#b8b883837a7a', '#7a7ab8b88383', '#afafb8b87a7a', '#83837a7ab8b8', '#b8b87a7aafaf', '#7a7aafafb8b8', '#d9d9d9d9d9d9', '#262626262626', '#dbdbc1c1bdbd', '#bdbddbdbc1c1', '#d7d7dbdbbdbd', '#c1c1bdbddbdb', '#dbdbbdbdd7d7', '#bdbdd7d7dbdb', '#ffffffffffff']"
