@@ -23,6 +23,9 @@ SAVEHIST=5000
 ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE="true"
 
+# This makes tmux start in 256 color mode so that we don't have to start tmux with `tmux -2`
+TERM=xterm-256color
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 
