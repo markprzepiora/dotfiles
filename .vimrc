@@ -685,7 +685,7 @@ augroup END
 
 augroup yaml
   au!
-  au BufNewFile,BufRead *.yml setlocal filetype=xxx
+  au BufNewFile,BufRead *.yml setlocal syntax=off
 augroup END
 
 let g:UltiSnipsExpandTrigger="<c-b>"
