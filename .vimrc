@@ -60,6 +60,9 @@ Plug 'Chun-Yang/vim-action-ag'
 " Color scheme
 Plug 'nightsense/stellarized'
 
+" Big bundle of color schemes
+Plug 'flazz/vim-colorschemes'
+
 call plug#end()
 
 
@@ -167,10 +170,25 @@ syntax on
 :set t_Co=256 " 256 colors
 
 syntax enable
-colorscheme stellarized
 set background=dark
-hi MatchParen cterm=none ctermbg=green ctermfg=blue
 
+" These only make sense when the colorscheme is disabled:
+"
+"     hi MatchParen           cterm=none  ctermbg=6     ctermfg=8
+"     hi Cursor                           ctermbg=blue  ctermfg=blue  gui=none
+"     hi CursorLine term=none cterm=none  ctermbg=23
+
+" I like this colorscheme, especially with a couple of overrides
+colorscheme delek
+hi Search ctermbg=blue ctermfg=0
+hi StatusLine ctermfg=8
+
+" This one is pretty nice too.
+"
+"     colorscheme znake
+
+" Highlight the current line.
+set cursorline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status Line
