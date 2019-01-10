@@ -1,3 +1,9 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule ".tmux/plugins/tmux-current-pane-hostname"]
+	path = .tmux/plugins/tmux-current-pane-hostname
+	url = https://github.com/soyuka/tmux-current-pane-hostname.git
