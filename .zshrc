@@ -23,8 +23,12 @@ SAVEHIST=5000
 ZSH_THEME="robbyrussell"
 DISABLE_AUTO_UPDATE="true"
 
-# This makes tmux start in 256 color mode so that we don't have to start tmux with `tmux -2`
-TERM=xterm-256color
+# Set TERM to 256 color mode, unless we're in tmux. Tmux sets its TERM to
+# screen-256color since that fixes some keycode weirdness over SSH, but setting
+# the TERM to screen-256color globally does weird things to the local terminal...
+if [ -z "$TMUX" ]; then
+  TERM=xterm-256color
+fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
