@@ -49,3 +49,16 @@ module Policies
 	end
 end
 endsnippet
+
+snippet change_table
+change_table :$1 do |t|
+	$0
+end
+endsnippet
+
+snippet create_table
+create_table :$1 do |t|
+	$0
+	t.timestamps
+end
+endsnippet
