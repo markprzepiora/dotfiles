@@ -1,28 +1,35 @@
 global !p
-def camelcase(filename):
-	underscored_name = re.sub(r'\.rb$', r'', fn)
+def __camelcase__(filename):
+	filename_without_leading_numbers = re.sub(r'^\d+_', r'', filename)
+	underscored_name = re.sub(r'\.rb$', r'', filename_without_leading_numbers)
 	titleized = underscored_name.title()
 	camelcased = titleized.replace('_', '')
 	return camelcased
 
-def return_camelcase():
-	snip.rv = camelcase(fn).replace("Spec", "")
+def camelcase():
+	snip.rv = __camelcase__(fn).replace("Spec", "")
 endglobal
 
 snippet model
-class ${1:`!p return_camelcase() `} < ApplicationRecord
+class ${1:`!p camelcase() `} < ApplicationRecord
+	$0
+end
+endsnippet
+
+snippet worker
+class ${1:`!p camelcase() `} < RallioWorker
 	$0
 end
 endsnippet
 
 snippet controller
-class ${1:`!p return_camelcase() `} < ApplicationController
+class ${1:`!p camelcase() `} < ApplicationController
 	$0
 end
 endsnippet
 
 snippet apicontroller
-class Api::${1:`!p return_camelcase() `} < Api::ApiController
+class Api::${1:`!p camelcase() `} < Api::ApiController
 	$0
 end
 endsnippet
@@ -30,14 +37,14 @@ endsnippet
 snippet spec
 require 'spec_helper'
 
-describe ${1:`!p return_camelcase() `} do
+describe ${1:`!p camelcase() `} do
 	$0
 end
 endsnippet
 
 snippet policy
 module Policies
-	module ${1:`!p return_camelcase() `}
+	module ${1:`!p camelcase() `}
 		$0
 	end
 end
