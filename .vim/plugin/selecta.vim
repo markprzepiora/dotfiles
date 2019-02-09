@@ -41,5 +41,5 @@ nnoremap <leader>C :call SelectaCommand("find_src_files \| ~/dotfiles/bin/filter
 "
 " Eventually I want to make this a little more generalized to replace gf with
 " something smarter.
-nnoremap <leader>cd "zyiw:call SelectaCommand("rg -l '\\b" . @z . " *='", "", ":e")<cr>
-vnoremap <leader>cd "zy:call SelectaCommand("rg -l '\\b" . @z . " *='", "", ":e")<cr>
+nnoremap <leader>cd "zyiw:call SelectaCommand("rg -il '\\b" . @z . " *='", "", ":e")<cr>
+vnoremap <leader>cd "zy:call SelectaCommand("rg -il '\\b" . @z . " *='", "", ":e")<cr>
