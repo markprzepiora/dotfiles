@@ -18,7 +18,10 @@ endsnippet
 
 snippet worker
 class ${1:`!p camelcase() `} < RallioWorker
-	$0
+	sidekiq_options queue: "${2:normal}", retry: ${3:false}
+	def perform
+		$0
+	end
 end
 endsnippet
 
