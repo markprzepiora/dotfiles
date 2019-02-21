@@ -164,6 +164,8 @@ augroup vimrcEx
   " to run commands there.
   autocmd! CmdwinEnter * :unmap <cr>
   autocmd! CmdwinLeave * :call MapCR()
+
+  autocmd FileType autohotkey setlocal commentstring=;\ %s
 augroup END
 
 
