@@ -41,6 +41,10 @@
   au = !"git st -s | grep '?' | cut -d' ' -f2 | xargs git add"
   lg = log --color --graph --pretty=format:'%Cred%h %Cgreen(%ci)%Creset%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
 
+  # When in another branch, run `git oldest-ancestor` to see where the current
+  # head diverged from master. You can explicitly specify the compared branches,
+  # e.g. the default is `git oldest-ancestor master HEAD`
+  oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
 [core]
   editor = vim
   excludesfile = /Users/mark/.gitignore_global
