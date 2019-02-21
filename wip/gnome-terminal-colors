@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 
-set -eu
+# set -eu
 set -o pipefail
+
+# sudo apt install dconf-tools
 
 readonly PROGDIR=$(cd "${0%/*}" && pwd)
 
 set -x
 
 profile_uuid=$(dconf read /org/gnome/terminal/legacy/profiles:/default | grep -oE "[0-9a-f-]+")
-exit
+
+if [ -z "$profile_uuid" ]; then
+  profile_uuid=$(dconf list /org/gnome/terminal/legacy/profiles:/ | head -1 | grep -oE "[0-9a-f-]+")
+fi
 
 dconf write /org/gnome/terminal/legacy/profiles:/:"$profile_uuid"/cursor-shape "'block'"
 dconf write /org/gnome/terminal/legacy/profiles:/:"$profile_uuid"/background-color "'#16160f0f2121'"
