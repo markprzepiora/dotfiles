@@ -472,7 +472,7 @@ function! RunTestFile(...)
     endif
 
     " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
     if in_test_file
         call SetTestFile()
     elseif !exists("t:grb_test_file")
@@ -495,16 +495,32 @@ function! RunTests(filename)
     " Write the file and run tests for the given filename
     :w
     if match(a:filename, '\.feature$') != -1
-        exec ":!script/cucumber " . a:filename
+        let test_cmd = "script/cucumber '" . a:filename . "'"
+    elseif filereadable("script/test")
+        let test_cmd = "script/test '" . a:filename . "'"
+    elseif filereadable("bin/test")
+        let test_cmd = "bin/test '" . a:filename . "'"
+    elseif filereadable("bin/rspec")
+        let test_cmd = "bin/rspec --color '" . a:filename . "'"
+    elseif filereadable("Gemfile")
+        let test_cmd = "bundle exec rspec --color '" . a:filename . "'"
     else
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
+        let test_cmd = "rspec --color '" . a:filename . "'"
     end
+
+    let existing_buffer = bufwinnr('\[test_runner\]')
+    if existing_buffer >= 0
+      exe existing_buffer . "wincmd w"
+      :q
+    end
+
+    botright new
+    call term_start(['/bin/sh', '-c', test_cmd], { 'term_finish': 'open', 'curwin': 1, 'term_name': '[test_runner] ' . test_cmd })
+    au BufLeave <buffer> wincmd p
+    nnoremap <buffer> <Enter> :q<CR>
+    wincmd p
+    redraw
+    echo "Press <Enter> to exit test runner terminal (<Ctrl-C> first if command is still running)"
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
