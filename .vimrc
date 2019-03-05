@@ -234,6 +234,9 @@ elseif has('unix')
     map <leader>p "*p
 endif
 
+" ,cn copies the current file basename to the unnamed buffer
+nmap <leader>cn :let @" = expand('%:t:r')<cr>
+
 " do not automatically copy visual selections to the clipboard
 set clipboard-=autoselect
 
