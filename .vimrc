@@ -491,15 +491,36 @@ function! SetTestFile()
     let t:grb_test_file=@%
 endfunction
 
-function! GetTestRunner()
+function! GetTestRunner(filename)
+    let is_rspec_file = match(a:filename, '_spec.rb$') != -1
+    let is_minitest_file = match(a:filename, '_test.rb$') != -1
+    let is_rails_minitest_project = !empty(glob('test')) && filereadable('config.ru') && match(readfile('config.ru'), 'Rails') != -1
+    let is_other_minitest_project = !empty(glob('test')) && filereadable('Gemfile') && match(readfile('Gemfile'), '\v<minitest>') != -1
+    let is_rspec_project = !empty(glob('spec')) && filereadable('Gemfile') && match(readfile('Gemfile'), '\v<rspec>') != -1
+
+    " The easy cases are when there's a test runner in the script or test
+    " directories -- if so, just use it!
     if filereadable("script/test")
         return "script/test"
     elseif filereadable("bin/test")
         return "bin/test"
     elseif filereadable("bin/rspec")
         return "bin/rspec --color"
-    elseif filereadable("Gemfile")
+
+    " Rails minitests are run with the `bin/rails test` command, which allows
+    " for running single test files!
+    elseif is_rails_minitest_project
+        return "bin/rails test"
+
+    " If it's a non-Rails minitest project, try just running the test with ruby???
+    elseif is_other_minitest_project
+        return "bundle exec ruby"
+
+    " If it's a Gemfile-based rspec project, run it with bundle.
+    elseif is_rspec_project
         return "bundle exec rspec --color"
+
+    " Otherwise who knows, run global rspec and pray.
     else
         return "rspec --color"
     end
@@ -508,8 +529,13 @@ endfunction!
 function! RunTests(filename)
     " Write the file and run tests for the given filename
     :w
-    let test_runner = GetTestRunner()
-    let test_cmd = test_runner . " '" . a:filename . "'"
+    let test_runner = GetTestRunner(a:filename)
+
+    if strlen(a:filename) > 0
+      let test_cmd = test_runner . " '" . a:filename . "'"
+    else
+      let test_cmd = test_runner
+    end
 
     let existing_buffer = bufwinnr('\[test_runner\]')
     if existing_buffer >= 0
