@@ -491,22 +491,25 @@ function! SetTestFile()
     let t:grb_test_file=@%
 endfunction
 
+function! GetTestRunner()
+    if filereadable("script/test")
+        return "script/test"
+    elseif filereadable("bin/test")
+        return "bin/test"
+    elseif filereadable("bin/rspec")
+        return "bin/rspec --color"
+    elseif filereadable("Gemfile")
+        return "bundle exec rspec --color"
+    else
+        return "rspec --color"
+    end
+endfunction!
+
 function! RunTests(filename)
     " Write the file and run tests for the given filename
     :w
-    if match(a:filename, '\.feature$') != -1
-        let test_cmd = "script/cucumber '" . a:filename . "'"
-    elseif filereadable("script/test")
-        let test_cmd = "script/test '" . a:filename . "'"
-    elseif filereadable("bin/test")
-        let test_cmd = "bin/test '" . a:filename . "'"
-    elseif filereadable("bin/rspec")
-        let test_cmd = "bin/rspec --color '" . a:filename . "'"
-    elseif filereadable("Gemfile")
-        let test_cmd = "bundle exec rspec --color '" . a:filename . "'"
-    else
-        let test_cmd = "rspec --color '" . a:filename . "'"
-    end
+    let test_runner = GetTestRunner()
+    let test_cmd = test_runner . " '" . a:filename . "'"
 
     let existing_buffer = bufwinnr('\[test_runner\]')
     if existing_buffer >= 0
