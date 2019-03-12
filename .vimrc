@@ -484,12 +484,13 @@ endfunction
 
 function! RunNearestTest()
     let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
+    call RunTestFile(":" . spec_line_number)
 endfunction
 
 function! SetTestFile()
     " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
+    let t:grb_test_file = @%
+    let t:grb_test_file = fnamemodify(expand(t:grb_test_file), ":~:.")
 endfunction
 
 function! GetTestRunner(filename)
@@ -502,40 +503,38 @@ function! GetTestRunner(filename)
     " The easy cases are when there's a test runner in the script or test
     " directories -- if so, just use it!
     if filereadable("script/test")
-        return "script/test"
+        return ["script/test"]
     elseif filereadable("bin/test")
-        return "bin/test"
+        return ["bin/test"]
     elseif filereadable("bin/rspec")
-        return "bin/rspec --color"
+        return ["bin/rspec", "--color"]
 
     " Rails minitests are run with the `bin/rails test` command, which allows
     " for running single test files!
     elseif is_rails_minitest_project
-        return "bin/rails test"
+        return ["bin/rails", "test"]
 
     " If it's a non-Rails minitest project, try just running the test with ruby???
     elseif is_other_minitest_project
-        return "bundle exec ruby"
+        return ["bundle", "exec", "ruby"]
 
     " If it's a Gemfile-based rspec project, run it with bundle.
     elseif is_rspec_project
-        return "bundle exec rspec --color"
+        return ["bundle", "exec", "rspec", "--color"]
 
     " Otherwise who knows, run global rspec and pray.
     else
-        return "rspec --color"
+        return ["rspec", "--color"]
     end
 endfunction!
 
 function! RunTests(filename)
     " Write the file and run tests for the given filename
     :w
-    let test_runner = GetTestRunner(a:filename)
+    let test_cmd = GetTestRunner(a:filename)
 
     if strlen(a:filename) > 0
-      let test_cmd = test_runner . " '" . a:filename . "'"
-    else
-      let test_cmd = test_runner
+      call add(test_cmd, a:filename)
     end
 
     let existing_buffer = bufwinnr('\[test_runner\]')
@@ -545,7 +544,8 @@ function! RunTests(filename)
     end
 
     botright new
-    call term_start(['/bin/sh', '-c', test_cmd], { 'term_finish': 'open', 'curwin': 1, 'term_name': '[test_runner] ' . test_cmd })
+    resize 10
+    call term_start(test_cmd, { 'term_finish': 'open', 'curwin': 1, 'term_name': '[test_runner] ' . join(test_cmd, " ") })
     au BufLeave <buffer> wincmd p
     nnoremap <buffer> <Enter> :q<CR>
     wincmd p
