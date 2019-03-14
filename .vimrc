@@ -552,7 +552,9 @@ function! RunTests(filename)
     end
 
     botright new
-    resize 10
+    resize 4
+    set nonumber
+    set norelativenumber
     call term_start(test_cmd, { 'term_finish': 'open', 'curwin': 1, 'term_name': '[test_runner] ' . join(test_cmd, " ") })
     au BufLeave <buffer> wincmd p
     nnoremap <buffer> <Enter> :q<CR>
