@@ -538,7 +538,9 @@ endfunction!
 
 function! RunTests(filename)
     " Write the file and run tests for the given filename
-    :w
+    if strlen(expand("%")) > 0
+      :w
+    end
     let test_cmd = GetTestRunner(a:filename)
 
     if strlen(a:filename) > 0
