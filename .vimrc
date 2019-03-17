@@ -641,7 +641,6 @@ command! OpenChangedFiles :call OpenChangedFiles()
 command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 
 set number
-nmap <C-N><C-N> :set invnumber <CR>
 " set smartindent
 " set ic
 " set scs
@@ -671,12 +670,14 @@ imap jj <esc>
 " Toggle relative/absolute numbers with C+n
 function! NumberToggle()
   if(&relativenumber == 1)
-    set number
+    set nonumber
+    set norelativenumber
   else
+    set number
     set relativenumber
   endif
 endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <C-n><C-n> :call NumberToggle()<cr>
 
 " Toggle folds with space
 nnoremap <Space> za
