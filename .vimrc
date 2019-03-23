@@ -63,6 +63,9 @@ Plug 'nightsense/stellarized'
 " Big bundle of color schemes
 Plug 'flazz/vim-colorschemes'
 
+" PowerShell highlighting
+Plug 'PProvost/vim-ps1'
+
 call plug#end()
 
 
