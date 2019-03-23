@@ -299,9 +299,31 @@ map <Down> <Nop>
 " Open files in directory of current file with ,e
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
+nmap <leader>e :edit %%
+nmap <leader>v :view %%
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Extract a variable from the current visual selection
+"
+" Usage:
+"
+"     notify(Account.find(123).users)
+"            ^^^^^^^^^^^^^^^^^
+"
+" Carets indicate the visual selection.
+"
+" Press ,e and enter 'account' when prompted.
+"
+" Result:
+"
+"     account = Account.find(123)
+"     notify(account.users)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! ExtractVariableFromSelection()
+  let var_name = input('Variable name: ', '')
+  execute ':normal! gvxmqi' . var_name . "\<esc>O\<esc>PI" . var_name . " = \<esc>==`q"
+endfunction
+vmap <leader>e :call ExtractVariableFromSelection()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rename current file
