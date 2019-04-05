@@ -120,7 +120,17 @@ operating_system() {
   if [ ! -f /etc/os-release ]; then echo unknown; return; fi
 
   local name_line=$(cat /etc/os-release | grep ^NAME=)
-  if [ "$name_line" = 'NAME="Ubuntu"' ]; then echo ubuntu; return; fi
+  if [ "$name_line" = 'NAME="Ubuntu"' ]; then
+    local version=$(cat /etc/os-release | grep VERSION_ID= | sed -E 's/^VERSION_ID="(.*)"$/\1/g')
+
+    if [ "$version" -gt "14.04" ]; then
+      echo ubuntu
+    else
+      echo oldubuntu
+    fi
+
+    return
+  fi
 
   echo unknown
 }
@@ -143,6 +153,11 @@ case $(operating_system) in
     ubuntu)
         sudo apt update
         sudo apt install -y git vim vim-nox zsh silversearcher-ag jq
+        ;;
+
+    oldubuntu)
+        sudo apt-get update
+        sudo apt-get install -y git vim vim-nox zsh jq
         ;;
 
     *)
