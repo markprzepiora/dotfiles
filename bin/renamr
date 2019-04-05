@@ -230,7 +230,7 @@ else
   replace = get_input('replace', ARGV[1])
 
   files = if ARGV.length > 2
-    ARGV[2..-1]
+    ARGV[2..-1].map{ |file| Dir.glob(file) }.flatten(1)
   else
     Dir.glob(get_input('files', nil))
   end
