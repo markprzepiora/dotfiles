@@ -1,4 +1,14 @@
 # Merge the current branch into master or the given branch.
+
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  echo "Usage:"
+  echo "    $0 [merge_into]"
+  echo ""
+  echo "Arguments:"
+  echo "    - merge_into (default 'master'): the branch to merge the current branch into"
+  return
+fi
+
 local master=${1:-master}
 local current_branch=$(git rev-parse --abbrev-ref HEAD)
 git checkout "$master" &&
