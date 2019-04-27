@@ -34,7 +34,7 @@
   # git branch-commits = see commits that will be merged
   branch-commits = "!. ~/.githelpers && branch_commits_range_from_head"
   branch-files = "!. ~/.githelpers && files_in_branch"
-  modified = "! git status --short | grep -E '^( M| M )' | cut -c4-"
+  modified = "! git status --porcelain | grep -Ev '^\\?\\?' | cut -c4-"
   conflicts = "! git status --short | grep -E '^UU' | cut -c4-"
 
   lg = log --color --graph --pretty=format:'%Cred%h %Cgreen(%ci)%Creset%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -43,8 +43,6 @@
   # head diverged from master. You can explicitly specify the compared branches,
   # e.g. the default is `git oldest-ancestor master HEAD`
   oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
-
-  modified = !"git status --porcelain | cut -c4-"
 
 [core]
   editor = vim
