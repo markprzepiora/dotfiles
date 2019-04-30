@@ -127,6 +127,13 @@ test -e ${HOME}/.iterm2_shell_integration.zsh &&
 # Load patched, vendored autojump
 source ~/dotfiles/autojump/autojump.zsh
 
+# Load direnv
+if [ -f /home/linuxbrew/.linuxbrew/bin/direnv ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/direnv hook zsh)"
+elif [ -f /usr/local/bin/direnv ]; then
+  eval "$(/usr/local/bin/direnv hook zsh)"
+fi
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
 
