@@ -66,6 +66,9 @@ Plug 'flazz/vim-colorschemes'
 " PowerShell highlighting
 Plug 'PProvost/vim-ps1'
 
+" ctags automation - https://github.com/ludovicchabant/vim-gutentags
+Plug 'ludovicchabant/vim-gutentags'
+
 call plug#end()
 
 
