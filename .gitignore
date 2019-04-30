@@ -3,3 +3,4 @@
 /.vim/bundle
 __pycache__
 /autojump/*.pyc
+/tags
