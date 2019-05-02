@@ -136,6 +136,10 @@ elif [ -f /usr/bin/direnv ]; then
   eval "$(/usr/bin/direnv hook zsh)"
 fi
 
+# Enable chruby/auto if present
+test -r /usr/local/share/chruby/auto.sh && \
+  source /usr/local/share/chruby/auto.sh
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
 

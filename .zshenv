@@ -20,8 +20,6 @@ test -d /home/linuxbrew/.linuxbrew && \
 # Enable chruby if present
 test -r /usr/local/share/chruby/chruby.sh && \
   source /usr/local/share/chruby/chruby.sh
-test -r /usr/local/share/chruby/auto.sh && \
-  source /usr/local/share/chruby/auto.sh
 
 # Add ~/bin and ~/Dropbox/bin to PATH
 PATH="$PATH":~/bin:~/Dropbox/bin
