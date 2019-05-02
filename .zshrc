@@ -132,6 +132,8 @@ if [ -f /home/linuxbrew/.linuxbrew/bin/direnv ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/direnv hook zsh)"
 elif [ -f /usr/local/bin/direnv ]; then
   eval "$(/usr/local/bin/direnv hook zsh)"
+elif [ -f /usr/bin/direnv ]; then
+  eval "$(/usr/bin/direnv hook zsh)"
 fi
 
 # Load personalized zshrc files if they exist.
