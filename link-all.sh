@@ -3,19 +3,7 @@
 set -eu
 set -o pipefail
 
-abspath() {
-    if [ -d "$1" ]; then
-        (cd "$1"; pwd)
-    elif [ -f "$1" ]; then
-        if [[ $1 = /* ]]; then
-            echo "$1"
-        elif [[ $1 == */* ]]; then
-            echo "$(cd "${1%/*}"; pwd)/${1##*/}"
-        else
-            echo "$(pwd)/$1"
-        fi
-    fi
-}
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
 
 has_executable() {
     command -v "$1" >/dev/null 2>&1
@@ -64,10 +52,6 @@ operating_system() {
   echo unknown
 }
 
-readonly ARGS="$@"
-readonly LONGPROGNAME=$(abspath "$0")
-readonly PROGDIR="${LONGPROGNAME%/*}"     # get directory component (remove short match)
-readonly PROGNAME="${LONGPROGNAME##*/}"   # get basename component (remove long match)
 
 case $(operating_system) in
     osx)
