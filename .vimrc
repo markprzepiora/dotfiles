@@ -69,6 +69,10 @@ Plug 'PProvost/vim-ps1'
 " ctags automation - https://github.com/ludovicchabant/vim-gutentags
 Plug 'ludovicchabant/vim-gutentags'
 
+" Automatically deal with (*#@$ swap file messages
+Plug 'gioele/vim-autoswap'
+let g:autoswap_detect_tmux = 1
+
 call plug#end()
 
 
