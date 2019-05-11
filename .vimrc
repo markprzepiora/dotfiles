@@ -47,6 +47,8 @@ Plug 'tmhedberg/matchit'
 
 " UltiSnips - The ultimate snippet solution for Vim
 Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsEnableSnipMate = 0
 
 " abolish.vim: easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
@@ -68,6 +70,7 @@ Plug 'PProvost/vim-ps1'
 
 " ctags automation - https://github.com/ludovicchabant/vim-gutentags
 Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_ctags_exclude=['.git', 'vendor', 'tmp', '.bundle']
 
 " Automatically deal with (*#@$ swap file messages
 Plug 'gioele/vim-autoswap'
@@ -787,7 +790,3 @@ augroup yaml
   au!
   au BufNewFile,BufRead *.yml setlocal syntax=off
 augroup END
-
-let g:UltiSnipsExpandTrigger="<c-b>"
-let g:UltiSnipsEnableSnipMate = 0
-let g:gutentags_ctags_exclude=['.git', 'vendor', 'tmp', '.bundle']
