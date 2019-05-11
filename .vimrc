@@ -790,3 +790,8 @@ augroup yaml
   au!
   au BufNewFile,BufRead *.yml setlocal syntax=off
 augroup END
+
+" <Ctrl-p> Acts like the opposite of D, it pastes, deleting the rest of the
+" current line with the buffer, with the added bonus of not yanking at the
+" same time.
+nnoremap <C-p> vg_"_xp
