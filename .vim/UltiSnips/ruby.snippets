@@ -1,0 +1,19 @@
+global !p
+def __camelcase__(filename):
+	filename_without_leading_numbers = re.sub(r'^\d+_', r'', filename)
+	underscored_name = re.sub(r'\.rb$', r'', filename_without_leading_numbers)
+	titleized = underscored_name.title()
+	camelcased = titleized.replace('_', '')
+	return camelcased
+
+def camelcase():
+	snip.rv = __camelcase__(fn).replace("Spec", "")
+endglobal
+
+snippet spec
+require 'spec_helper'
+
+describe ${1:`!p camelcase() `} do
+	$0
+end
+endsnippet
