@@ -1,14 +1,12 @@
 snippet script
 #!/usr/bin/env bash
 
-set -eu
-set -o pipefail
-
 readonly ARGS="\$@"
 readonly PROGDIR=\$(cd "\${0%/*}" && pwd)
 readonly PROGNAME="\${0##*/}"
 
-set -x
+set -o pipefail
+set -eux
 
 endsnippet
 
