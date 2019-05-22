@@ -7,6 +7,10 @@ fi
 # `.zshrc' is sourced in interactive shells. It should contain commands to set
 # up aliases, functions, options, key bindings, etc.
 
+# Alt+z <char> delete until (not including) the next <char>
+zmodload zsh/deltochar
+bindkey "\ez" zap-to-char
+
 # Path to your oh-my-zsh configuration.
 ZSH="$HOME"/.oh-my-zsh
 ZSH_CUSTOM="$HOME"/dotfiles/zsh_custom
