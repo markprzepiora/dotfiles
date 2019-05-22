@@ -795,3 +795,6 @@ augroup END
 " current line with the buffer, with the added bonus of not yanking at the
 " same time.
 nnoremap <C-p> vg_"_xp
+
+" Joining lines with Shift+J removes leading comments.
+set formatoptions+=j
