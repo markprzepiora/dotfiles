@@ -11,6 +11,32 @@ set -eux
 endsnippet
 
 
+snippet getopt
+input=""
+yes=0
+
+# read the options
+TEMP=\$(getopt -o i:,y --long input:,yes -- "\$@")
+eval set -- "\$TEMP"
+
+# extract options and their arguments into variables.
+while true ; do
+    case "\$1" in
+        -i | --input)
+            input="\$2"
+            shift 2
+            ;;
+        -y | --yes)
+            yes=1
+            shift 1
+            ;;
+        --) shift ; break ;;
+        *) echo "Internal error!" ; exit 1 ;;
+    esac
+done
+endsnippet
+
+
 snippet longscript
 #!/usr/bin/env bash
 
