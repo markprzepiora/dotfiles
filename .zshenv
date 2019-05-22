@@ -21,8 +21,8 @@ test -d /home/linuxbrew/.linuxbrew && \
 test -r /usr/local/share/chruby/chruby.sh && \
   source /usr/local/share/chruby/chruby.sh
 
-# Add ~/bin and ~/Dropbox/bin to PATH
-PATH="$PATH":~/bin:~/Dropbox/bin
+# Add ~/bin and ~/Dropbox/bin and ~/.local/bin to PATH
+PATH="$PATH":~/bin:~/Dropbox/bin:~/.local/bin
 
 # Add rust/cargo dir
 PATH="$PATH":~/.cargo/bin
