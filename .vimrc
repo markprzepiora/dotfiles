@@ -229,21 +229,21 @@ elseif !empty(glob("/mnt/c"))
     " an X server, not if you are using the native ubuntu.exe / wsl.exe
     " terminal (or hyperfine) which is a problem. So instead we use clip.exe
     " and paste.exe.
-    function! CopyText()
+    function! CopyTextWSL()
       normal gv"*y
-      :call system('~/Dropbox/bin/windows/clip.exe', getreg('*'))
+      :call system('echo -n ' . shellescape(getreg('*')) . ' | ~/Dropbox/bin/windows/clip.exe')
     endfunction
-    xmap <leader>y <esc>:call CopyText()<cr>
+    xmap <leader>y <esc>:call CopyTextWSL()<cr>
     map <leader>p :read !~/Dropbox/bin/windows/paste.exe<cr>
 " Other Linux/Unix
 elseif has('unix')
     " work-around to copy selected text to system clipboard
     " and prevent it from clearing clipboard when using ctrl+z (depends on xsel)
-    function! CopyText()
+    function! CopyTextLinux()
       normal gv"*y
       :call system('xsel -ib', getreg('*'))
     endfunction
-    xmap <leader>y <esc>:call CopyText()<Cr>
+    xmap <leader>y <esc>:call CopyTextLinux()<Cr>
     map <leader>p "*p
 endif
 
