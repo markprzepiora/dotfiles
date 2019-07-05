@@ -21,11 +21,7 @@ def yesno
     system("stty -raw echo")
   end
 
-  if str.upcase == "Y"
-    return true
-  else
-    return false
-  end
+  str.upcase == "Y"
 end
 
 stdout = IO.popen(['ag', '-l0', *ARGV], in: :in, err: :err, &:read)
