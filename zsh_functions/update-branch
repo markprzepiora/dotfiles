@@ -1,0 +1,28 @@
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  echo "Usage:"
+  echo "    $0 [branch_to_rebase]"
+  echo ""
+  echo "Arguments:"
+  echo "    - branch_to_rebase (default 'master'): the branch to update and rebase against"
+  return
+fi
+
+local branch=${1:-master}
+local current_branch=$(git rev-parse --abbrev-ref HEAD)
+local remote=$(git config "branch.${branch}.remote")
+
+if [ -z "$remote" ]; then
+  echo "Could not find remote for branch ${branch} -- is it tracking a remote branch?"
+  return 1
+fi
+
+echo "Will update ${remote}/${branch} and rebase ${current_branch} on top of it"
+
+read -q "choice?Continue (y/n)? "
+if [[ ! $choice =~ ^[Yy]$ ]]; then
+  return 1
+fi
+echo ""
+
+git fetch "${remote}" "${branch}" &&
+git rebase --autostash "${remote}/${branch}"
