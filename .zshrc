@@ -86,7 +86,7 @@ zle_highlight=(
 )
 
 fpath+=( ~/dotfiles/zsh_functions )
-autoload -Uz imv try_until extract_numbers add checkout_remote checkout_remote_merge merge_current findf findd git-checkout-github
+autoload -Uz imv try_until extract_numbers add checkout_remote checkout_remote_merge merge_current findf findd git-checkout-github vim-last-modified
 
 # The two settings below taken from
 # http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
