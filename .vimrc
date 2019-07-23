@@ -798,3 +798,6 @@ nnoremap <C-p> vg_"_xp
 
 " Joining lines with Shift+J removes leading comments.
 set formatoptions+=j
+
+" ,d duplicates the block under the cursor
+nmap ,d V%y%o<esc>p
