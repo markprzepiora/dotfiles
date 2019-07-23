@@ -76,6 +76,10 @@ let g:gutentags_ctags_exclude=['.git', 'vendor', 'tmp', '.bundle']
 Plug 'gioele/vim-autoswap'
 let g:autoswap_detect_tmux = 1
 
+" An alternative sudo.vim for Vim and Neovim, limited support sudo in Windows
+Plug 'lambdalisue/suda.vim'
+let g:suda_smart_edit = 1
+
 call plug#end()
 
 
