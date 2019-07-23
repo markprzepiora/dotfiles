@@ -8,7 +8,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   endif
 
   try
-    let l:selection = system(a:choice_command . " | " . l:selecta . " 2>/dev/null" . a:selecta_args)
+    let l:selection = system(a:choice_command . " | " . l:selecta . " 2>/dev/null " . a:selecta_args)
   catch /Vim:Interrupt/
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
@@ -43,3 +43,11 @@ nnoremap <leader>C :call SelectaCommand("find_src_files \| ~/dotfiles/bin/filter
 " something smarter.
 nnoremap <leader>cd "zyiw:call SelectaCommand("rg -il '\\b" . @z . " *='", "", ":e")<cr>
 vnoremap <leader>cd "zy:call SelectaCommand("rg -il '\\b" . @z . " *='", "", ":e")<cr>
+
+" Visually-selecting some text and pressing ,f searches for a file with that
+" string. Useful for finding some files that ctags don't find.
+:vmap <leader>f <esc>:call SelectaSearchForSelection()<cr>
+function! SelectaSearchForSelection()
+  normal gv"*y
+  call SelectaCommand("find_src_files", "-q " . getreg('*'), ":e")
+endfunction
