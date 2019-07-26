@@ -40,6 +40,12 @@
   # show only the filenames changed in a given commit (default HEAD)
   show-names = show --name-only --pretty=
 
+  # list untracked files
+  untracked = ls-files --exclude-standard --others
+
+  # list ignored files
+  ignored = ls-files --ignored --exclude-standard --others
+
   lg = log --color --graph --pretty=format:'%Cred%h %Cgreen(%ci)%Creset%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
 
   # When in another branch, run `git oldest-ancestor` to see where the current
