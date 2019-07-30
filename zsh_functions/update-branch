@@ -1,13 +1,33 @@
-if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+help() {
   echo "Usage:"
   echo "    $0 [branch_to_rebase]"
   echo ""
   echo "Arguments:"
   echo "    - branch_to_rebase (default 'master'): the branch to update and rebase against"
-  return
+}
+
+# read the options
+TEMP=$(getopt -o h --long help -- "$@")
+eval set -- "$TEMP"
+
+# extract options and their arguments into variables.
+while true ; do
+    case "$1" in
+        -h | --help)
+            help
+            return 1
+            ;;
+        --) shift ; break ;;
+        *) echo "Internal error!" ; exit 1 ;;
+    esac
+done
+
+local branch="$1"
+
+if [ -z "$branch" ]; then
+  help; return 1
 fi
 
-local branch=${1:-master}
 local current_branch=$(git rev-parse --abbrev-ref HEAD)
 local remote=$(git config "branch.${branch}.remote")
 
