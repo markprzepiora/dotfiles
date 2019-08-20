@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+# vim: set ft=ruby:
+
+# This file executes as a bash script, which turns around and executes Ruby via
+# the line below. The -x argument to Ruby makes it discard everything before
+# the second "!ruby" shebang. This allows us to work on Linux, where the
+# shebang can only have one argument so we can't directly say
+# "#!/usr/bin/env ruby --disable-gems". Thanks for that, Linux.
+#
+# If this seems confusing, don't worry. You can treat it as a normal Ruby file
+# starting with the "!ruby" shebang below.
+
+exec /usr/bin/env ruby -W0 --disable-gems -x "$0" "$@"
+#!ruby
+
+require 'optparse'
+require 'open3'
+
+class RunResult < Struct.new(:args, :out, :err, :status)
+  def ok?
+    status == 0
+  end
+
+  def fail_if_not_ok!
+    if ok?
+      self
+    else
+      fail "running #{args.inspect} returned status #{status}"
+    end
+  end
+end
+
+def run(*args, verbose: true, **opts)
+  out, err, status = *Open3.capture3(*args, **opts)
+  res = RunResult.new(args, out, err, status.to_i)
+
+  if verbose
+    p res
+  else
+    res
+  end
+end
+
+def run!(*args, **opts)
+  run(*args, **opts).fail_if_not_ok!
+end
+
+def yesno?
+  begin
+    system("stty raw -echo")
+    str = STDIN.getc
+  ensure
+    system("stty -raw echo")
+  end
+
+  str.upcase == "Y"
+end
+
+def confirm?(options)
+  return true if options.yes
+
+  puts "Base Branch: #{options.base_branch}"
+  puts "Commits: #{options.format_commits}"
+  puts "OK? [yn] "
+  yesno?
+end
+
+class Options < Struct.new(:yes, :base_branch, :branch_name, :commits)
+  def format_commits
+    if commits.any?
+      commits.join(", ")
+    else
+      "<No commits>"
+    end
+  end
+
+  def format_branch_name
+    if !branch_name.empty?
+      branch_name
+    else
+      "<Will not create a branch>"
+    end
+  end
+end
+
+options = Options.new(false, 'master', nil, [])
+
+option_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: extract-commits-into-branch [options] REF..."
+
+  opts.on("-y", "--yes", "Skip confirmation") do
+    options.yes = true
+  end
+
+  opts.on("-m", "--master BASE_BRANCH", "Base branch (default master)") do |branch|
+    options.base_branch = branch
+  end
+
+  opts.on("-b", "--branch BRANCH", "Branch to create (optional)") do |branch|
+    options.branch_name = branch
+  end
+end
+
+def remote_of_branch
+  name = run("git", "rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}").out.strip.split("/").first
+
+  if name.empty?
+    nil
+  else
+    name
+  end
+end
+
+option_parser.parse!
+options.commits = ARGV
+
+if options.commits.empty?
+  puts option_parser.help
+  exit 1
+end
+
+exit 1 unless confirm?(options)
+
+run!("git", "checkout", options.base_branch, in: nil)
+run!("git", "pull", "--ff-only")
+
+if options.branch_name
+  run!("git", "checkout", "-b", options.branch_name, "#{remote_of_branch}/#{options.base_branch}")
+end
+
+run!("git", "cherry-pick", *options.commits)
