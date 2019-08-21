@@ -4,3 +4,5 @@
 __pycache__
 /autojump/*.pyc
 /tags
+tags
+desktop.ini
