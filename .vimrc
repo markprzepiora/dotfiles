@@ -805,3 +805,6 @@ set formatoptions+=j
 
 " ,d duplicates the block under the cursor
 nmap ,d V%y%o<esc>p
+
+" alt+backspace to delete words in insert mode as expected
+imap <Esc><BS> <C-w>
