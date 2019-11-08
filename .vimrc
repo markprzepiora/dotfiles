@@ -53,8 +53,11 @@ let g:UltiSnipsEnableSnipMate = 0
 " abolish.vim: easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
-" Vim plugin for the_silver_searcher, 'ag'
-Plug 'rking/ag.vim'
+" Vim plugin for grepping
+Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Easier ag searching
 Plug 'Chun-Yang/vim-action-ag'
