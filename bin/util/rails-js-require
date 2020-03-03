@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ag '^//= require\s.*' app/assets/javascripts -o --nofilename | sort | uniq
