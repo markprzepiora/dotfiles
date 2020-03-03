@@ -19,6 +19,32 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   exec a:vim_command . " " . l:selection
 endfunction
 
+function SelectaInsert(cmd, selecta_args)
+  if has('macunix')
+    let l:selecta = $HOME . '/dotfiles/bin/fzy-osx'
+  elseif has('unix')
+    let l:selecta = $HOME . '/dotfiles/bin/fzy-linux'
+  endif
+
+  try
+    let l:selection = system(a:cmd . " | " . l:selecta . " 2>/dev/null " . a:selecta_args)
+    let l:selection = substitute(l:selection, '\n\+$', '', '')
+    let l:selection = substitute(l:selection, '^\n\+', '', '')
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  normal o
+  exec ":normal i" . l:selection
+  exec ":normal =="
+endfunction
+
+:command Req call SelectaInsert("~/dotfiles/bin/util/rails-js-require", "")
+:command Let call SelectaInsert("~/dotfiles/bin/util/rails-js-let", "")
+
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find_src_files", "", ":e")<cr>
