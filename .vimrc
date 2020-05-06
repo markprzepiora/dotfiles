@@ -83,6 +83,9 @@ let g:autoswap_detect_tmux = 1
 Plug 'lambdalisue/suda.vim'
 let g:suda_smart_edit = 1
 
+" Handlebars highlighting
+Plug 'joukevandermaas/vim-ember-hbs'
+
 call plug#end()
 
 
