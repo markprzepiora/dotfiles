@@ -116,6 +116,7 @@ class RenameFile
     @performed = true
 
     begin
+      FileUtils.mkdir_p(@to.dirname) if !File.exists?(@to.dirname)
       @from.rename(@to)
       @ok = true
       true
@@ -169,11 +170,11 @@ end
 # PARSE OPTIONS
 # =============================================================================
 
-$options = { dry_run: false, verbose: true }
+$options = { dry_run: false, verbose: true, match_full_path: false }
 OptionParser.new do |opts|
   opts.banner = "Usage: renamr [options] search replace [file...]"
 
-  opts.on("-t", "--[no-]dry-run", "Only print what we're going to do") do |v|
+  opts.on("-n", "--[no-]dry-run", "Only print what we're going to do") do |v|
     $options[:dry_run] = v
     $options[:verbose] = true if v
   end
@@ -184,6 +185,10 @@ OptionParser.new do |opts|
 
   opts.on("-u", "--undo", "Undo the last operation") do
     $options[:undo] = true
+  end
+
+  opts.on("-p", "--full-path", "Search and replace on the full path (not the basename)") do
+    $options[:match_full_path] = true
   end
 end.parse!
 
@@ -233,13 +238,20 @@ else
     ARGV[2..-1].map{ |file| Dir.glob(file) }.flatten(1)
   else
     Dir.glob(get_input('files', nil))
+  end.select do |path|
+    File.file?(path)
   end
 
   renamer = RenameMany.new
-  files.each{ |name|
-    from_path = Pathname.new(name).realpath rescue next
-    dir, name = from_path.split
-    to_path = dir + Pathname.new(name.to_s.gsub(Regexp.new(search), replace))
+  files.each{ |from_path_string|
+    from_path = Pathname.new(from_path_string).realpath rescue next
+
+    to_path = if $options[:match_full_path]
+      Pathname.new(from_path.to_s.gsub(Regexp.new(search), replace))
+    else
+      dir, name = from_path.split
+      dir + Pathname.new(name.to_s.gsub(Regexp.new(search), replace))
+    end
 
     if from_path != to_path
       renamer.queue_rename(RenameFile.new(from_path, to_path))
