@@ -75,7 +75,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'PProvost/vim-ps1'
 
 " ctags automation - https://github.com/ludovicchabant/vim-gutentags
-Plug 'ludovicchabant/vim-gutentags'
+" https://github.com/ludovicchabant/vim-gutentags/issues/277#issuecomment-635541116
+Plug 'ludovicchabant/vim-gutentags', { 'commit': '31c0ead' }
 let g:gutentags_ctags_exclude=['.git', 'vendor', 'tmp', '.bundle']
 
 " Automatically deal with (*#@$ swap file messages
