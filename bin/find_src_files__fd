@@ -7,6 +7,8 @@ fd \
   -E 'node_modules' \
   -E 'bower_components' \
   -E 'public/assets' \
+  -E 'chef/vendor-berks' \
+  -E 'chef/vendor-static' \
   -E '__pycache__' \
   -E 'tmp' \
   -E '*.png' \

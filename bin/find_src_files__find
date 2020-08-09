@@ -7,6 +7,8 @@ find . \
   -not '(' -path '*/node_modules' -prune ')' \
   -not '(' -path '*/bower_components' -prune ')' \
   -not '(' -path '*/public/assets' -prune ')' \
+  -not '(' -path '*/chef/vendor-berks' -prune ')' \
+  -not '(' -path '*/chef/vendor-static' -prune ')' \
   -not '(' -path '*/__pycache__' -prune ')' \
   -not '(' -path '*/tmp*' -prune ')' \
   -not '(' -name '*.png' -prune ')' \
