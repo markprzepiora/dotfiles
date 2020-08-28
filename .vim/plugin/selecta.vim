@@ -70,10 +70,18 @@ nnoremap <leader>C :call SelectaCommand("find_src_files \| ~/dotfiles/bin/filter
 nnoremap <leader>cd "zyiw:call SelectaCommand("rg -il '\\b" . @z . " *='", "", ":e")<cr>
 vnoremap <leader>cd "zy:call SelectaCommand("rg -il '\\b" . @z . " *='", "", ":e")<cr>
 
-" Visually-selecting some text and pressing ,f searches for a file with that
-" string. Useful for finding some files that ctags don't find.
+" Visually-selecting some text and pressing ,f searches for a filename with
+" that string. Useful for finding some files that ctags don't find.
 :vmap <leader>f <esc>:call SelectaSearchForSelection()<cr>
 function! SelectaSearchForSelection()
   normal gv"*y
   call SelectaCommand("find_src_files", "-q " . getreg('*'), ":e")
+endfunction
+
+" Visually-selecting some text and pressing ,a searches for a file containing
+" that string.
+:vmap <leader>a <esc>:call SelectaSearchForSelectionContents()<cr>
+function! SelectaSearchForSelectionContents()
+  normal gv"*y
+  call SelectaCommand("ag -lQ " . shellescape(getreg('*')), "", ":e")
 endfunction
