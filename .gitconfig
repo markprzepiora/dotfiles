@@ -31,8 +31,19 @@
   tr = !git tl -30
   # git pb = branches
   pb = "!. ~/.githelpers && pretty_git_branches"
-  # git branch-commits = see commits that will be merged
+
+  # What commits will be merged? Intended to be used from e.g. `develop` (or
+  # whatever branch the feature branch will be merged INTO).
+  #
+  # Usage:
+  #
+  #     git branch-commits FEATURE_BRANCH [HEAD]
+  #
+  # Example:
+  #
+  #     git branch-commits some-feature-branch develop
   branch-commits = "!. ~/.githelpers && branch_commits_range_from_head"
+
   branch-files = "!. ~/.githelpers && files_in_branch"
   modified = "! git status --porcelain | grep -Ev '^\\?\\?' | cut -c4-"
   conflicts = "! git status --short | grep -E '^UU' | cut -c4-"
