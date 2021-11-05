@@ -6,9 +6,50 @@ def __camelcase__(filename):
 	camelcased = titleized.replace('_', '')
 	return camelcased
 
+# Examples:
+#
+# 'foo.rb' -> ['foo']
+# 'app/rallio/foo.rb' -> ['foo']
+# 'app/models/foo.rb' -> ['foo']
+# 'lib/foo/csv_helpers.rb' -> ['foo', 'csv_helpers']
+def __path_components__(path):
+	# remove _spec.rb
+	path = re.sub(r'_spec\.rb$', r'', path)
+
+	# remove .rb extension
+	path = re.sub(r'\.rb$', r'', path)
+
+  # Remove leading app/whatever
+	path = re.sub(r'^app/[a-z_]+/', r'', path)
+
+  # Remove leading lib/
+	path = re.sub(r'^lib/', r'', path)
+
+	# Split into components
+	components = path.split('/')
+
+	return components
+
+def __camelcase_with_module__(path):
+	components = __path_components__(path)
+	camelcased_components = [__camelcase__(component) for component in components]
+	return '::'.join(camelcased_components)
+
 def camelcase():
-	snip.rv = __camelcase__(fn).replace("Spec", "")
+	snip.rv = __camelcase_with_module__(path)
 endglobal
+
+snippet class
+class ${1:`!p camelcase() `}
+	$0
+end
+endsnippet
+
+snippet module
+module ${1:`!p camelcase() `}
+	$0
+end
+endsnippet
 
 snippet model
 class ${1:`!p camelcase() `} < ApplicationRecord
