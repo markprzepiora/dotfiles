@@ -1,4 +1,11 @@
 # Check out a remote branch and rebase it on top of master.
+
+if [[ $1 == "-"* ]]; then
+  echo '$1 = branch to checkout'
+  echo '$2 = master'
+  return 1
+fi
+
 local master=${2:-master}
 git checkout $master &&
 git pull --ff-only &&
