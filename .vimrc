@@ -818,3 +818,15 @@ nmap <leader>d V%y%o<esc>p
 
 " alt+backspace to delete words in insert mode as expected
 imap <Esc><BS> <C-w>
+
+command! -complete=file -nargs=* Vse call Vsedit(<f-args>)
+function! Vsedit(...)
+  let t = tabpagenr()
+  let i = 0
+  for f in a:000
+    for g in glob(f, 0, 1)
+      exe "vs " . fnameescape(g)
+      let i = i + 1
+    endfor
+  endfor
+endfunction
