@@ -25,7 +25,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'godlygeek/tabular'
 
 " Vastly improved Javascript indentation and syntax support in Vim
-Plug 'pangloss/vim-javascript', { 'for': ['js', 'javascript'] }
+Plug 'vieira/vim-javascript', { 'for': ['js', 'javascript'] }
 
 " TypeScript syntax
 Plug 'leafgarland/typescript-vim'
