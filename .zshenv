@@ -12,10 +12,11 @@ PATH="$PATH:$HOME/dotfiles/bin"
 PATH="$PATH:$HOME/.npm_global/bin"
 
 # Enable linuxbrew if present
-test -d ~/.linuxbrew && \
-  PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
-test -d /home/linuxbrew/.linuxbrew && \
-  PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -f ~/.linuxbrew/bin/brew ]; then
+  eval "$(~/.linuxbrew/bin/brew shellenv)"
+fi
 
 # Enable chruby if present
 test -r /usr/local/share/chruby/chruby.sh && \
