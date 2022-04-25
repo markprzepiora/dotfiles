@@ -26,6 +26,7 @@ Add **environment-related customizations** (such as PATH customization) to
 `~/.zshenv_private`. This will be loaded after the contents of the supplied
 `.zshenv` file.
 
+
 ZSH Dotfile Load Order
 ----------------------
 
@@ -36,3 +37,30 @@ ZSH Dotfile Load Order
 3. [`.zshrc` if interactive]
 4. [`.zlogin` if login]
 5. [`.zlogout` when login shells exit].
+
+
+Windows Bootstrapping
+---------------------
+
+Not dotfiles... but next time I set up a Windows PC, here are some useful
+instructions.
+
+### Chocolatey
+
+Open PowerShell as an administrator.
+
+Then run:
+
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+Then install:
+
+    choco install -y googlechrome 7zip vlc foobar2000 sublimetext4 steam everything dropbox adobe-creative-cloud autohotkey geforce-experience signal cpu-z geekbench OpenHardwareMonitor sysinternals wiztree zoom discord
+
+### Manual downloads
+
+Chocolatey does not have definitions for a few things.
+
+- [1Password 8](https://downloads.1password.com/win/1PasswordSetup-latest.exe)
+- [Twitch Studio](https://spotlight.twitchsvc.net/installer/windows/TwitchStudioSetup-network.exe)
+- [Spotify](https://download.scdn.co/SpotifySetup.exe)
