@@ -53,6 +53,12 @@ first trying to rename the user, and then, when you give up on that, create a
 new user name `Mark`. Instead, just tell Windows to create an offline login to
 begin with so you can name it whatever you want.
 
+### Install 1Password
+
+Open Powershell and run:
+
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/markprzepiora/dotfiles/master/script-windows/install-1password.ps1'))
+
 ### Chocolatey
 
 Open PowerShell as an administrator.
@@ -69,7 +75,6 @@ Then install:
 
 Chocolatey does not have definitions for a few things.
 
-- [1Password 8](https://downloads.1password.com/win/1PasswordSetup-latest.exe)
 - [Twitch Studio](https://spotlight.twitchsvc.net/installer/windows/TwitchStudioSetup-network.exe)
 - [Spotify](https://download.scdn.co/SpotifySetup.exe)
 
