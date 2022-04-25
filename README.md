@@ -64,3 +64,34 @@ Chocolatey does not have definitions for a few things.
 - [1Password 8](https://downloads.1password.com/win/1PasswordSetup-latest.exe)
 - [Twitch Studio](https://spotlight.twitchsvc.net/installer/windows/TwitchStudioSetup-network.exe)
 - [Spotify](https://download.scdn.co/SpotifySetup.exe)
+
+### WSL Setup
+
+First install Ubuntu:
+
+    wsl --install -d Ubuntu
+
+Once you get into a bash terminal, install packages we'll need:
+
+    sudo apt-get update --yes
+    sudo apt-get upgrade --yes
+    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common
+    sudo apt-add-repository -y ppa:rael-gc/rvm
+    sudo apt-get update --yes
+    sudo apt-get install --yes -qq libssl1.0-dev
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql-pgdg.list > /dev/null
+    sudo apt-get update --yes
+    sudo apt-get install postgresql-9.6
+
+Install Ruby binaries:
+
+    mkdir -p ~/projects
+    git clone git@github.com:markprzepiora/ruby-binaries.git ~/projects/ruby-binaries
+    sudo mkdir /opt/rubies
+    cd ~/projects/ruby-binaries
+    bin/install-rubies-remote
+
+Install dotfiles:
+
+    curl https://raw.githubusercontent.com/markprzepiora/dotfiles/master/setup.sh | bash
