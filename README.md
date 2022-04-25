@@ -45,6 +45,14 @@ Windows Bootstrapping
 Not dotfiles... but next time I set up a Windows PC, here are some useful
 instructions.
 
+### Remember
+
+Do NOT let Windows create your account from your Microsoft account. It will
+create a user named `markp` and you will spend an unreasonable amount of time
+first trying to rename the user, and then, when you give up on that, create a
+new user name `Mark`. Instead, just tell Windows to create an offline login to
+begin with so you can name it whatever you want.
+
 ### Chocolatey
 
 Open PowerShell as an administrator.
@@ -75,7 +83,7 @@ Once you get into a bash terminal, install packages we'll need:
 
     sudo apt-get update --yes
     sudo apt-get upgrade --yes
-    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common
+    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python
     sudo apt-add-repository -y ppa:rael-gc/rvm
     sudo apt-get update --yes
     sudo apt-get install --yes -qq libssl1.0-dev
@@ -92,6 +100,17 @@ Install Ruby binaries:
     cd ~/projects/ruby-binaries
     bin/install-rubies-remote
 
+Create some useful links:
+
+    ln -s /mnt/c/Users/Mark/Downloads ~/Downloads
+    ln -s /mnt/c/Users/Mark/Dropbox ~/Dropbox
+    ln -s /mnt/c/Users/Mark/Desktop ~/Desktop
+    ln -s /mnt/c/Users/Mark ~/mnt-Mark
+
 Install dotfiles:
 
     curl https://raw.githubusercontent.com/markprzepiora/dotfiles/master/setup.sh | bash
+
+Change your shell:
+
+    chsh -s /bin/zsh
