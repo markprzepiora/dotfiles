@@ -88,14 +88,29 @@ Once you get into a bash terminal, install packages we'll need:
 
     sudo apt-get update --yes &&
     sudo apt-get upgrade --yes &&
-    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python2.7 exuberant-ctags libpq-dev redis-server ncdu silversearcher-ag &&
+    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python2.7 exuberant-ctags libpq-dev redis-server ncdu silversearcher-ag fd-find &&
     sudo apt-add-repository -y ppa:rael-gc/rvm &&
     sudo apt-get update --yes &&
     sudo apt-get install --yes -qq libssl1.0-dev &&
     (wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -) &&
     (echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql-pgdg.list > /dev/null) &&
     sudo apt-get update --yes &&
-    sudo apt-get install --yes -qq postgresql-9.6
+    sudo apt-get install --yes -qq postgresql-9.6 &&
+    mkdir -p ~/bin &&
+    ln -s "$(which fdfind)" ~/bin/fd
+
+Install chruby:
+
+    rm -rf ~/tmp/chruby-0.3.9 &&
+    mkdir -p ~/tmp &&
+    wget -O ~/tmp/chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz &&
+    tar -xzvf ~/tmp/chruby-0.3.9.tar.gz -C ~/tmp &&
+    cd ~/tmp/chruby-0.3.9 &&
+    sudo make install
+
+Install Homebrew:
+
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 Install Ruby binaries:
 
