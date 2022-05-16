@@ -86,16 +86,16 @@ First install Ubuntu:
 
 Once you get into a bash terminal, install packages we'll need:
 
-    sudo apt-get update --yes
-    sudo apt-get upgrade --yes
-    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python exuberant-ctags libpq-dev redis-server
-    sudo apt-add-repository -y ppa:rael-gc/rvm
-    sudo apt-get update --yes
-    sudo apt-get install --yes -qq libssl1.0-dev
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql-pgdg.list > /dev/null
-    sudo apt-get update --yes
-    sudo apt-get install postgresql-9.6
+    sudo apt-get update --yes &&
+    sudo apt-get upgrade --yes &&
+    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python2.7 exuberant-ctags libpq-dev redis-server ncdu silversearcher-ag &&
+    sudo apt-add-repository -y ppa:rael-gc/rvm &&
+    sudo apt-get update --yes &&
+    sudo apt-get install --yes -qq libssl1.0-dev &&
+    (wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -) &&
+    (echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql-pgdg.list > /dev/null) &&
+    sudo apt-get update --yes &&
+    sudo apt-get install --yes -qq postgresql-9.6
 
 Install Ruby binaries:
 
