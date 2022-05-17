@@ -88,7 +88,7 @@ Once you get into a bash terminal, install packages we'll need:
 
     sudo apt-get update --yes &&
     sudo apt-get upgrade --yes &&
-    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python2.7 exuberant-ctags libpq-dev redis-server s3cmd ncdu silversearcher-ag fd-find pv &&
+    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python2.7 exuberant-ctags libpq-dev redis-server s3cmd ncdu silversearcher-ag fd-find pv pigz &&
     sudo apt-add-repository -y ppa:rael-gc/rvm &&
     sudo apt-get update --yes &&
     sudo apt-get install --yes -qq libssl1.0-dev &&
