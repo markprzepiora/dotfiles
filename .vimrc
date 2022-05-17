@@ -261,6 +261,15 @@ elseif has('unix')
     map <leader>p "*p
 endif
 
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
+
 " ,cn copies the current file basename to the unnamed buffer
 nmap <leader>cn :let @" = expand('%:t:r')<cr>
 
