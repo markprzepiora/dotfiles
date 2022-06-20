@@ -57,6 +57,9 @@
 \set waits 'SELECT pg_stat_activity.pid, pg_stat_activity.query, pg_stat_activity.waiting, now() - pg_stat_activity.query_start AS \"totaltime\", pg_stat_activity.backend_start FROM pg_stat_activity WHERE pg_stat_activity.query !~ \'%IDLE%\'::text AND pg_stat_activity.waiting = true;'
 \set dbsize 'SELECT datname, pg_size_pretty(pg_database_size(datname)) db_size FROM pg_database ORDER BY db_size;'
 \set tablesize 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size" FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY pg_relation_size(C.oid) DESC LIMIT 40;'
+
+
+
 \set tablecounts 'SELECT relname, reltuples::int AS approximate_row_count FROM pg_class ORDER BY reltuples DESC;'
 \set uselesscol 'SELECT nspname, relname, attname, typname, (stanullfrac*100)::int AS null_percent, case when stadistinct &gt;= 0 then stadistinct else abs(stadistinct)*reltuples end AS \"distinct\", case 1 when stakind1 then stavalues1 when stakind2 then stavalues2 end AS \"values\" FROM pg_class c JOIN pg_namespace ns ON (ns.oid=relnamespace) JOIN pg_attribute ON (c.oid=attrelid) JOIN pg_type t ON (t.oid=atttypid) JOIN pg_statistic ON (c.oid=starelid AND staattnum=attnum) WHERE nspname NOT LIKE E\'pg\\\\_%\' AND nspname != \'information_schema\' AND relkind=\'r\' AND NOT attisdropped AND attstattarget != 0 AND reltuples &gt;= 100 AND stadistinct BETWEEN 0 AND 1 ORDER BY nspname, relname, attname;'
 
@@ -90,6 +93,11 @@
 
 \set duplicate_indexes 'SELECT pg_size_pretty(SUM(pg_relation_size(idx))::BIGINT) AS SIZE, (array_agg(idx))[1] AS idx1, (array_agg(idx))[2] AS idx2, (array_agg(idx))[3] AS idx3, (array_agg(idx))[4] AS idx4 FROM ( SELECT indexrelid::regclass AS idx, (indrelid::text ||E''\n''|| indclass::text ||E''\n''|| indkey::text ||E''\n''|| COALESCE(indexprs::text,'''')||E''\n'' || COALESCE(indpred::text,'''')) AS KEY FROM pg_index) sub GROUP BY KEY HAVING COUNT(*)>1 ORDER BY SUM(pg_relation_size(idx)) DESC;'
 \set replicalag 'select now() - pg_last_xact_replay_timestamp();'
+
+-- my additions
+\set deadtups 'SELECT schemaname, relname, n_live_tup, n_dead_tup, last_autovacuum FROM pg_stat_all_tables ORDER BY n_dead_tup / (n_live_tup * current_setting('''autovacuum_vacuum_scale_factor''')::float8 + current_setting('''autovacuum_vacuum_threshold''')::float8) DESC LIMIT 30;'
+\set vacuumprogress 'SELECT p.pid, now() - a.xact_start AS duration, coalesce(wait_event_type ||'''.'''|| wait_event, '''f''') AS waiting, CASE WHEN a.query ~*'''^autovacuum.*to prevent wraparound''' THEN '''wraparound''' WHEN a.query ~*'''^vacuum''' THEN '''user''' ELSE '''regular''' END AS mode, p.datname AS database, p.relid::regclass AS table, p.phase, pg_size_pretty(p.heap_blks_total * current_setting('''block_size''')::int) AS table_size, pg_size_pretty(pg_total_relation_size(relid)) AS total_size, pg_size_pretty(p.heap_blks_scanned * current_setting('''block_size''')::int) AS scanned, pg_size_pretty(p.heap_blks_vacuumed * current_setting('''block_size''')::int) AS vacuumed, round(100.0 * p.heap_blks_scanned / p.heap_blks_total, 1) AS scanned_pct, round(100.0 * p.heap_blks_vacuumed / p.heap_blks_total, 1) AS vacuumed_pct, p.index_vacuum_count, round(100.0 * p.num_dead_tuples / p.max_dead_tuples,1) AS dead_pct FROM pg_stat_progress_vacuum p JOIN pg_stat_activity a using (pid) ORDER BY now() - a.xact_start DESC;'
+\set totalsize 'SELECT pg_size_pretty(sum(pg_relation_size(C.oid))) FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (''pg_catalog'', ''information_schema'');'
 
 -- Development queries
 
