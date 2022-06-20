@@ -95,7 +95,7 @@ Once you get into a bash terminal, install packages we'll need:
     (wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -) &&
     (echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql-pgdg.list > /dev/null) &&
     sudo apt-get update --yes &&
-    sudo apt-get install --yes -qq postgresql-9.6 &&
+    sudo apt-get install --yes -qq postgresql-9.6 libpq-dev &&
     mkdir -p ~/bin &&
     ln -s "$(which fdfind)" ~/bin/fd
 
