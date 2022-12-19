@@ -840,3 +840,7 @@ function! Vsedit(...)
     endfor
   endfor
 endfunction
+
+" If you like `Y` to work from the cursor to the end of line (which is more
+" logical, but not Vi-compatible) use `:map Y y$`.
+map Y y$
