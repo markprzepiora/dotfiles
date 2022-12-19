@@ -245,7 +245,8 @@ elseif !empty(glob("/mnt/c"))
     " and paste.exe.
     function! CopyTextWSL()
       normal gv"*y
-      :call system('echo -n ' . shellescape(getreg('*')) . ' | ~/Dropbox/bin/windows/clip.exe')
+      :call system('echo -n ' . shellescape(getreg('*')) . ' | /mnt/c/Windows/System32/clip.exe')
+      " :call system('/mnt/c/Windows/System32/clip.exe', getreg('*'))
     endfunction
     xmap <leader>y <esc>:call CopyTextWSL()<cr>
     map <leader>p :read !~/Dropbox/bin/windows/paste.exe<cr>
