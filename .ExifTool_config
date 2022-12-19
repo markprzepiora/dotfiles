@@ -1,0 +1,12 @@
+%Image::ExifTool::UserDefined = (
+    'Image::ExifTool::Composite' => {
+        OnlyTrack => {
+            Require => 'Track',
+            # only get first integer
+        ValueConv => '$val=~/(\d+)/; $1',
+            # an optional PrintConv may be used to format the value
+            PrintConv => 'sprintf("%02s", $val)',
+        },
+    },
+);
+1;  #end
