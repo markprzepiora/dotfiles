@@ -123,6 +123,9 @@ alias now='date +%Y-%m-%d--%H-%M-%S'
 # I type "g st" constantly, this saves two keystrokes
 alias st='git status --short'
 
+# What commits are in the current branch
+alias gbc='git branch-commits HEAD develop'
+
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
 
