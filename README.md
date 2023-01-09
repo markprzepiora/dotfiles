@@ -77,6 +77,10 @@ Open Powershell and run:
 
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/markprzepiora/dotfiles/master/script-windows/install-final-fantasy-xiv.ps1'))
 
+Sync configuration from Dropbox:
+
+    Set-ExecutionPolicy Bypass -Scope Process -Force; PowerShell -File C:\Users\Mark\Dropbox\App-Settings-Sync\Common\ff14.ps1
+
 Then install xivlauncher from https://github.com/goatcorp/FFXIVQuickLauncher/releases
 
 ### Manual downloads
