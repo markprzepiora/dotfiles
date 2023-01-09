@@ -112,6 +112,10 @@ Install Homebrew:
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+Install Heroku:
+
+    curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
 Install Ruby binaries:
 
     mkdir -p ~/projects
