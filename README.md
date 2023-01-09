@@ -71,6 +71,12 @@ Then install:
 
     choco install -y googlechrome 7zip vlc foobar2000 sublimetext4 steam everything dropbox adobe-creative-cloud autohotkey geforce-experience signal cpu-z geekbench OpenHardwareMonitor sysinternals wiztree zoom discord slack docker-desktop teamviewer
 
+### Final Fantasy XIV
+
+Open Powershell and run:
+
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/markprzepiora/dotfiles/master/script-windows/install-final-fantasy-xiv.ps1'))
+
 ### Manual downloads
 
 Chocolatey does not have definitions for a few things.
