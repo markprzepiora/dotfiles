@@ -77,6 +77,8 @@ Open Powershell and run:
 
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/markprzepiora/dotfiles/master/script-windows/install-final-fantasy-xiv.ps1'))
 
+Then install xivlauncher from https://github.com/goatcorp/FFXIVQuickLauncher/releases
+
 ### Manual downloads
 
 Chocolatey does not have definitions for a few things.
