@@ -90,6 +90,9 @@ let g:suda_smart_edit = 1
 " Handlebars highlighting
 Plug 'joukevandermaas/vim-ember-hbs'
 
+" GitHub Copilot
+Plug 'github/copilot.vim'
+
 call plug#end()
 
 
