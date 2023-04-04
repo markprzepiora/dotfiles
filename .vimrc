@@ -188,7 +188,6 @@ augroup vimrcEx
 
   autocmd BufRead *.md nnoremap <buffer> k gk
   autocmd BufRead *.md nnoremap <buffer> j gj
-  autocmd BufRead *.md setlocal syn=off wrap linebreak nolist columns=90
 
   " Leave the return key alone when in command line windows, since it's used
   " to run commands there.
