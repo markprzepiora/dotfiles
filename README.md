@@ -114,7 +114,8 @@ Once you get into a bash terminal, install packages we'll need:
 Install Neovim if desired:
 
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
-    sudo apt-get install -y neovim ripgrep
+    sudo apt-get install -y neovim ripgrep python3 python3-pip
+    python3 -m pip install --user --upgrade pynvim
 
 Install chruby:
 
