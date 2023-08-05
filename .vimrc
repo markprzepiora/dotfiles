@@ -93,6 +93,12 @@ Plug 'joukevandermaas/vim-ember-hbs'
 " GitHub Copilot
 Plug 'github/copilot.vim'
 
+if has('nvim')
+  " Fuzzy finder
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+endif
+
 call plug#end()
 
 
@@ -597,6 +603,11 @@ function! GetTestRunner(filename)
     end
 endfunction!
 
+" Exit to normal mode inside a terminal with escape
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
+
 function! RunTests(filename)
     " Write the file and run tests for the given filename
     if strlen(expand("%")) > 0
@@ -615,10 +626,16 @@ function! RunTests(filename)
     end
 
     botright new
-    resize 4
+    resize 8
     set nonumber
     set norelativenumber
-    call term_start(test_cmd, { 'term_finish': 'open', 'curwin': 1, 'term_name': '[test_runner] ' . join(test_cmd, " ") })
+
+    if has('nvim')
+      call termopen(test_cmd)
+    else
+      call term_start(test_cmd, { 'term_finish': 'open', 'curwin': 1, 'term_name': '[test_runner] ' . join(test_cmd, " ") })
+    endif
+
     au BufLeave <buffer> wincmd p
     nnoremap <buffer> <Enter> :q<CR>
     wincmd p

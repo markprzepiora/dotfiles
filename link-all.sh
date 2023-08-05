@@ -65,7 +65,7 @@ case $(operating_system) in
 esac
 
 # Define files to copy
-FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf .zshrc .zshenv .oh-my-zsh .zprofile .irbrc .psqlrc .npmrc .dir_colors .direnvrc .pryrc .ExifTool_config"
+FILES=".vim .vimrc .gitconfig .githelpers .tmux.conf .zshrc .zshenv .oh-my-zsh .zprofile .irbrc .psqlrc .npmrc .dir_colors .direnvrc .pryrc .ExifTool_config .config/nvim/init.vim"
 
 # Backup existing dotfiles
 mkdir -p ~/backups
@@ -74,6 +74,7 @@ $TAR --ignore-failed-read -C ~/ -zcf ~/backups/dotfiles-`date +%Y-%m-%d--%T`.tar
 # Delete existing dotfiles
 (cd ~ && rm -rf $FILES)
 
+# Link new dotfiles
 for file in $FILES; do
-  ln -s "$PROGDIR"/"$file" ~/
+  ln -s "$PROGDIR"/"$file" ~/"$file"
 done

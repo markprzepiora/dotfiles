@@ -111,6 +111,11 @@ Once you get into a bash terminal, install packages we'll need:
     mkdir -p ~/bin &&
     ln -s "$(which fdfind)" ~/bin/fd
 
+Install Neovim if desired:
+
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    sudo apt-get install -y neovim ripgrep
+
 Install chruby:
 
     rm -rf ~/tmp/chruby-0.3.9 &&
