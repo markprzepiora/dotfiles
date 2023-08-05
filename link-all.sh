@@ -74,6 +74,9 @@ $TAR --ignore-failed-read -C ~/ -zcf ~/backups/dotfiles-`date +%Y-%m-%d--%T`.tar
 # Delete existing dotfiles
 (cd ~ && rm -rf $FILES)
 
+# Create nvim config directory
+mkdir -p ~/.config/nvim
+
 # Link new dotfiles
 for file in $FILES; do
   ln -s "$PROGDIR"/"$file" ~/"$file"
