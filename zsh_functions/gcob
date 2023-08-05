@@ -1,0 +1,9 @@
+# Display usage if no arguments are given
+if [ $# -eq 0 ]; then
+  echo "Usage: gcob <branch-name>"
+  return
+fi
+
+git checkout develop &&
+git pull --ff-only &&
+git checkout -b $(today)--"$1"
