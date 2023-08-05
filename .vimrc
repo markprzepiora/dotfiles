@@ -15,6 +15,10 @@ Plug 'tpope/vim-commentary'
 " rails.vim: Ruby on Rails power tools
 Plug 'tpope/vim-rails'
 
+" includes syntax highlighting, indentation, omnicompletion, and various
+" useful tools and mappings.
+Plug 'vim-ruby/vim-ruby'
+
 " fugitive.vim: A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'
 
@@ -863,3 +867,17 @@ endfunction
 " If you like `Y` to work from the cursor to the end of line (which is more
 " logical, but not Vi-compatible) use `:map Y y$`.
 map Y y$
+
+
+" Ruby indentation personalizations
+
+" x = if condition
+"   something
+" end
+let g:ruby_indent_assignment_style = 'variable'
+
+" render('product/show',
+"   product: product,
+"   on_sale: true,
+" )
+let g:ruby_indent_hanging_elements = 0
