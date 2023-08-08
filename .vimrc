@@ -457,7 +457,7 @@ augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fix fucking :w and :q typos
+" Fix fucking :w, :q, and :e typos
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 :command WQ wq
@@ -468,6 +468,7 @@ augroup END
 :command Qa qa
 :command! -bar -bang Q quit<bang>
 :command! -bar -bang Qa qall<bang>
+:command! -nargs=* -bang -complete=file E e<bang> <args>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
