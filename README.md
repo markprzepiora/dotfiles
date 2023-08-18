@@ -116,6 +116,7 @@ Install Neovim if desired:
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo apt-get install -y neovim ripgrep python3 python3-pip
     python3 -m pip install --user --upgrade pynvim
+    sudo update-alternatives --install /usr/bin/vi vi $(which nvim) 50
 
 Install chruby:
 
