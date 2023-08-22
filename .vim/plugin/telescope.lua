@@ -7,5 +7,10 @@ require('telescope').setup{
         ["<C-k>"] = actions.move_selection_previous,
       }
     }
-  }
+  },
+  pickers = {
+    find_files = {
+      find_command = { "find_src_files" },
+    },
+  },
 }
