@@ -40,5 +40,5 @@ puts ""
 print "OK? [yn] "
 
 if yesno
-  exec("vim", "-O", *files)
+  exec("vi", "-O", *files)
 end
