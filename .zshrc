@@ -149,6 +149,12 @@ fi
 test -r /usr/local/share/chruby/auto.sh && \
   source /usr/local/share/chruby/auto.sh
 
+# Load asdf if present
+if [ -d ~/dotfiles/asdf ]; then
+  source ~/dotfiles/asdf/asdf.sh
+  source ~/dotfiles/asdf/completions/asdf.bash
+fi
+
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
 
