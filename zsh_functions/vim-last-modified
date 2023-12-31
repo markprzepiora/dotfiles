@@ -1,2 +1,2 @@
 commit="${1:-HEAD}"
-vim -O $(git show-names "$commit" | grep -vF /cassettes/ | sort | head -10)
+vi -O $(git show-names "$commit" | grep -vF /cassettes/ | sort | head -10)
