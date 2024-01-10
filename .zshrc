@@ -126,6 +126,10 @@ alias st='git status --short'
 # What commits are in the current branch
 alias gbc='git branch-commits HEAD develop'
 
+# Quick ls, useful for when you're in a directory with a lot of files on e.g. a
+# Windows directory in WSL.
+alias ql='ls -1 --color=never'
+
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
 
