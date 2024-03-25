@@ -130,6 +130,12 @@ alias gbc='git branch-commits HEAD develop'
 # Windows directory in WSL.
 alias ql='ls -1 --color=never'
 
+# Use eza for ll and l if it's available
+if command -v eza >/dev/null 2>&1; then
+  alias ll='eza -l --group-directories-first'
+  alias l='eza -la --group-directories-first'
+fi
+
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
 
