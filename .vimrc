@@ -95,7 +95,7 @@ let g:suda_smart_edit = 1
 Plug 'joukevandermaas/vim-ember-hbs'
 
 " GitHub Copilot
-Plug 'github/copilot.vim'
+Plug 'github/copilot.vim', { 'branch': 'release' }
 
 if has('nvim')
   " Fuzzy finder
