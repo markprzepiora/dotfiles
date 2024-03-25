@@ -163,7 +163,7 @@ test -r /usr/local/share/chruby/auto.sh && \
   source /usr/local/share/chruby/auto.sh
 
 # Load asdf if present
-if [ -d ~/dotfiles/asdf ]; then
+if [ -f ~/dotfiles/asdf/asdf.sh ]; then
   source ~/dotfiles/asdf/asdf.sh
   source ~/dotfiles/asdf/completions/asdf.bash
 fi
