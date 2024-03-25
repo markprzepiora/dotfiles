@@ -15,6 +15,7 @@ fd \
   -E '*.gif' \
   -E '*.jpg' \
   -E '*.jpeg' \
+  -E 'spec/fixtures/cassettes' \
   --type f \
   --hidden \
   --no-ignore-vcs
