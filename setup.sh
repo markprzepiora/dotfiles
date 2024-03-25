@@ -152,7 +152,7 @@ case $(operating_system) in
 
     ubuntu)
         sudo apt update
-        sudo apt install -y git vim vim-nox zsh silversearcher-ag jq
+        sudo apt install -y git vim vim-nox zsh silversearcher-ag jq fzf
         ;;
 
     oldubuntu)
