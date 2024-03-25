@@ -136,6 +136,9 @@ if command -v eza >/dev/null 2>&1; then
   alias l='eza -la --group-directories-first'
 fi
 
+alias p='git pull --ff-only'
+alias co='git checkout'
+
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
 
