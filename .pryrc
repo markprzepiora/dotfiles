@@ -1,7 +1,7 @@
 if File.exists?('/proc/version') && File.read('/proc/version').include?('WSL')
   class String
     def pbcopy
-      IO.popen(File.expand_path('~/Dropbox/bin/windows/clip.exe'), 'w') { |f| f << self }
+      IO.popen(%w(xclip -selection clipboard -in), 'w') { |f| f << self }
       self
     end
   end
