@@ -3,4 +3,4 @@
 set -eu
 
 prog=$(which "$1")
-vim "$prog"
+vi "$prog"
