@@ -831,10 +831,14 @@ endfunction
 " Select the current line's indent level with ,i
 map <leader>i :call SelectIndent()<cr>
 
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
+if has('nvim')
+  let g:markdown_fenced_languages = ['sql', 'ruby', 'js=javascript']
+else
+  augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+  augroup END
+endif
 
 augroup yaml
   au!
