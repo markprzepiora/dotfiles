@@ -1,0 +1,14 @@
+require("cyberdream").setup({
+  -- Recommended - see "Configuring" below for more config options
+  transparent = true,
+  italic_comments = true,
+  hide_fillchars = true,
+  borderless_telescope = true,
+  terminal_colors = true,
+  theme = {
+    highlights = {
+      Visual = { bg = "#8e5bb1", fg = "#ffffff" },
+    },
+  },
+})
+vim.cmd("colorscheme cyberdream") -- set the colorscheme

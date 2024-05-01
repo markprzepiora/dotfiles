@@ -101,7 +101,7 @@ if has('nvim')
   Plug 'nvim-telescope/telescope.nvim'
 
   " Some colorschemes
-  " Plug 'scottmckendry/cyberdream.nvim'
+  Plug 'scottmckendry/cyberdream.nvim'
   Plug 'folke/tokyonight.nvim'
   " Plug 'rebelot/kanagawa.nvim'
 endif
@@ -226,10 +226,11 @@ set background=dark
 "     hi CursorLine term=none cterm=none  ctermbg=23
 
 if has('nvim')
+  set termguicolors
+  " colorscheme onehalfdark
   " colorscheme tokyonight-storm
   " colorscheme kanagawa
-  set termguicolors
-  colorscheme onehalfdark
+  " The real colorscheme is loaded in .vim/plugin/cyberdream.lua
 else
   :set t_Co=256 " 256 colors
   colorscheme stellarized
