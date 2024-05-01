@@ -179,3 +179,17 @@ Install dotfiles:
 Change your shell:
 
     chsh -s /bin/zsh
+
+Test colors
+-----------
+
+If you run,
+
+    ~/dotfiles/bin/util/color-test.sh
+
+Then the output, in both a vanilla terminal and within tmux, should look like the following:
+
+![Color test output](bin/util/color-test.png)
+
+If the output looks different, try running `:checkhealth` in neovim and search
+for "color" in the output. It may offer suggestions.
