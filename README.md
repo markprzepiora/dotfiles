@@ -193,3 +193,10 @@ Then the output, in both a vanilla terminal and within tmux, should look like th
 
 If the output looks different, try running `:checkhealth` in neovim and search
 for "color" in the output. It may offer suggestions.
+
+You can also try hacking your terminfo:
+
+    infocmp -x -A /lib/terminfo | sed -E 's/^(\t.*,)/\1Tc,RGB,/' > infocmp-hacked.txt
+    tic -x infocmp-hacked.txt
+
+If you bork your terminfo, you can delete `~/.terminfo/x/xterm-256color`
