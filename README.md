@@ -111,6 +111,19 @@ Once you get into a bash terminal, install packages we'll need:
     mkdir -p ~/bin &&
     ln -s "$(which fdfind)" ~/bin/fd
 
+If you want to compile the latest tmux:
+
+    sudo apt install -y libevent-dev libncurses-dev
+    mkdir -p ~/src
+    cd ~/src
+    wget https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz
+    tar -zxf tmux-3.4.tar.gz
+    cd tmux-3.4
+    ./configure
+    make -j24
+    sudo make install
+    tmux -V
+
 Install Node v20:
 
     sudo apt-get install --yes ca-certificates curl gnupg
