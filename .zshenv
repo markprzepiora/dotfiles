@@ -28,5 +28,8 @@ PATH="$PATH":~/bin:~/Dropbox/bin:~/.local/bin
 # Add rust/cargo dir
 PATH="$PATH":~/.cargo/bin
 
+# Add snap bin dir
+PATH="$PATH":/snap/bin
+
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
