@@ -25,7 +25,7 @@ def yesno
 end
 
 stdout = IO.popen(['ag', '-l0', *ARGV], in: :in, err: :err, &:read)
-files = stdout.split("\0")
+files = stdout.split("\0").sort
 
 if files.empty?
   $stderr.puts "no files matched"
