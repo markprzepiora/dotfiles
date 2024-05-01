@@ -59,6 +59,7 @@
 \set tablesize 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size", pg_relation_size(C.oid)/1024/1024 AS size_mb FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY pg_relation_size(C.oid) DESC LIMIT 100;'
 \set dbsize 'select datname, pg_size_pretty(pg_database_size(datname)) from pg_database order by pg_database_size(datname);'
 \set tablesize_all 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size", pg_relation_size(C.oid)/1024/1024 AS size_mb FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY nspname || \'.\' || relname ASC;'
+\set tablesize2 '\\i ~/dotfiles/psql/tablesize2.sql'
 
 
 
