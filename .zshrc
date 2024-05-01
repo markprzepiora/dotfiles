@@ -31,7 +31,7 @@ DISABLE_AUTO_UPDATE="true"
 # screen-256color since that fixes some keycode weirdness over SSH, but setting
 # the TERM to screen-256color globally does weird things to the local terminal...
 if [ -z "$TMUX" ]; then
-  TERM=xterm-256color
+  # TERM=xterm-256color
 fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
