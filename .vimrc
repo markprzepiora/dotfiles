@@ -72,6 +72,8 @@ Plug 'Chun-Yang/vim-action-ag'
 " Color scheme
 Plug 'nightsense/stellarized'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+" Despite the name, this one actually works with vanilla vim 9.0+ as well
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " PowerShell highlighting
 Plug 'PProvost/vim-ps1'
@@ -99,11 +101,6 @@ if has('nvim')
   " Fuzzy finder
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-
-  " Some colorschemes
-  Plug 'scottmckendry/cyberdream.nvim'
-  Plug 'folke/tokyonight.nvim'
-  " Plug 'rebelot/kanagawa.nvim'
 endif
 
 call plug#end()
@@ -228,9 +225,7 @@ set background=dark
 if has('nvim')
   set termguicolors
   " colorscheme onehalfdark
-  " colorscheme tokyonight-storm
-  " colorscheme kanagawa
-  " The real colorscheme is loaded in .vim/plugin/cyberdream.lua
+  colorscheme catppuccin-macchiato
 else
   :set t_Co=256 " 256 colors
   colorscheme stellarized
@@ -727,17 +722,6 @@ command! OpenChangedFiles :call OpenChangedFiles()
 command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 
 set number
-" set smartindent
-" set ic
-" set scs
-" map #2 <Esc><Plug>Traditionalji<Esc>
-" set expandtab
-" set tabstop=3
-" set shiftwidth=3
-" set ff=unix
-" set hlsearch
-" color torte
-" color darkblue
 
 " Set shiftwidth to 2 for coffeescript and handlebars files
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
@@ -768,23 +752,6 @@ nnoremap <C-n><C-n> :call NumberToggle()<cr>
 " Toggle folds with space
 nnoremap <Space> za
 
-" Set up eregex
-" nnoremap / :M/ 
-" nnoremap ,/ / 
-
-" XMPfilter annotations
-map <silent> <F8> !xmpfilter -a<cr>
-nmap <silent> <F8> V<F10>
-imap <silent> <F8> <ESC><F10>a
-
-" Annotate the full buffer
-" I actually prefer ggVG to %; it's a sort of poor man's visual bell 
-nmap <silent> <F7> mzggVG!xmpfilter -a<cr>'z
-" nmap <silent> <F7> mz%;!xmpfilter -a<cr>'z
-imap <silent> <F7> <ESC><F7>
-
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize shortcuts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -810,7 +777,6 @@ nmap \\ gcc
 
 " Comment out a visual selection with \
 vmap \ gc
-
 
 " Select the current line's indent level
 function SelectIndent()
