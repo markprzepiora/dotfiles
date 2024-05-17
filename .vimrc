@@ -723,9 +723,10 @@ command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 
 set number
 
-" Set shiftwidth to 2 for coffeescript and handlebars files
+" Set shiftwidth to 2 for formats that have different defaults
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.handlebars setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.md setl shiftwidth=2 expandtab
 
 " Enable folding for coffeescript files
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
