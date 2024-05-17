@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# is first arg a directory?
+if [ -d "$1" ]; then
+  dir="$1"
+  shift
+else
+  dir="."
+fi
+
 fd \
   -E '.git' \
   -E '.svn' \
@@ -18,4 +26,5 @@ fd \
   -E 'spec/fixtures/cassettes' \
   --type f \
   --hidden \
-  --no-ignore-vcs
+  --no-ignore-vcs \
+  "$@" "$dir"

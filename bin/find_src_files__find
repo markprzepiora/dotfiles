@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-find . \
+# is first arg a directory?
+if [ -d "$1" ]; then
+  dir="$1"
+  shift
+else
+  dir="."
+fi
+
+find "$dir" \
   -not '(' -path '*/.git' -prune ')' \
   -not '(' -path '*/.svn' -prune ')' \
   -not '(' -path '*/.bundle' -prune ')' \
@@ -15,5 +23,5 @@ find . \
   -not '(' -name '*.gif' -prune ')' \
   -not '(' -name '*.jpg' -prune ')' \
   -not '(' -name '*.jpeg' -prune ')' \
-  -type f |
-cut -c3-
+  -not '(' -path '*/spec/fixtures/cassettes/*' -prune ')' \
+  -type f "$@" | sed -E 's/^\.\///'
