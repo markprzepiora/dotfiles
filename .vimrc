@@ -97,6 +97,9 @@ Plug 'joukevandermaas/vim-ember-hbs'
 " GitHub Copilot
 Plug 'github/copilot.vim', { 'branch': 'release' }
 
+" Better navigation between vim splits and tmux panes
+Plug 'christoomey/vim-tmux-navigator'
+
 if has('nvim')
   " Fuzzy finder
   Plug 'nvim-lua/plenary.nvim'
