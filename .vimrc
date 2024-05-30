@@ -740,6 +740,7 @@ au BufNewFile,BufReadPost *.css,*.scss,*.html,*.handlebars,*.hbs,*.html.erb setl
 
 " jj exits insert mode
 imap jj <esc>
+imap jk <esc>
 
 " Toggle relative/absolute numbers with C+n
 function! NumberToggle()
