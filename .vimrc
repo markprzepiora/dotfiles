@@ -56,6 +56,7 @@ Plug 'tmhedberg/matchit'
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<c-b>"
 let g:UltiSnipsEnableSnipMate = 0
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 " abolish.vim: easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
