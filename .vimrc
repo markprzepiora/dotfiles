@@ -105,6 +105,8 @@ if has('nvim')
   " Fuzzy finder
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'folke/flash.nvim', { 'branch': 'main' }
 endif
 
 call plug#end()
