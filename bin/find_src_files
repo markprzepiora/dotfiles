@@ -8,8 +8,8 @@ has_executable() {
   command -v "$1" >/dev/null 2>&1
 }
 
-# if has_executable fd; then
-#   ~/dotfiles/bin/find_src_files__fd "$@"
-# else
-  ~/dotfiles/bin/find_src_files__find "$@"
-# fi
+if has_executable rg; then
+  ~/dotfiles/bin/find_src_files__rg "$@" | sort
+else
+  ~/dotfiles/bin/find_src_files__find "$@" | sort
+fi

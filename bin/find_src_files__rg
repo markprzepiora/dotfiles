@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+rg \
+  --files \
+  --no-ignore \
+  --hidden \
+  --glob='!.git/*' \
+  --glob='!.svn/*' \
+  --glob='!.bundle/*' \
+  --glob='!node_modules/*' \
+  --glob='!bower_components/*' \
+  --glob='!public/assets/*' \
+  --glob='!chef/vendor-berks/*' \
+  --glob='!chef/vendor-static/*' \
+  --glob='!__pycache__/*' \
+  --glob='!tmp/*' \
+  --glob='!*.png' \
+  --glob='!*.gif' \
+  --glob='!*.jpg' \
+  --glob='!*.jpeg' \
+  --glob='!spec/fixtures/cassettes/*' \
+  "$@"
