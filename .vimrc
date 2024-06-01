@@ -136,6 +136,7 @@ set cursorline
 set cmdheight=2
 set switchbuf=useopen
 set numberwidth=5
+set number
 set showtabline=2
 set winwidth=120
 " This makes RVM work inside Vim. I have no idea why.
@@ -239,6 +240,7 @@ endif
 
 " Highlight the current line.
 set cursorline
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status Line
@@ -355,6 +357,7 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 nmap <leader>e :edit %%
 nmap <leader>v :view %%
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Extract a variable from the current visual selection
 "
@@ -378,8 +381,9 @@ function! ExtractVariableFromSelection()
 endfunction
 vmap <leader>e :call ExtractVariableFromSelection()<cr>
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Rename current file
+" Rename current file with <leader>n
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFileAsk()
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -400,6 +404,7 @@ function! RenameFile(old_name, new_name)
 endfunction
 
 map <leader>n :call RenameFileAsk()<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Promote variable to RSpec 'let'
@@ -428,32 +433,6 @@ augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" USEFUL GETTER MACRO FOR EMBER.JS APPLICATIONS
-"
-" Example:
-"
-"   foo
-"   model.foo
-"
-" Output:
-"
-"   const foo = this.get('foo');
-"   const foo = this.get('model.foo');
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! EmberGetter()
-  :.s/\v^( *)((.+\.)?([^.]+)$)/\1const \4 = this.get('\2');/
-  :normal! +
-  silent! call repeat#set(",l", -1)  " Allow us to do it multiple times
-endfunction
-:command! EmberGetter :call EmberGetter()
-augroup EmberGetter
-  autocmd!
-  autocmd FileType javascript nnoremap <buffer> <leader>l :EmberGetter<cr>
-augroup END
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Automatically set relativenumber
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -473,29 +452,6 @@ augroup END
 :command! -bar -bang Q quit<bang>
 :command! -bar -bang Qa qall<bang>
 :command! -nargs=* -bang -complete=file E e<bang> <args>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Jump to routes
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gr :topleft :split config/routes.rb<cr>
-function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 100 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . "_ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-map <leader>gR :call ShowRoutes()<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -541,6 +497,7 @@ function! AlternateForCurrentFile()
   return new_file
 endfunction
 nnoremap <leader>. :call OpenTestAlternate()<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
@@ -652,6 +609,7 @@ function! RunTests(filename)
     echo "Press <Enter> to exit test runner terminal (<Ctrl-C> first if command is still running)"
 endfunction
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Wrapping stuff in HTML/Handlebars
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -674,30 +632,6 @@ function! VisualHTMLTagWrap()
   endif
 endfunction
 
-" Wrap visual selection in a Handlebars tag.
-" http://vim.wikia.com/wiki/Wrap_a_visual_selection_in_an_HTML_tag
-vmap <Leader>w <Esc>:call VisualHandlebarsTagWrap()<CR>
-function! VisualHandlebarsTagWrap()
-  let tag = input("Tag to wrap block: ")
-  if len(tag) > 0
-    normal `>
-    if &selection == 'exclusive'
-      exe "normal O{{/".tag."}}"
-    else
-      exe "normal a{{/".tag."}}"
-    endif
-    normal `<
-    exe "normal i{{#".tag."}}"
-    normal `<
-  endif
-endfunction
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Md5 COMMAND
-" Show the MD5 of the current buffer
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! -range Md5 :echo system('echo '.shellescape(join(getline(<line1>, <line2>), '\n')) . '| md5')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sudo write with w!!
@@ -705,29 +639,6 @@ command! -range Md5 :echo system('echo '.shellescape(join(getline(<line1>, <line
 
 cmap w!! w !sudo tee > /dev/null %
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OpenChangedFiles COMMAND
-" Open a split for each dirty file in git
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenChangedFiles()
-  only " Close all windows, unless they're modified
-  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
-  let filenames = split(status, "\n")
-  exec "edit " . filenames[0]
-  for filename in filenames[1:]
-    exec "sp " . filename
-  endfor
-endfunction
-command! OpenChangedFiles :call OpenChangedFiles()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" InsertTime COMMAND
-" Insert the current time
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
-
-set number
 
 " Set shiftwidth to 2 for formats that have different defaults
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
@@ -743,6 +654,7 @@ au BufNewFile,BufReadPost *.css,*.scss,*.html,*.handlebars,*.hbs,*.html.erb setl
 
 " jj exits insert mode
 imap jj <esc>
+" jk exits insert mode
 imap jk <esc>
 
 " Toggle relative/absolute numbers with C+n
@@ -760,6 +672,7 @@ nnoremap <C-n><C-n> :call NumberToggle()<cr>
 " Toggle folds with space
 nnoremap <Space> za
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize shortcuts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -772,6 +685,7 @@ nmap <Leader>a> :Tabularize /=><CR>
 vmap <Leader>a> :Tabularize /=><CR>
 nmap <Leader>a, :Tabularize /,\zs<CR>
 vmap <Leader>a, :Tabularize /,\zs<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Commentary Shortcuts
@@ -834,24 +748,14 @@ nmap <leader>d V%y%o<esc>p
 " alt+backspace to delete words in insert mode as expected
 imap <Esc><BS> <C-w>
 
-command! -complete=file -nargs=* Vse call Vsedit(<f-args>)
-function! Vsedit(...)
-  let t = tabpagenr()
-  let i = 0
-  for f in a:000
-    for g in glob(f, 0, 1)
-      exe "vs " . fnameescape(g)
-      let i = i + 1
-    endfor
-  endfor
-endfunction
-
 " If you like `Y` to work from the cursor to the end of line (which is more
 " logical, but not Vi-compatible) use `:map Y y$`.
 map Y y$
 
 
-" Ruby indentation personalizations
+"""""""""""""""""""""""""""""""""""""
+" Ruby indentation personalizations "
+"""""""""""""""""""""""""""""""""""""
 
 " x = if condition
 "   something
