@@ -433,6 +433,34 @@ augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Promote variable to RSpec 'let' (visual block mode)
+"
+" Example:
+"
+"   foo = do_something({
+"     'bar' => 'baz'
+"   })
+"
+" Use V to select the block, then <leader>l to promote it.
+"
+" Output:
+"
+"   let(:foo) do
+"     do_something({
+"       'bar' => 'baz'
+"     })
+"   end
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLetVisual()
+  let @l = '`<f=€ýawv`>h"kx0elDIlet(:jkA) doendjkkojk€ýa"kpgvj0k$V%koj='
+  normal @l
+endfunction
+:command! PromoteToLetVisual :call PromoteToLetVisual()
+autocmd FileType ruby vmap <leader>l <Esc>:PromoteToLetVisual<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Automatically set relativenumber
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
