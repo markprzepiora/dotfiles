@@ -62,6 +62,7 @@
 \set tablesize_all_size_desc 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size", pg_relation_size(C.oid)/1024/1024 AS size_mb FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY 3 DESC;'
 \set indexsize_all_size_desc 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size", pg_relation_size(C.oid)/1024/1024 AS size_mb FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') AND relkind = ''i'' ORDER BY 3 DESC;'
 \set tablesize '\\i ~/dotfiles/psql/tablesize2.sql'
+\set integer_overflow '\\i ~/dotfiles/psql/integer_overflow.sql'
 
 
 
