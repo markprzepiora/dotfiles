@@ -323,6 +323,30 @@ call MapCR()
 " Switch between the current and previously-opened file with ,,
 nnoremap <leader><leader> <c-^>
 
+" Pasting over a visual selection no longer yanks the selection
+xnoremap p "_dP
+
+" Center the screen when jumping to the next match
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" Shift-H and Shift-L to move to the beginning and end of the line
+nnoremap <S-h> ^
+onoremap <S-h> ^
+xnoremap <S-h> ^
+nnoremap <S-l> g_
+onoremap <S-l> g_
+xnoremap <S-l> g_
+
+" Toggle wrap with <leader>w
+nnoremap <leader>w :set wrap!<cr>
+
+" Delete visual selection with <cr>
+vnoremap <cr> d
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Multipurpose Tab Key
