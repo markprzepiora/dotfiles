@@ -23,5 +23,6 @@ find "$dir" \
   -not '(' -name '*.gif' -prune ')' \
   -not '(' -name '*.jpg' -prune ')' \
   -not '(' -name '*.jpeg' -prune ')' \
+  -not '(' -name '*.svg' -prune ')' \
   -not '(' -path '*/spec/fixtures/cassettes/*' -prune ')' \
   -type f "$@" | sed -E 's/^\.\///'

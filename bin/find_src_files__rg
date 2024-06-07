@@ -18,5 +18,6 @@ rg \
   --glob='!*.gif' \
   --glob='!*.jpg' \
   --glob='!*.jpeg' \
+  --glob='!*.svg' \
   --glob='!spec/fixtures/cassettes/*' \
   "$@"
