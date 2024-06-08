@@ -61,15 +61,6 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " abolish.vim: easily search for, substitute, and abbreviate multiple variants of a word
 Plug 'tpope/vim-abolish'
 
-" Vim plugin for grepping
-Plug 'mileszs/ack.vim'
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-" Easier ag searching
-Plug 'Chun-Yang/vim-action-ag'
-
 " Color scheme
 Plug 'nightsense/stellarized'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
