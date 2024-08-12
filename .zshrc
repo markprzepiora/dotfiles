@@ -101,9 +101,6 @@ function _backward_kill_default_word() {
 zle -N backward-kill-default-word _backward_kill_default_word
 bindkey '\e=' backward-kill-default-word   # = is next to backspace
 
-# Use Selecta to interactively select a branch to check out.
-alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
-
 # An ISO8601-esque timestamp in the format 2016-01-10_10-53-17, usable in filenames!
 alias timestamp='date +"%Y-%m-%d_%H-%M-%S"'
 
@@ -120,11 +117,14 @@ alias traceroute='traceroute -q1 -w1'
 alias today='date +%Y-%m-%d'
 alias now='date +%Y-%m-%d--%H-%M-%S'
 
-# I type "g st" constantly, this saves two keystrokes
+# == GIT ALIASES ==
+# Use Selecta to interactively select a branch to check out.
+alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
 alias st='git status --short'
-
 # What commits are in the current branch
 alias gbc='git branch-commits HEAD develop'
+alias p='git pull --ff-only'
+alias co='git checkout'
 
 # Quick ls, useful for when you're in a directory with a lot of files on e.g. a
 # Windows directory in WSL.
@@ -136,8 +136,7 @@ if command -v eza >/dev/null 2>&1; then
   alias l='eza -la --group-directories-first'
 fi
 
-alias p='git pull --ff-only'
-alias co='git checkout'
+alias tat='tmux at'
 
 # Less annoying pager in psql
 PSQL_PAGER="less -iMSx4 -FX"
