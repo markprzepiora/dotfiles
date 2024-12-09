@@ -173,3 +173,5 @@ fi
 if [ "$ZSH_PROFILE" = "true" ]; then
   zprof
 fi
+
+. "$HOME/.cargo/env"
