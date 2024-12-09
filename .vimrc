@@ -55,6 +55,7 @@ Plug 'tmhedberg/matchit'
 " UltiSnips - The ultimate snippet solution for Vim
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsEnableSnipMate = 0
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
