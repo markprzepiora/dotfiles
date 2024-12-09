@@ -476,6 +476,12 @@ endfunction
 :command! PromoteToLetVisual :call PromoteToLetVisual()
 autocmd FileType ruby vmap <leader>l <Esc>:PromoteToLetVisual<cr>
 
+" <leader>me to wrap a block in a .each block
+autocmd FileType ruby nmap <leader>me yiwA.each do \|<esc>pxa\|<cr>end<esc>O
+" <leader>mE to wrap a block in a .each block and also leave a comment for use
+" in my code notebook when walking through code
+autocmd FileType ruby nmap <leader>mE "gyiwA.each do \|<esc>"gpxa\|<cr>end<esc>O# <esc>"gp==$xA = <esc>"gpa[0]<cr><esc>xA
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Automatically set relativenumber
