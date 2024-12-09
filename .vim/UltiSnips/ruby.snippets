@@ -147,6 +147,12 @@ execute <<~SQL
 SQL
 endsnippet
 
+snippet ct "change_table"
+change_table :$1 do |t|
+	$0
+end
+endsnippet
+
 snippet sheq "should equal"
 expect($1).to eq($2)
 endsnippet
