@@ -3,3 +3,47 @@ create(:$1, {
 	$0
 })
 endsnippet
+
+snippet do "do"
+do
+	$0
+end
+endsnippet
+
+snippet context "context"
+context "$1" do
+	$0
+end
+endsnippet
+
+snippet describe "describe"
+describe "$1" do
+	$0
+end
+endsnippet
+
+snippet bef "before"
+before do
+	$0
+end
+endsnippet
+
+snippet let! "let!"
+let!(:$1) { $0 }
+endsnippet
+
+snippet let "let"
+let!(:$1) { $0 }
+endsnippet
+
+snippet mash "Hashie::Mash.new({})"
+Hashie::Mash.new({
+	$0
+})
+endsnippet
+
+snippet standby "Standby.on_standby do ..."
+Standby.on_standby do
+	$0
+end
+endsnippet
