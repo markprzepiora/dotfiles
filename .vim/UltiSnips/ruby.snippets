@@ -135,8 +135,14 @@ endsnippet
 snippet rev "reversible"
 reversible do |dir|
 	dir.up do
+		execute <<~SQL
+			$1
+		SQL
 	end
 	dir.down do
+		execute <<~SQL
+			$2
+		SQL
 	end
 end
 endsnippet
@@ -155,4 +161,8 @@ endsnippet
 
 snippet sheq "should equal"
 expect($1).to eq($2)
+endsnippet
+
+snippet uploadcsv "Upload CSV"
+UploadToS3.hashes_to_csv(hashes).url.pbcopy
 endsnippet
