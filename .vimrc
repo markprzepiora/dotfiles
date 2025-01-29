@@ -814,3 +814,7 @@ let g:ruby_indent_assignment_style = 'variable'
 "   on_sale: true,
 " )
 let g:ruby_indent_hanging_elements = 0
+
+let g:copilot_filetypes = {
+      \ 'gitcommit': v:true,
+      \ }
