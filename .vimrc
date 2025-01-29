@@ -317,7 +317,7 @@ call MapCR()
 nnoremap <leader><leader> <c-^>
 
 " Pasting over a visual selection no longer yanks the selection
-xnoremap p "_c<C-r>"<Esc>
+xnoremap p P
 
 " Center the screen when jumping to the next match
 nnoremap n nzz
