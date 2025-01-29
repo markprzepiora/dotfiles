@@ -481,6 +481,11 @@ autocmd FileType ruby nmap <leader>me yiwA.each do \|<esc>pxa\|<cr>end<esc>O
 " <leader>mE to wrap a block in a .each block and also leave a comment for use
 " in my code notebook when walking through code
 autocmd FileType ruby nmap <leader>mE "gyiwA.each do \|<esc>"gpxa\|<cr>end<esc>O# <esc>"gp==$xA = <esc>"gpa[0]<cr><esc>xA
+" <leader>me to wrap a block in a .map block
+autocmd FileType ruby nmap <leader>mm yiwA.map do \|<esc>pxa\|<cr>end<esc>O
+" <leader>mE to wrap a block in a .map block and also leave a comment for use
+" in my code notebook when walking through code
+autocmd FileType ruby nmap <leader>mM "gyiwA.map do \|<esc>"gpxa\|<cr>end<esc>O# <esc>"gp==$xA = <esc>"gpa[0]<cr><esc>xA
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
