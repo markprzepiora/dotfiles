@@ -105,6 +105,7 @@
 \set totalsize 'SELECT pg_size_pretty(sum(pg_relation_size(C.oid))) FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (''pg_catalog'', ''information_schema'');'
 \set idle 'SELECT now() - state_change as idle_in_transaction_duration, now() - xact_start as xact_duration,* FROM  pg_stat_activity WHERE state  = '''idle in transaction''' AND   xact_start is not null AND now() - state_change > '''0.5 second'''::interval ORDER BY 1 DESC;'
 \set autovacuum_stats '\\i ~/dotfiles/psql/autovacuum_stats.sql'
+\set roledetails '\\i ~/dotfiles/psql/roledetails.sql'
 
 -- Development queries
 
