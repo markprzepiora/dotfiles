@@ -162,10 +162,8 @@ test -r /usr/local/share/chruby/auto.sh && \
   source /usr/local/share/chruby/auto.sh
 
 # Load asdf if present
-if [ -f ~/dotfiles/asdf/asdf.sh ]; then
-  source ~/dotfiles/asdf/asdf.sh
-  source ~/dotfiles/asdf/completions/asdf.bash
-fi
+export ASDF_DATA_DIR=/home/mark/.asdf
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
