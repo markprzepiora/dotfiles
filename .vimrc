@@ -285,6 +285,19 @@ endif
 " ,cn copies the current file basename to the unnamed buffer
 nmap <leader>cn :let @" = expand('%:t:r')<cr>
 
+function! ReplaceThisFile()
+  " Replace all instances of __THISFILE__ with the current filename
+  " Replace all instances of __THISBASENAME__ with the current filename's
+  " basename
+  let thisfile = expand('%')
+  let thisbasename = expand('%:t:r')
+  let thisfileescaped = escape(thisfile, '\/')
+  let thisbasenameescaped = escape(thisbasename, '\/')
+  execute '%s/__THISFILE__/' . thisfileescaped . '/ge'
+  execute '%s/__THISBASENAME__/' . thisbasenameescaped . '/ge'
+endfunction
+:command! ReplaceThisFile :call ReplaceThisFile()
+
 " do not automatically copy visual selections to the clipboard
 set clipboard-=autoselect
 
@@ -796,6 +809,9 @@ set formatoptions+=j
 
 " ,d duplicates the block under the cursor
 nmap <leader>d V%y`>o<esc>p
+
+" ,; adds a semicolon to the end of the current line and moves down
+nnoremap <leader>; A;<esc>j
 
 " alt+backspace to delete words in insert mode as expected
 imap <Esc><BS> <C-w>
