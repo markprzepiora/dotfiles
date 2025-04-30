@@ -111,6 +111,15 @@ Once you get into a bash terminal, install packages we'll need:
     mkdir -p ~/bin &&
     ln -s "$(which fdfind)" ~/bin/fd
 
+Redis:
+
+    sudo apt-get install lsb-release curl gpg &&
+    (curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg) &&
+    sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg &&
+    (echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list) &&
+    sudo apt-get update &&
+    sudo apt-get install redis
+
 If you want to compile the latest tmux:
 
     sudo apt install -y libevent-dev libncurses-dev
