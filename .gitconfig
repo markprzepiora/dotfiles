@@ -32,7 +32,7 @@
   # git pb = branches
   pb = "!. ~/.githelpers && pretty_git_branches"
   # git trr = (flat) recent commits, current branch, reverse order, no refs
-  trr = "!. ~/.githelpers && pretty_git_topo_log_no_branch_names --reverse -10"
+  trr = "!. ~/.githelpers && pretty_git_topo_log_no_branch_names --reverse -10 --topo-order"
 
   # What commits will be merged? Intended to be used from e.g. `develop` (or
   # whatever branch the feature branch will be merged INTO).
