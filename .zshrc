@@ -175,4 +175,11 @@ if [ "$ZSH_PROFILE" = "true" ]; then
   zprof
 fi
 
+# fnm
+FNM_PATH="/home/mark/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+
 . "$HOME/.cargo/env"
