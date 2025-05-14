@@ -57,6 +57,8 @@ if [ -e /mnt/c ]; then
   wcd() {
     cd "$(~/Dropbox/bin/windows-to-wsl-path "$1")"
   }
+
+  PATH="$PATH":~/dotfiles/bin/wsl
 fi
 
 source $ZSH/oh-my-zsh.sh
