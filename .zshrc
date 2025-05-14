@@ -125,6 +125,7 @@ alias st='git status --short'
 alias gbc='git branch-commits HEAD develop'
 alias p='git pull --ff-only'
 alias co='git checkout'
+alias gdc='git diff --cached'
 
 # Quick ls, useful for when you're in a directory with a lot of files on e.g. a
 # Windows directory in WSL.
