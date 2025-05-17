@@ -100,7 +100,7 @@ Once you get into a bash terminal, install packages we'll need:
 
     sudo apt-get update --yes &&
     sudo apt-get upgrade --yes &&
-    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common python2.7 exuberant-ctags libpq-dev s3cmd phantomjs ncdu silversearcher-ag fd-find pv pigz libsqlite3-dev pcre2-utils direnv &&
+    sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common exuberant-ctags libpq-dev s3cmd ncdu silversearcher-ag fd-find pv pigz libsqlite3-dev pcre2-utils direnv python3 python-is-python3 &&
     sudo apt-add-repository -y ppa:rael-gc/rvm &&
     sudo apt-get update --yes &&
     sudo apt-get install --yes -qq libssl1.0-dev &&
@@ -122,31 +122,46 @@ Redis:
 
 If you want to compile the latest tmux:
 
-    sudo apt install -y libevent-dev libncurses-dev
-    mkdir -p ~/src
-    cd ~/src
-    wget https://github.com/tmux/tmux/releases/download/3.4/tmux-3.4.tar.gz
-    tar -zxf tmux-3.4.tar.gz
-    cd tmux-3.4
-    ./configure
-    make -j24
-    sudo make install
+    sudo apt install -y libevent-dev libncurses-dev &&
+    mkdir -p ~/src &&
+    cd ~/src &&
+    wget https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz &&
+    tar -zxf tmux-3.5a.tar.gz &&
+    cd tmux-3.5a &&
+    ./configure &&
+    make -j24 &&
+    sudo make install &&
     tmux -V
 
-Install Node v20:
+If the final command outputs a different version of tmux, then restart your shell.
 
-    sudo apt-get install --yes ca-certificates curl gnupg
-    sudo mkdir -p /etc/apt/keyrings
-    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-    sudp apt-get update --yes
-    sudo apt-get install nodejs -y
+Install fnm:
 
-Install Neovim if desired:
+    curl -o- https://fnm.vercel.app/install | bash
 
-    sudo add-apt-repository -y ppa:neovim-ppa/unstable
-    sudo apt-get install -y neovim ripgrep python3 python3-pip
-    python3 -m pip install --user --upgrade pynvim
+Run zsh, and install Node.js:
+
+    fnm install 22
+
+Install 1Password:
+
+    (curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg) &&
+    (echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list) &&
+    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/ &&
+    (curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol) &&
+    (sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22) &&
+    (curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg) &&
+    sudo apt update &&
+    sudo apt install 1password
+
+Run 1password, log in, and enable "Integrate with 1Password CLI" in the Developer tab in Settings.
+
+    nohup 1password &
+
+Install Neovim:
+
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable &&
+    sudo apt-get install -y neovim ripgrep python3 python3-pip python3-pynvim &&
     sudo update-alternatives --install /usr/bin/vi vi $(which nvim) 50
 
 Install chruby:
@@ -168,10 +183,10 @@ Install Heroku:
 
 Install Ruby binaries:
 
-    mkdir -p ~/projects
-    git clone git@github.com:markprzepiora/ruby-binaries.git ~/projects/ruby-binaries
-    sudo mkdir /opt/rubies
-    cd ~/projects/ruby-binaries
+    mkdir -p ~/projects &&
+    git clone git@github.com:markprzepiora/ruby-binaries.git ~/projects/ruby-binaries &&
+    sudo mkdir -p /opt/rubies &&
+    cd ~/projects/ruby-binaries &&
     bin/install-rubies-remote
 
 Create some useful links:
