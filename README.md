@@ -106,7 +106,8 @@ Once you get into a bash terminal, install packages we'll need:
     sudo apt-get install --yes -qq postgresql-17 libpq-dev &&
     mkdir -p ~/bin &&
     ln -s "$(which fdfind)" ~/bin/fd &&
-    sudo locale-gen en_US en_US.UTF-8 && sudo update-locale
+    sudo locale-gen en_US en_US.UTF-8 && sudo update-locale &&
+    sudo systemctl disable postgresql && sudo systemctl stop postgresql
 
 Redis:
 
