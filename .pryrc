@@ -1,4 +1,4 @@
-if File.exists?('/proc/version') && File.read('/proc/version').include?('WSL')
+if File.exist?('/proc/version') && File.read('/proc/version').include?('WSL')
   class String
     def pbcopy
       IO.popen(%w(xclip -selection clipboard -in), 'w') { |f| f << self }
