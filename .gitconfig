@@ -80,3 +80,5 @@
 	hide-dirty = 1
 [init]
 	defaultBranch = main
+[commit]
+	template = /home/mark/dotfiles/.gitmessage
