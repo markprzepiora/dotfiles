@@ -2,16 +2,17 @@
   name = Mark Przepiora
   email = mark.przepiora@gmail.com
 [alias]
-  co = checkout
   aa = add --all
-  st = status --short
   ci = commit
+  co = checkout
   dc = diff --cached
   di = diff
-  pullff = pull --ff-only
+  mff = merge --ff-only
   pf = push --force
+  pff = pull --ff-only
+  pullff = pull --ff-only
+  st = status --short
 
-  # git h = head
   head = !git l -1
   h = !git head
   # git hp = head with patch
@@ -68,12 +69,13 @@
 
 [core]
   editor = vi
-  excludesfile = ~/dotfiles/.gitignore
+  excludesFile = ~/dotfiles/.gitignore
   pager = ~/dotfiles/bin/diff-so-fancy | less --tabs=4 -RFX
 [color]
   ui = true
 [push]
   default = simple
+  autoSetupRemote = true
 [oh-my-zsh]
 	# disable showing dirty status in zsh prompt since this can be quite slow in
 	# slow filesystems (like WSL)
