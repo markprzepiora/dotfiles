@@ -127,6 +127,8 @@ alias st='git status --short'
 alias gbc='git branch-commits HEAD develop'
 alias p='git pull --ff-only'
 alias co='git checkout'
+alias ci='git commit -v'
+alias cia='git commit -v --amend'
 alias gdc='git diff --cached'
 
 # Quick ls, useful for when you're in a directory with a lot of files on e.g. a
