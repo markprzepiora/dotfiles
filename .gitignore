@@ -3,6 +3,7 @@
 /.vim/bundle
 __pycache__
 /autojump/*.pyc
-/tags
-tags
 desktop.ini
+/tags
+/tags.temp
+/tags.lock
