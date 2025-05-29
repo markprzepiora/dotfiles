@@ -542,6 +542,7 @@ function! AlternateForCurrentFile()
   let in_spec = match(current_file, '^spec/') != -1
   let going_to_spec = !in_spec
   let in_app =
+        \ match(current_file, '\<rallio\>') != -1 ||
         \ match(current_file, '\<controllers\>') != -1 ||
         \ match(current_file, '\<models\>') != -1 ||
         \ match(current_file, '\<views\>') != -1 ||
