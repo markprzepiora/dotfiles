@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+set -eux
+
+sudo apt-get update --yes
+sudo apt-get upgrade --yes
+sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common exuberant-ctags libpq-dev s3cmd ncdu silversearcher-ag fd-find pv pigz libsqlite3-dev pcre2-utils direnv python3 python-is-python3 python3-pip python3-pynvim postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+sudo apt-get update --yes
+sudo apt-get install --yes -qq postgresql-17 postgresql-17-pgvector libpq-dev
+
+mkdir -p ~/bin
+! test -f ~/bin/fd && ln -s "$(which fdfind)" ~/bin/fd
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale
+
+sudo systemctl disable postgresql
+sudo systemctl stop postgresql
+
+asdf plugin add fzf
+asdf install fzf latest
+asdf set --home fzf latest
+
+asdf plugin add redis
+asdf install redis 8.0.2
+asdf set --home redis 8.0.2
+
+asdf plugin add tmux
+asdf install tmux latest
+asdf set --home tmux latest
+
+asdf plugin add nodejs
+asdf install nodejs 22.16.0
+asdf install nodejs latest
+asdf set --home nodejs latest
+
+asdf plugin add neovim
+asdf install neovim latest
+asdf set --home neovim latest
+
+asdf plugin add ruby
+asdf install ruby 3.1.7
+asdf install ruby 3.2.8
+asdf install ruby 3.3.8
+asdf install ruby 3.4.4
+asdf set --home ruby 3.4.4
+
+if [ ! -f /usr/share/keyrings/1password-archive-keyring.gpg ]; then
+  curl -sS https://downloads.1password.com/linux/keys/1password.asc |
+  sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+fi
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
+sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+if [ ! -f /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg ]; then
+  curl -sS https://downloads.1password.com/linux/keys/1password.asc |
+  sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+fi
+sudo apt update
+sudo apt install -y libasound2t64 1password 1password-cli
+
+curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+set +x
+
+echo "-----------------------------"
+echo "Done - now restart your shell"
+echo "-----------------------------"
