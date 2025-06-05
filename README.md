@@ -103,7 +103,7 @@ Once you get into a bash terminal, install packages we'll need:
     sudo apt-get install --yes -qq parallel wget build-essential bison zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev software-properties-common exuberant-ctags libpq-dev s3cmd ncdu silversearcher-ag fd-find pv pigz libsqlite3-dev pcre2-utils direnv python3 python-is-python3 postgresql-common &&
     sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y &&
     sudo apt-get update --yes &&
-    sudo apt-get install --yes -qq postgresql-17 libpq-dev &&
+    sudo apt-get install --yes -qq postgresql-17 postgresql-17-pgvector libpq-dev &&
     mkdir -p ~/bin &&
     ln -s "$(which fdfind)" ~/bin/fd &&
     sudo locale-gen en_US en_US.UTF-8 && sudo update-locale &&
