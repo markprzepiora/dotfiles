@@ -36,16 +36,14 @@ fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+plugins=(git)
 
-plugins=(git fzf)
-
-# In OSX...
+# MacOS
 if [ -e /Library ]; then
-  # Enable the osx plugin
   plugins+=(osx)
 fi
 
-# In WSL...
+# WSL
 if [ -e /mnt/c ]; then
   # Disable BG_NICE because it fails with errors
   unsetopt BG_NICE
@@ -61,7 +59,7 @@ if [ -e /mnt/c ]; then
   PATH="$PATH":~/dotfiles/bin/wsl
 fi
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # !@^&**#*@^&% autopushd and autocorrect
 unsetopt autopushd
@@ -167,15 +165,11 @@ test -r /usr/local/share/chruby/auto.sh && \
   source /usr/local/share/chruby/auto.sh
 
 # Load asdf if present
-export ASDF_DATA_DIR=/home/mark/.asdf
+export ASDF_DATA_DIR=~/.asdf
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
-
-if [ "$ZSH_PROFILE" = "true" ]; then
-  zprof
-fi
 
 # fnm
 FNM_PATH="/home/mark/.local/share/fnm"
@@ -186,4 +180,12 @@ fi
 
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
+if [ "$ZSH_PROFILE" = "true" ]; then
+  zprof
 fi
