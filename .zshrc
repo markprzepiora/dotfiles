@@ -1,3 +1,4 @@
+ZSH_PROFILE=false
 if [ "$ZSH_PROFILE" = "true" ]; then
   zmodload zsh/zprof
 fi
@@ -142,8 +143,14 @@ fi
 alias tat='tmux at'
 
 f() {
-    fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+    if command -v yazi >/dev/null 2>&1; then
+      mkdir -p "${XDG_CACHE_HOME}/yazi"
+      yazi "$@" --cwd-file="${XDG_CACHE_HOME}/yazi/.yazi_d"
+      cd "$(cat "${XDG_CACHE_HOME}/yazi/.yazi_d")"
+    else
+      fff "$@"
+      cd "$(cat "${XDG_CACHE_HOME}/fff/.fff_d")"
+    fi
 }
 
 # Less annoying pager in psql

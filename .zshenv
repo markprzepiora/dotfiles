@@ -5,8 +5,15 @@
 # important environment variables. `.zshenv' should not contain commands that
 # produce output or assume the shell is attached to a tty.
 
+XDG_CACHE_HOME="${HOME}/.cache"
+
 # Add dotfiles executables
 PATH="$PATH:$HOME/dotfiles/bin"
+
+# Add x86_64 dotfiles binaries to path
+if [[ $(uname -sp) =~ x86_64 ]]; then
+  PATH="$PATH:$HOME/dotfiles/bin/linux"
+fi
 
 # Add globally-installed npm binaries to path
 PATH="$PATH:$HOME/.npm_global/bin"
