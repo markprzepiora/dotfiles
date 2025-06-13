@@ -39,6 +39,10 @@ asdf plugin add neovim
 asdf install neovim latest
 asdf set --home neovim latest
 
+asdf plugin add memcached
+asdf install memcached latest
+asdf set --home memcached latest
+
 asdf plugin add ruby
 asdf install ruby 3.1.7
 asdf install ruby 3.2.8
