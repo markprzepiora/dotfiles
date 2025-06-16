@@ -60,7 +60,7 @@ if [ -e /mnt/c ]; then
   PATH="$PATH":~/dotfiles/bin/wsl
 fi
 
-source "$ZSH/oh-my-zsh.sh"
+# source "$ZSH/oh-my-zsh.sh"
 
 # !@^&**#*@^&% autopushd and autocorrect
 unsetopt autopushd
@@ -199,11 +199,6 @@ if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi
 
-if [ "$ZSH_PROFILE" = "true" ]; then
-  zprof
-fi
-
-
 # Add a newline before every prompt, except the first
 PROMPT_NEEDS_NEWLINE=false
 precmd() {
@@ -217,4 +212,8 @@ clear() {
 
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
+fi
+
+if [ "$ZSH_PROFILE" = "true" ]; then
+  zprof
 fi
