@@ -1,0 +1,34 @@
+add_newline = false
+command_timeout = 10
+format = """$directory$git_branch ${custom.newline_if_thin}$character"""
+
+[custom.newline_if_thin]
+when = '''test $COLUMNS -lt 90'''
+format = "\n"
+
+[directory]
+truncation_length = 2
+truncation_symbol = '…/'
+home_symbol = '~'
+read_only = '  '
+format = '[$path]($style)[$read_only]($read_only_style)'
+style = 'purple'
+
+[username]
+style_user = 'purple bold'
+style_root = 'black bold'
+format = '[$user](purple)'
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[$hostname](green)'
+disabled = false
+
+[git_branch]
+format = '[\[](black)[$branch](green)[\]](black)'
+
+[ruby]
+format = '[//](black bold) [${symbol} ${version}]($style) '
+disabled = true

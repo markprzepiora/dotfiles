@@ -70,7 +70,7 @@ unsetopt correct_all
 unsetopt AUTO_CD
 
 PROMPT='%{$fg_bold[blue]%}%n%{$fg_bold[blue]%}@%{$fg_bold[blue]%}%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[red]%}$(git_prompt_info)%{$fg_bold[red]%}
-%{$fg_bold[blue]%}◈ %{$reset_color%}'
+%{$fg_bold[blue]%}❯ %{$reset_color%}'
 
 # C-x e to edit the current line in the editor
 autoload edit-command-line
@@ -201,4 +201,20 @@ fi
 
 if [ "$ZSH_PROFILE" = "true" ]; then
   zprof
+fi
+
+
+# Add a newline before every prompt, except the first
+PROMPT_NEEDS_NEWLINE=false
+precmd() {
+  [[ "$PROMPT_NEEDS_NEWLINE" == true ]] && echo
+  PROMPT_NEEDS_NEWLINE=true
+}
+clear() {
+  PROMPT_NEEDS_NEWLINE=false
+  command clear
+}
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
 fi

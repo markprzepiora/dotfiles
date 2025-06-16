@@ -50,6 +50,8 @@ asdf install ruby 3.3.8
 asdf install ruby 3.4.4
 asdf set --home ruby 3.4.4
 
+curl -sS https://starship.rs/install.sh | sh
+
 if [ ! -f /usr/share/keyrings/1password-archive-keyring.gpg ]; then
   curl -sS https://downloads.1password.com/linux/keys/1password.asc |
   sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
