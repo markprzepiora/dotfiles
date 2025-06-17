@@ -1,6 +1,6 @@
 add_newline = false
 command_timeout = 10
-format = """$directory$git_branch ${custom.newline_if_thin}$character"""
+format = """$directory$git_branch${custom.newline_if_thin}$character"""
 
 [custom.newline_if_thin]
 when = '''test $COLUMNS -lt 90'''
