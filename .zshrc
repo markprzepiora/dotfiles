@@ -60,7 +60,7 @@ if [ -e /mnt/c ]; then
   PATH="$PATH":~/dotfiles/bin/wsl
 fi
 
-# source "$ZSH/oh-my-zsh.sh"
+source "$ZSH/oh-my-zsh.sh"
 
 # !@^&**#*@^&% autopushd and autocorrect
 unsetopt autopushd
