@@ -57,3 +57,8 @@ if Pry.config.history.respond_to?(:histignore)
   Pry.config.history.histignore << /^hist\b/
   Pry.config.history.histignore << /^history\b/
 end
+
+pryrc_private_path = File.join(Dir.home, 'Dropbox', 'App-Settings-Sync', 'pryrc.private.rd')
+if File.exists?(pryrc_private_path)
+  load pryrc_private_path
+end
