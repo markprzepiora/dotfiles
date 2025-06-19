@@ -102,6 +102,9 @@ function _backward_kill_default_word() {
 zle -N backward-kill-default-word _backward_kill_default_word
 bindkey '\e=' backward-kill-default-word   # = is next to backspace
 
+# Launch tmux-sessionizer with ^g
+bindkey -s '^g' "^Qtmux-sessionizer^M"
+
 # An ISO8601-esque timestamp in the format 2016-01-10_10-53-17, usable in filenames!
 alias timestamp='date +"%Y-%m-%d_%H-%M-%S"'
 
