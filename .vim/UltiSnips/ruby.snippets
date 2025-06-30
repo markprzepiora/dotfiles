@@ -3,6 +3,8 @@ def __camelcase__(filename):
 	filename_without_leading_numbers = re.sub(r'^\d+_', r'', filename)
 	underscored_name = re.sub(r'\.rb$', r'', filename_without_leading_numbers)
 	titleized = underscored_name.title()
+	# manually titleize Api -> API
+	titleized = re.sub(r'([_/a-z]|\b)Api([_/A-Z]|\b)', r'\1API\2', titleized)
 	camelcased = titleized.replace('_', '')
 	return camelcased
 
@@ -15,14 +17,16 @@ def __camelcase__(filename):
 def __path_components__(path):
 	# remove _spec.rb
 	path = re.sub(r'_spec\.rb$', r'', path)
-
 	# remove .rb extension
 	path = re.sub(r'\.rb$', r'', path)
 
-  # Remove leading app/whatever
+	# Remove leading app/whatever/
 	path = re.sub(r'^app/[a-z_]+/', r'', path)
 
-  # Remove leading lib/
+	# Remove leading spec/whatever/
+	path = re.sub(r'^spec/[a-z_]+/', r'', path)
+
+	# Remove leading lib/
 	path = re.sub(r'^lib/', r'', path)
 
 	# Split into components
@@ -39,7 +43,7 @@ def camelcase():
 	snip.rv = __camelcase_with_module__(path)
 
 def spec_camelcase():
-	snip.rv = __camelcase__(fn).replace("Spec", "")
+	snip.rv = __camelcase_with_module__(path).replace("Spec", "")
 
 def filename():
 	return fn
