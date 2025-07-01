@@ -10,6 +10,12 @@ sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
 sudo apt-get update --yes
 sudo apt-get install --yes -qq postgresql-17 postgresql-17-pgvector libpq-dev
 
+# Install wslu
+sudo add-apt-repository ppa:wslutilities/wslu
+sudo apt update
+sudo apt install wslu
+wslview -r
+
 mkdir -p ~/bin
 ! test -f ~/bin/fd && ln -s "$(which fdfind)" ~/bin/fd
 sudo locale-gen en_US en_US.UTF-8
