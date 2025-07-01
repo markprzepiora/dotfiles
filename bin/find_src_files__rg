@@ -4,10 +4,10 @@ rg \
   --files \
   --no-ignore \
   --hidden \
-  --glob='!.git/*' \
+  --glob='!**/.git/*' \
   --glob='!.svn/*' \
   --glob='!.bundle/*' \
-  --glob='!node_modules/*' \
+  --glob='!**/node_modules/*' \
   --glob='!bower_components/*' \
   --glob='!public/assets/*' \
   --glob='!chef/vendor-berks/*' \
@@ -20,4 +20,6 @@ rg \
   --glob='!*.jpeg' \
   --glob='!*.svg' \
   --glob='!spec/fixtures/cassettes/*' \
+  --glob='!_remote/*' \
+  --glob='!env/*' \
   "$@"
