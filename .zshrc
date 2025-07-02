@@ -155,15 +155,19 @@ alias now='date +%Y-%m-%d--%H-%M-%S'
 
 # == GIT ALIASES ==
 # Use Selecta to interactively select a branch to check out.
-alias cbranch='git branch | cut -c 3- | selecta | xargs git checkout'
-alias st='git status --short'
+alias ci='git commit -v'
+alias cia='git commit -v --amend'
+# interactive checkout
+alias coi='git branch | grep -v "^\*" | cut -c 3- | fzf --height=20% --reverse --info=inline | xargs git checkout'
+alias co='git checkout'
+alias di='git diff'
+alias dc='git diff --cached'
+alias gdc='git diff --cached'
 # What commits are in the current branch
 alias gbc='git branch-commits HEAD develop'
 alias p='git pull --ff-only'
-alias co='git checkout'
-alias ci='git commit -v'
-alias cia='git commit -v --amend'
-alias gdc='git diff --cached'
+alias st='git status --short'
+
 alias po='pomodoro'
 
 # Quick ls, useful for when you're in a directory with a lot of files on e.g. a
