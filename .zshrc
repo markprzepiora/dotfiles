@@ -137,6 +137,14 @@ bindkey '\e=' backward-kill-default-word   # = is next to backspace
 # Launch tmux-sessionizer with ^g
 bindkey -s '^g' "^Qtmux-sessionizer^M"
 
+fzf-commands-widget () {
+    LBUFFER="${LBUFFER}$(compgen -c | fzf --height=20%)"
+    local ret=$?
+    zle reset-prompt
+    return $ret
+}
+zle -N fzf-commands-widget
+bindkey "^[r" fzf-commands-widget
 
 source ~/dotfiles/zsh_aliases
 
