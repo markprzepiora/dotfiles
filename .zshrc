@@ -21,6 +21,9 @@ ZSH_DISABLE_COMPFIX=true
 HISTSIZE=5000
 SAVEHIST=5000
 
+# Readable manpages
+MANWIDTH=100
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -62,12 +65,41 @@ fi
 
 source "$ZSH/oh-my-zsh.sh"
 
-# !@^&**#*@^&% autopushd and autocorrect
-unsetopt autopushd
+# ---------------------------------------------------
+# Override ZSH Options
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+# ---------------------------------------------------
+
+## Changing Directories:
+## https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
+
+unsetopt auto_pushd
+unsetopt auto_cd
+
+## Input/Output options:
+## https://zsh.sourceforge.io/Doc/Release/Options.html#Input_002fOutput
+
+# (Don't) Try to correct the spelling of commands and arguments.
+unsetopt correct
 unsetopt correct_all
 
-# turn off this awful feature
-unsetopt AUTO_CD
+## Completion options:
+## https://zsh.sourceforge.io/Doc/Release/Options.html#Completion-4
+
+# On an ambiguous completion, instead of listing possibilities or beeping,
+# insert the first match immediately. Then when completion is requested again,
+# remove the first match and insert the second match, etc. When there are no
+# more matches, go back to the first one again.
+setopt menu_complete
+
+# (Don't) beep on an ambiguous completion.
+unsetopt list_beep
+
+## History options:
+## https://zsh.sourceforge.io/Doc/Release/Options.html#History
+
+# (Don't) beep when a widget attempts to access a history entry which isn’t there.
+unsetopt hist_beep
 
 PROMPT='%{$fg_bold[blue]%}%n%{$fg_bold[blue]%}@%{$fg_bold[blue]%}%m:%{$fg_bold[green]%}%p%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[red]%}$(git_prompt_info)%{$fg_bold[red]%}
 %{$fg_bold[blue]%}❯ %{$reset_color%}'
