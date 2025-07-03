@@ -84,3 +84,7 @@
 	defaultBranch = main
 [commit]
 	template = /home/mark/dotfiles/.gitmessage
+
+[rebase]
+  autosquash = true
+  autostash = true
