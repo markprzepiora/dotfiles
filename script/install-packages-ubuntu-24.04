@@ -56,6 +56,11 @@ asdf install ruby 3.3.8
 asdf install ruby 3.4.4
 asdf set --home ruby 3.4.4
 
+asdf plugin add python
+sudo apt install -y libbz2-dev liblzma-dev tk-dev
+asdf install python 3.13.5
+asdf set --home python 3.13.5
+
 curl -sS https://starship.rs/install.sh | sh
 
 if [ ! -f /usr/share/keyrings/1password-archive-keyring.gpg ]; then
