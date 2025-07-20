@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+set -eux
+
+sudo pacman -S --needed \
+  parallel \
+  wget \
+  base-devel \
+  bison \
+  zlib \
+  libyaml \
+  openssl \
+  gdbm \
+  readline \
+  ncurses \
+  libffi \
+  ctags \
+  postgresql-libs \
+  s3cmd \
+  ncdu \
+  the_silver_searcher \
+  fd \
+  pv \
+  pigz \
+  sqlite3 \
+  pcre2 \
+  direnv \
+  python3 \
+  python-pip \
+  python-pynvim \
+  bzip2 \
+  xz \
+  tk \
+  fzf \
+  tmux \
+  neovim \
+  starship \
+  zsh
+
+yay -S --needed heroku-cli
+
+sudo locale-gen en_US en_US.UTF-8
+
+mise install redis@8.0.2
+mise use --global redis@8.0.2
+
+mise install nodejs@22.16.0 nodejs@lts nodejs@latest
+mise use --global nodejs@lts
+
+mise install ruby@3.1.7 ruby@3.2.8 ruby@3.3.8 ruby@3.4.5
+mise use --global ruby@3.4.5
+
+mise install python@3.13.5
+mise use --global python@3.13.5
