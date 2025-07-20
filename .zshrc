@@ -202,11 +202,6 @@ fi
 
 if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
-
-  if [ -f "$HOME"/dotfiles/fzf-tab/fzf-tab.plugin.zsh ]; then
-    source "$HOME"/dotfiles/fzf-tab/fzf-tab.plugin.zsh
-    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-  fi
 fi
 
 # Add a newline before every prompt, except the first
