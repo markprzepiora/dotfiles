@@ -26,6 +26,7 @@ alias dc='git diff --cached'
 alias gdc='git diff --cached'
 # What commits are in the current branch
 alias gbc='git branch-commits HEAD develop'
+alias h=heroku
 alias p='git pull --ff-only'
 alias st='git status --short'
 
