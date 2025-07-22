@@ -174,22 +174,9 @@ elif [ -f /usr/bin/direnv ]; then
   eval "$(/usr/bin/direnv hook zsh)"
 fi
 
-# Enable chruby/auto if present
-test -r /usr/local/share/chruby/auto.sh && \
-  source /usr/local/share/chruby/auto.sh
-
-# Load asdf if present
-export ASDF_DATA_DIR=~/.asdf
-export PATH="$ASDF_DATA_DIR/shims:$PATH"
-
-# Load personalized zshrc files if they exist.
-[[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
-
-# fnm
-FNM_PATH="/home/mark/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
+# Load mise
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate "$(ps -o comm= -p$$)")"
 fi
 
 if [ -f "$HOME/.cargo/env" ]; then
@@ -218,6 +205,9 @@ fi
 # Alt+z <char> delete until (not including) the next <char>
 zmodload zsh/deltochar
 bindkey "\ez" zap-to-char
+
+# Load personalized zshrc files if they exist.
+[[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
 
 if [ "$ZSH_PROFILE" = "true" ]; then
   zprof
