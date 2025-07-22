@@ -1,6 +1,9 @@
 snippet script
 #!/usr/bin/env bash
 
+# Cheat sheet:
+# https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
+
 readonly ARGS="\$@"
 readonly PROGDIR=\$(cd "\${0%/*}" && pwd)
 readonly PROGNAME="\${0##*/}"
@@ -14,16 +17,36 @@ endsnippet
 
 
 snippet getopt
+# Default values for options
 input=""
 yes=0
 
 # read the options
-TEMP=\$(getopt -o i:,y --long input:,yes -- "\$@")
+TEMP=\$(getopt -o i:,yh --long input:,yes,help -- "\$@")
 eval set -- "\$TEMP"
+
+help() {
+    cat <<EOF
+Usage:
+
+    \$0 [ARG...]
+
+Options:
+
+    [ARG...]                     Describe the positional arguments to your script here
+    -h --help                    Show this help message
+    -y --yes                     A flag
+    -iVAL --input=VAL            An option with an argument
+EOF
+    exit 1
+}
 
 # extract options and their arguments into variables.
 while true ; do
     case "\$1" in
+        -h | --help)
+            help
+            ;;
         -i | --input)
             input="\$2"
             shift 2
@@ -36,6 +59,19 @@ while true ; do
         *) echo "Internal error!" ; exit 1 ;;
     esac
 done
+
+# Cheat sheet:
+# https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
+
+if [[ \$yes -eq 1 ]]; then
+    # Do something if the --yes flag was set
+fi
+
+if [[ -n \$input ]]; then
+    # Do something with the input value
+else
+    # Handle the case where input is not provided
+fi
 endsnippet
 
 
