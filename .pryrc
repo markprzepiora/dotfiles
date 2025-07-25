@@ -4,10 +4,43 @@ if File.exist?('/proc/version') && File.read('/proc/version').include?('WSL')
       IO.popen(%w(xclip -selection clipboard -in), 'w') { |f| f << self }
       self
     end
+
+    alias_method :yy, :pbcopy
+  end
+
+  class Array
+    def pbcopy
+      inspect.pbcopy
+    end
+
+    alias_method :yy, :pbcopy
   end
 
   def pbpaste
     `~/Dropbox/bin/windows/paste.exe`
+  end
+end
+
+if RbConfig::CONFIG['host_os'] == 'linux' && `which wl-copy 2>/dev/null`.strip.length > 0 && ENV['WAYLAND_DISPLAY'].to_s.strip.length > 0
+  class String
+    def pbcopy
+      IO.popen(%w(wl-copy), 'w') { |f| f << self }
+      self
+    end
+
+    alias_method :yy, :pbcopy
+  end
+
+  class Array
+    def pbcopy
+      inspect.pbcopy
+    end
+
+    alias_method :yy, :pbcopy
+  end
+
+  def pbpaste
+    `wl-paste`
   end
 end
 
@@ -60,6 +93,6 @@ end
 
 # ~/Dropbox/App-Settings-Sync/pryrc.private.rb
 pryrc_private_path = File.join(Dir.home, 'Dropbox', 'App-Settings-Sync', 'pryrc.private.rb')
-if File.exists?(pryrc_private_path)
+if File.exist?(pryrc_private_path)
   load pryrc_private_path
 end
