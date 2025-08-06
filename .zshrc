@@ -156,7 +156,7 @@ f() {
 }
 
 # Less annoying pager in psql
-PSQL_PAGER="less -iMSx4 -FX"
+export PSQL_PAGER="less -iMSx4 -FX"
 
 # Load iterm2 shell integrations if present
 test -e ${HOME}/.iterm2_shell_integration.zsh &&
