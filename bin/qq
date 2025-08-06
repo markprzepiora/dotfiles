@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Cheat sheet:
+# https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
+
+readonly ARGS="$@"
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
+readonly PROGNAME="${0##*/}"
+
+set -o pipefail
+set -eu
+
+cd "${PROGDIR}/.."
+
+declare -A quick_commands
+declare -a quick_commands_order
+
+add_command() {
+  local command_name="$1"
+  local command_action="$2"
+  quick_commands["$command_name"]="$command_action"
+  quick_commands_order+=("$command_name")
+}
+
+if [[ -n $WAYLAND_DISPLAY ]] && grep --silent --no-messages i7-1355U /proc/cpuinfo; then
+  add_command "(Power) Performance mode" "sudo cpupower frequency-set -g performance && sudo cpupower set -b 0"
+  add_command "(Power) Power saving mode" "sudo cpupower frequency-set -g powersave && sudo cpupower set -b 1"
+  add_command "(Network) Wi-Fi" "impala"
+  add_command "(Home VPN) Connect" "wg-quick up home"
+  add_command "(Home VPN) Disconnect" "wg-quick down home"
+fi
+
+for command in "${quick_commands_order[@]}"; do
+  echo "$command"
+done | fzf --no-sort | while read -r selected_command; do
+# done | bemenu -c -i | while read -r selected_command; do
+  if [[ -n $selected_command ]]; then
+    if [[ -n ${quick_commands[$selected_command]}
+    ]]; then
+      eval "${quick_commands[$selected_command]}"
+    else
+      echo "Command not found: $selected_command"
+    fi
+  else
+    echo "No command selected."
+  fi
+done
