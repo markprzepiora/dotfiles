@@ -39,24 +39,43 @@ fi
 plugins=(git)
 
 # MacOS
-if [ -e /Library ]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
   plugins+=(osx)
 fi
 
-# WSL
-if [ -e /mnt/c ]; then
-  # Disable BG_NICE because it fails with errors
-  unsetopt BG_NICE
+# Linux
+if [[ "$OSTYPE" == "linux-gnu"* && -e /proc/version ]]; then
+  read -r __version < /proc/version
 
-  # Set umask since it's $&#*ed up by default in WSL
-  umask 022
+  # WSL
+  if [[ $__version == *"WSL"* ]]; then
+    # Disable BG_NICE because it fails with errors
+    unsetopt BG_NICE
 
-  # Add `wcd` command for changing into a Windows directory
-  wcd() {
-    cd "$(~/Dropbox/bin/windows-to-wsl-path "$1")"
-  }
+    # Set umask since it's $&#*ed up by default in WSL
+    umask 022
 
-  PATH="$PATH":~/dotfiles/bin/wsl
+    # Add `wcd` command for changing into a Windows directory
+    wcd() {
+      cd "$(~/Dropbox/bin/windows-to-wsl-path "$1")"
+    }
+
+    PATH="$PATH":~/dotfiles/bin/wsl
+  fi
+
+  # Non-WSL Linux
+  if [[ $__version != *"WSL"* ]]; then
+    open() {
+      setsid xdg-open "${@:-.}" >/dev/null 2>&1
+    }
+  fi
+
+  # Wayland
+  if [[ -n "$WAYLAND_DISPLAY" ]]; then
+    alias pbcopy='wl-copy'
+  fi
+
+  unset __version
 fi
 
 source "$ZSH/oh-my-zsh.sh"
@@ -154,6 +173,12 @@ f() {
       cd "$(cat "${XDG_CACHE_HOME}/fff/.fff_d")"
     fi
 }
+
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
 
 # Less annoying pager in psql
 export PSQL_PAGER="less -iMSx4 -FX"
