@@ -23,33 +23,55 @@ add_command() {
 }
 
 if [[ -n $WAYLAND_DISPLAY ]] && grep --silent --no-messages i7-1355U /proc/cpuinfo; then
-  add_command "(Power) Performance mode" "sudo cpupower frequency-set -g performance && sudo cpupower set -b 0"
-  add_command "(Power) Power saving mode" "sudo cpupower frequency-set -g powersave && sudo cpupower set -b 1"
+  if [[ -t 1 ]]; then
+    add_command "(Power) Performance mode" "sudo cpupower frequency-set -g performance && sudo cpupower set -b 0"
+    add_command "(Power) Power saving mode" "sudo cpupower frequency-set -g powersave && sudo cpupower set -b 1"
+  fi
   add_command "(Network) Wi-Fi" "impala"
   add_command "(Home VPN) Connect" "wg-quick up home"
   add_command "(Home VPN) Disconnect" "wg-quick down home"
   add_command "(Audio) Connect headset" "bluetoothctl connect 20:AF:1B:0A:44:D6"
   add_command "(Audio) Disconnect headset" "bluetoothctl disconnect 20:AF:1B:0A:44:D6"
-  add_command "(Audio) High Quality Bluetooth" "pactl set-card-profile bluez_card.20_AF_1B_0A_44_D6 a2dp-sink-sbc_xq"
-  add_command "(Audio) Bluetooth with microphone" "pactl set-card-profile bluez_card.20_AF_1B_0A_44_D6 headset-head-unit"
+  add_command "(Audio) High Quality Bluetooth" "bluetoothctl connect 20:AF:1B:0A:44:D6 && sleep 2 && pactl set-card-profile bluez_card.20_AF_1B_0A_44_D6 a2dp-sink-sbc_xq"
+  add_command "(Audio) Bluetooth with microphone" "bluetoothctl connect 20:AF:1B:0A:44:D6 && pactl set-card-profile bluez_card.20_AF_1B_0A_44_D6 headset-head-unit"
   add_command "(Audio) Restart services" "systemctl --user restart wireplumber pipewire pipewire-pulse"
   add_command '(Procs) Kill process by listening port' 'lsof -sTCP:LISTEN -Pni | fzf --multi --header-lines=1 | while read _ pid rest; do echo $pid; done | xargs kill'
-  add_command '(Display) Medium brightness' 'echo 10000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
-  add_command '(Display) Low brightness' 'echo 5000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
+  if [[ -t 1 ]]; then
+    add_command '(Display) Medium brightness' 'echo 10000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
+    add_command '(Display) Low brightness' 'echo 5000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
+  fi
 fi
 
-for command in "${quick_commands_order[@]}"; do
-  echo "$command"
-done | fzf --no-sort | while read -r selected_command; do
-# done | bemenu -c -i | while read -r selected_command; do
-  if [[ -n $selected_command ]]; then
-    if [[ -n ${quick_commands[$selected_command]}
-    ]]; then
-      eval "${quick_commands[$selected_command]}"
+if [[ -t 1 ]]; then
+  # Terminal
+  for command in "${quick_commands_order[@]}"; do
+    echo "$command"
+  done | fzf --no-sort | while read -r selected_command; do
+    if [[ -n $selected_command ]]; then
+      if [[ -n ${quick_commands[$selected_command]}
+      ]]; then
+        eval "${quick_commands[$selected_command]}"
+      else
+        echo "Command not found: $selected_command"
+      fi
     else
-      echo "Command not found: $selected_command"
+      echo "No command selected."
     fi
-  else
-    echo "No command selected."
-  fi
-done
+  done
+else
+  # GUI
+  for command in "${quick_commands_order[@]}"; do
+    echo "$command"
+  done | bemenu -c -i -l 20 --fixed-height -W 0.8 --fn "CaskaydiaMono Nerd Font 15" | while read -r selected_command; do
+    if [[ -n $selected_command ]]; then
+      if [[ -n ${quick_commands[$selected_command]}
+      ]]; then
+        eval "${quick_commands[$selected_command]}"
+      else
+        echo "Command not found: $selected_command"
+      fi
+    else
+      echo "No command selected."
+    fi
+  done
+fi
