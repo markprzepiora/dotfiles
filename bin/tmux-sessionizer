@@ -5,32 +5,45 @@ set -o pipefail
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/projects ~/src ~/work -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(
+        (find ~/projects ~/src ~/work ~/Obsidian -mindepth 1 -maxdepth 1 -type d
+        echo personal
+    ) | fzf)
 fi
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-selected_parent_name=$(basename $(realpath "$selected/..") | tr . _)
-tmux_running=$(pgrep tmux)
+case "$selected" in
+    "personal")
+        selected_name="personal" ;;
+    *)
+        selected_name="$(basename $(realpath "$selected/..") | tr . _)-$(basename "$selected" | tr . _)" ;;
+esac
 
-selected_name="${selected_parent_name}-${selected_name}"
-
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    exit 0
+if [[ -z $TMUX ]] && [[ -z "$(pgrep tmux)" ]]; then
+    # If tmux is not running, it's okay to attach to the session right away
+    detach_flag=""
+else
+    # If tmux is already running, tmux will complain unless we pass the -d flag
+    detach_flag="-d"
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    if command -v "tmux-${selected_name}" >/dev/null 2>&1; then
+        # If there is a custom tmux session script for this project, run it instead
+        "tmux-${selected_name}"
+    else
+        # Otherwise, just start a new tmux session in the selected directory
+        tmux new-session $detach_flag -s $selected_name -c "$selected"
+    fi
 fi
 
 if [[ -z $TMUX ]]; then
-    tmux attach -t $selected_name
+    tmux attach -t "$selected_name"
 else
-    tmux switch-client -t $selected_name
+    tmux switch-client -t "$selected_name"
 fi
 
 # vim: ts=4 sts=4 sw=4 et
