@@ -152,6 +152,7 @@ bindkey '\e=' backward-kill-default-word   # = is next to backspace
 # Launch tmux-sessionizer with ^g
 bindkey -s '^g' "^Qtmux-sessionizer^M"
 
+# choose a command with alt-r
 fzf-commands-widget () {
     LBUFFER="${LBUFFER}$(compgen -c | fzf --height=20%)"
     local ret=$?
@@ -160,6 +161,26 @@ fzf-commands-widget () {
 }
 zle -N fzf-commands-widget
 bindkey "^[r" fzf-commands-widget
+
+# insert a git branch name with alt-shift-B
+git-branch-widget () {
+    LBUFFER="${LBUFFER}$(git branch --sort=-committerdate | grep -v "^\*" | cut -c 3- | fzf --height=20% --reverse --info=inline --preview='git branch-commits {}')"
+    local ret=$?
+    zle reset-prompt
+    return $ret
+}
+zle -N git-branch-widget
+bindkey "^[B" git-branch-widget
+
+# insert a modified git file with alt-shift-M
+git-modified-file () {
+    LBUFFER="${LBUFFER}$(git status --short --porcelain | fzf --height=50% --reverse --info=inline --multi --accept-nth=2 --preview='git diff {2}' | tr '\n' ' ')"
+    local ret=$?
+    zle reset-prompt
+    return $ret
+}
+zle -N git-modified-file
+bindkey "^[M" git-modified-file
 
 source ~/dotfiles/zsh_aliases
 
