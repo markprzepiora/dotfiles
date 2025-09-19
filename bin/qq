@@ -35,12 +35,13 @@ if [[ -n $WAYLAND_DISPLAY ]] && grep --silent --no-messages i7-1355U /proc/cpuin
   add_command "(Audio) High Quality Bluetooth" "bluetoothctl connect 20:AF:1B:0A:44:D6 && sleep 1 && pactl set-card-profile bluez_card.20_AF_1B_0A_44_D6 a2dp-sink-sbc_xq"
   add_command "(Audio) Bluetooth with microphone" "bluetoothctl connect 20:AF:1B:0A:44:D6 && sleep 1 && pactl set-card-profile bluez_card.20_AF_1B_0A_44_D6 headset-head-unit"
   add_command "(Audio) Restart services" "systemctl --user restart wireplumber pipewire pipewire-pulse"
-  add_command '(Procs) Kill process by listening port' 'lsof -sTCP:LISTEN -Pni | fzf --multi --header-lines=1 | while read _ pid rest; do echo $pid; done | xargs kill'
   if [[ -t 1 ]]; then
     add_command '(Display) Medium brightness' 'echo 10000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
     add_command '(Display) Low brightness' 'echo 5000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
   fi
 fi
+
+add_command '(Procs) Kill process by listening port' 'lsof -sTCP:LISTEN -Pni | fzf --multi --header-lines=1 | while read _ pid rest; do echo $pid; done | xargs kill'
 
 if [[ -t 1 ]]; then
   # Terminal
