@@ -75,6 +75,12 @@ if [[ "$OSTYPE" == "linux-gnu"* && -e /proc/version ]]; then
     alias pbcopy='wl-copy'
   fi
 
+  if command -v notify-send >/dev/null 2>&1; then
+    passfail() {
+      notify-send "$1" "$(if [[ $? == 0 ]]; then echo "✅ Passed"; else echo "❌ Failed"; fi)"
+    }
+  fi
+
   unset __version
 fi
 
