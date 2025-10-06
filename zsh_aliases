@@ -43,3 +43,4 @@ if command -v eza >/dev/null 2>&1; then
 fi
 
 alias tat='tmux at'
+alias vi='nvim'
