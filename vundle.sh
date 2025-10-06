@@ -3,6 +3,6 @@
 set -eu
 set -o pipefail
 
-vi +PlugUpdate +PlugClean +qall
+vim +PlugUpdate +PlugClean +qall
 
 echo "Vim plugins installed"
