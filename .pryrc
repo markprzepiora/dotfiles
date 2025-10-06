@@ -29,6 +29,13 @@ if RbConfig::CONFIG['host_os'] == 'linux' && `which wl-copy 2>/dev/null`.strip.l
     end
 
     alias_method :yy, :pbcopy
+
+    def o
+      if File.exist?(self) || self =~ /\Ahttps?:\/\//
+        system('xdg-open', self)
+      end
+      self
+    end
   end
 
   class Array
@@ -37,6 +44,13 @@ if RbConfig::CONFIG['host_os'] == 'linux' && `which wl-copy 2>/dev/null`.strip.l
     end
 
     alias_method :yy, :pbcopy
+
+    def o
+      each do |item|
+        system('xdg-open', item.to_s)
+      end
+      self
+    end
   end
 
   def pbpaste
