@@ -29,10 +29,23 @@ declare tmp_list tmp_entries tmp_last old_last new_last old_count new_count
 bemenu_cmd=(bemenu -c -i -l 20 --fixed-height -W 0.8 --fn "CaskaydiaMono Nerd Font 15")
 
 # desktop entries directories paths
-desktop_path=("$HOME/.local/share/applications")
-desktop_path+=("/usr/local/share/applications")
-desktop_path+=("/usr/share/applications")
-desktop_path+=("/var/lib/flatpak/exports/share/applications")
+desktop_path=()
+
+if [[ -d "$HOME/.local/share/applications" ]]; then
+  desktop_path+=("$HOME/.local/share/applications")
+fi
+
+if [[ -d "/usr/local/share/applications" ]]; then
+  desktop_path+=("/usr/local/share/applications")
+fi
+
+if [[ -d "/usr/share/applications" ]]; then
+  desktop_path+=("/usr/share/applications")
+fi
+
+if [[ -d "/var/lib/flatpak/exports/share/applications" ]]; then
+  desktop_path+=("/var/lib/flatpak/exports/share/applications")
+fi
 
 # desktop entries absolute filepaths
 # shellcheck disable=SC2206
