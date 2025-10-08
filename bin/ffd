@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Cheat sheet:
+# https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
+
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
+"${PROGDIR}/ff" --type d "$@"
