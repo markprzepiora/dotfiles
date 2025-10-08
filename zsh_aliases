@@ -42,5 +42,9 @@ if command -v eza >/dev/null 2>&1; then
   alias l='eza -la --group-directories-first'
 fi
 
+if command -v taskwarrior-tui >/dev/null 2>&1; then
+  alias tt='taskwarrior-tui'
+fi
+
 alias tat='tmux at'
 alias vi='nvim'
