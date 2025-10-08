@@ -8,6 +8,7 @@ else
     selected=$(
         (find ~/projects ~/src ~/work ~/Obsidian -mindepth 1 -maxdepth 1 -type d
         echo personal
+        echo work
     ) | fzf)
 fi
 
