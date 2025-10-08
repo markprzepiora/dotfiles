@@ -178,6 +178,16 @@ git-branch-widget () {
 zle -N git-branch-widget
 bindkey "^[B" git-branch-widget
 
+# insert a git commit with alt-shift-C
+git-commit-widget () {
+    LBUFFER="${LBUFFER}$(git r | fzf --height=50% --reverse --info=inline --multi --accept-nth=2 --preview='git show {2}')"
+    local ret=$?
+    zle reset-prompt
+    return $ret
+}
+zle -N git-commit-widget
+bindkey "^[C" git-commit-widget
+
 # insert a modified git file with alt-shift-M
 git-modified-file () {
     LBUFFER="${LBUFFER}$(git status --short --porcelain | fzf --height=50% --reverse --info=inline --multi --accept-nth=2 --preview='git diff {2}' | tr '\n' ' ')"
