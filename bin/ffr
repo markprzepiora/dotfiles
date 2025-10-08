@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
+"${PROGDIR}/ff" --changed-within=1d "$@"

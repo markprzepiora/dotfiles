@@ -25,7 +25,8 @@ selected_file=$(
     fd --no-ignore-vcs --exclude='**/node_modules/**' --search-path ~ "$@" |
     fzf --scheme=path --tiebreak=length,end --preview='
       [[ -d {} ]] && tree -C {} | head -100 || (bat --color=always --line-range :100 {} || head -100 {})
-    ' --preview-window=right:50% --ansi
+    ' --preview-window=right:50% --ansi \
+    --bind 'ctrl-r:reload(fd --no-ignore-vcs --exclude="**/node_modules/**" --search-path ~ --changed-within=1d)'
 )
 if [[ -n "$selected_file" ]]; then
     open "$selected_file"
