@@ -3,14 +3,8 @@
 # Cheat sheet:
 # https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
 
-readonly ARGS="$@"
-readonly PROGDIR=$(cd "${0%/*}" && pwd)
-readonly PROGNAME="${0##*/}"
-
 set -o pipefail
-set -eu
-
-cd "${PROGDIR}/.."
+set -e
 
 declare -A quick_commands
 declare -a quick_commands_order
@@ -47,7 +41,7 @@ if [[ -t 1 ]]; then
   # Terminal
   for command in "${quick_commands_order[@]}"; do
     echo "$command"
-  done | fzf --no-sort | while read -r selected_command; do
+  done | fzf --no-sort --query="$1" | while read -r selected_command; do
     if [[ -n $selected_command ]]; then
       if [[ -n ${quick_commands[$selected_command]}
       ]]; then
