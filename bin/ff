@@ -3,14 +3,30 @@
 # Cheat sheet:
 # https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
 
-set -o pipefail
-set -eu
-
 open () {
-    setsid xdg-open "${@:-.}" > /dev/null 2>&1 &
+    # This (with the 0.2 second sleep) is the most consistent way I could figure
+    # out to do this. Below are some alternatives that didn't work in all cases.
+    nohup xdg-open "${@:-.}" >/dev/null 2>&1 &
+    # This sleep is required to avoid the process exiting before xdg-open
+    # actually runs the command
+    sleep 0.2
+
+    # if command -v gio >/dev/null 2>&1; then
+    #     gio open "${@:-.}"
+    # else
+    #     nohup xdg-open "${@:-.}" >/dev/null 2>&1 &
+    #     # This sleep is required to avoid the process exiting before xdg-open
+    #     # actually runs the command
+    #     sleep 0.2
+    # fi
 }
 
-selected_file=$(fd --no-ignore-vcs --exclude='**/node_modules/**' --search-path ~ "$@" | fzf --scheme=path --tiebreak=length,end --preview='[[ -d {} ]] && tree -C {} | head -100 || (bat --color=always --line-range :100 {} || head -100 {})' --preview-window=right:50% --ansi)
+selected_file=$(
+    fd --no-ignore-vcs --exclude='**/node_modules/**' --search-path ~ "$@" |
+    fzf --scheme=path --tiebreak=length,end --preview='
+      [[ -d {} ]] && tree -C {} | head -100 || (bat --color=always --line-range :100 {} || head -100 {})
+    ' --preview-window=right:50% --ansi
+)
 if [[ -n "$selected_file" ]]; then
-    (open "$selected_file")
+    open "$selected_file"
 fi
