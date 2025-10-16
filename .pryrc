@@ -16,6 +16,12 @@ if File.exist?('/proc/version') && File.read('/proc/version').include?('WSL')
     alias_method :yy, :pbcopy
   end
 
+  class Integer
+    def pbcopy
+      to_s.pbcopy
+    end
+  end
+
   def pbpaste
     `~/Dropbox/bin/windows/paste.exe`
   end
@@ -50,6 +56,12 @@ if RbConfig::CONFIG['host_os'] == 'linux' && `which wl-copy 2>/dev/null`.strip.l
         system('xdg-open', item.to_s)
       end
       self
+    end
+  end
+
+  class Integer
+    def pbcopy
+      to_s.pbcopy
     end
   end
 
