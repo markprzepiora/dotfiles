@@ -250,6 +250,8 @@ if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi
 
+[[ -f /home/mark/.config/op/plugins.sh ]] && source /home/mark/.config/op/plugins.sh
+
 # Add a newline before every prompt, except the first
 PROMPT_NEEDS_NEWLINE=false
 precmd() {
