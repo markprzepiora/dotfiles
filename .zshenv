@@ -34,5 +34,8 @@ PATH="$PATH":~/.cargo/bin
 # Add snap bin dir
 PATH="$PATH":/snap/bin
 
+# Add omarchy bin directory to path if it exists
+[[ -d ~/.local/share/omarchy/bin ]] && PATH="$PATH":~/.local/share/omarchy/bin
+
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
