@@ -225,8 +225,13 @@ export PSQL_PAGER="less -iMSx4 -FX"
 test -e ${HOME}/.iterm2_shell_integration.zsh &&
   source ${HOME}/.iterm2_shell_integration.zsh
 
-# Load patched, vendored autojump
-source ~/dotfiles/autojump/autojump.zsh
+# Load zoxide if installed, otherwise load autojump
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh --cmd j)"
+else
+  # Load patched, vendored autojump
+  source ~/dotfiles/autojump/autojump.zsh
+fi
 
 # Load direnv
 if [ -f /home/linuxbrew/.linuxbrew/bin/direnv ]; then
