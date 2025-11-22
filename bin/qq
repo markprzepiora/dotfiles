@@ -33,7 +33,9 @@ if [[ -n $WAYLAND_DISPLAY ]] && grep --silent --no-messages i7-1355U /proc/cpuin
     add_command '(Display) Medium brightness' 'echo 10000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
     add_command '(Display) Low brightness' 'echo 5000 | sudo tee /sys/class/backlight/intel_backlight/brightness'
   fi
-  add_command '(Webcam) Set exposure' 'v4l2-ctl -c backlight_compensation=0 -c gamma=120 -c exposure_dynamic_framerate=0 -c brightness=100'
+  add_command '(Webcam) Low exposure' 'v4l2-ctl -c backlight_compensation=0 -c gamma=120 -c exposure_dynamic_framerate=0 -c brightness=100'
+  add_command '(Webcam) High exposure' 'v4l2-ctl -c backlight_compensation=2 -c gamma=120 -c exposure_dynamic_framerate=0 -c brightness=100'
+  add_command '(Webcam) Compensate for high contrast light' 'v4l2-ctl -c backlight_compensation=0 -c gamma=135 -c exposure_dynamic_framerate=0 -c brightness=100 -c exposure_time_absolute=180'
 fi
 
 if [[ -n $WAYLAND_DISPLAY ]]; then
@@ -50,6 +52,7 @@ if [[ -t 1 ]]; then
     if [[ -n $selected_command ]]; then
       if [[ -n ${quick_commands[$selected_command]}
       ]]; then
+        echo "${quick_commands[$selected_command]}"
         eval "${quick_commands[$selected_command]}"
       else
         echo "Command not found: $selected_command"
