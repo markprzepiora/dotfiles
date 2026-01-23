@@ -48,3 +48,12 @@ fi
 
 alias tat='tmux at'
 alias vi='nvim'
+
+alias fabric=fabric-ai
+ai() {
+  if [ $# -eq 0 ]; then
+    cat | fabric -s
+  else
+    echo "$@" | fabric -s
+  fi
+}
