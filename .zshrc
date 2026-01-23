@@ -279,6 +279,9 @@ bindkey "\ez" zap-to-char
 # Load personalized zshrc files if they exist.
 [[ -e "$HOME/.zshrc_private" ]] && source "$HOME/.zshrc_private"
 
+# Load GHCup environment if it exists
+[ -f ~/.ghcup/env ] && . ~/.ghcup/env
+
 if [ "$ZSH_PROFILE" = "true" ]; then
   zprof
 fi
