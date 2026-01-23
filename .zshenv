@@ -39,3 +39,6 @@ PATH="$PATH":/snap/bin
 
 # Load personalized zshenv file if it exists.
 [[ -e "$HOME/.zshenv_private" ]] && source "$HOME/.zshenv_private"
+
+# Add bun binary directory to path if it exists
+[[ -d ~/.cache/.bun/bin ]] && PATH="$PATH":~/.cache/.bun/bin
