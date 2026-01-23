@@ -116,7 +116,7 @@ class RenameFile
     @performed = true
 
     begin
-      FileUtils.mkdir_p(@to.dirname) if !File.exists?(@to.dirname)
+      FileUtils.mkdir_p(@to.dirname) if !File.exist?(@to.dirname)
       @from.rename(@to)
       @ok = true
       true
