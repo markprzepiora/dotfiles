@@ -8,6 +8,7 @@ RIPGREP_CONFIG_PATH=.ripgreprc rg \
   --glob='!.svn/*' \
   --glob='!.bundle/*' \
   --glob='!**/node_modules/*' \
+  --glob='!.venv/*' \
   --glob='!bower_components/*' \
   --glob='!public/assets/*' \
   --glob='!chef/vendor-berks/*' \
