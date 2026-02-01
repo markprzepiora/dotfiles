@@ -6,10 +6,12 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     selected=$(
-        (find ~/projects ~/src ~/work ~/Obsidian ~/learn -mindepth 1 -maxdepth 1 -type d
-        echo personal
-        echo work
-    ) | fzf)
+        (
+            find ~/projects ~/src ~/work ~/Obsidian ~/learn -mindepth 1 -maxdepth 1 -type d
+            find ~ -mindepth 1 -maxdepth 1 -type d -name 'work*'
+            echo personal
+        ) | fzf
+    )
 fi
 
 if [[ -z $selected ]]; then
