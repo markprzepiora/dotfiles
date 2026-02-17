@@ -5,6 +5,7 @@
   aa = add --all
   ci = commit
   co = checkout
+  cp = cherry-pick
   dc = diff --cached
   di = diff
   mff = merge --ff-only
