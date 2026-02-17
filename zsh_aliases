@@ -12,6 +12,9 @@ alias traceroute='traceroute -q1 -w1'
 
 # e.g. 2018-04-17
 alias today='date +%Y-%m-%d'
+# e.g. 2018-04-16
+alias yesterday='date -d "yesterday" +%Y-%m-%d'
+# e.g. 2018-04-17--10-53-17
 alias now='date +%Y-%m-%d--%H-%M-%S'
 
 # == GIT ALIASES ==
