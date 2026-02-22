@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# coi: git [c]heck[o]ut, but [i]nteractive
+
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
+
+git branch --sort=-committerdate |
+  grep -v "^\*" |
+  cut -c 3- |
+  (
+    if command -v fzf > /dev/null; then
+      fzf --height=40% --reverse --info=inline --preview="git branch-commits {}"
+    else
+      ${PROGDIR}/selecta
+    fi
+  ) |
+  xargs git checkout

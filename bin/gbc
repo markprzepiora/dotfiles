@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# What commits are in the current branch
+
+# Cheat sheet:
+# https://kapeli.com/cheat_sheets/Bash_Test_Operators.docset/Contents/Resources/Documents/index
+
+git branch-commits HEAD "${1:-origin/HEAD}"

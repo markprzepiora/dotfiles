@@ -21,14 +21,10 @@ alias now='date +%Y-%m-%d--%H-%M-%S'
 # Use Selecta to interactively select a branch to check out.
 alias ci='git commit -v'
 alias cia='git commit -v --amend'
-# interactive checkout
-alias coi='git branch --sort=-committerdate | grep -v "^\*" | cut -c 3- | fzf --height=40% --reverse --info=inline --preview="git branch-commits {}" | xargs git checkout'
 alias co='git checkout'
 alias di='git diff'
 alias dc='git diff --cached'
 alias gdc='git diff --cached'
-# What commits are in the current branch
-alias gbc='git branch-commits HEAD develop'
 alias h=heroku
 alias p='git pull --ff-only'
 alias st='git status --short'

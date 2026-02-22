@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+readonly PROGDIR=$(cd "${0%/*}" && pwd)
+
 branch=$(
   git branch --all --sort=-committerdate |
   grep -v "HEAD ->" |
@@ -8,17 +10,29 @@ branch=$(
   # branches that don't have a corresponding local branch (including current branch)
   awk '
     /^\* / { current=substr($0, 3); next }
-    /^remotes\// { remote[$0] = 1; sub(/^remotes\/[^\/]+\//, ""); remotes[$0] = 1; next }
+    /^remotes\// {
+      remote[$0] = 1
+        order[++count] = $0
+        sub(/^remotes\/[^\/]+\//, "");
+        remotes[$0] = 1;
+        next
+    }
     { local[$0] = 1 }
     END {
-      for (r in remote) {
-        short_r=r
-        sub(/^remotes\/[^\/]+\//, "", short_r);
-        if (!(short_r in local) && short_r != current) print r
+      for (i = 1; i <= count; i++) {
+        r = order[i]
+          short_r = r
+          sub(/^remotes\/[^\/]+\//, "", short_r)
+          if (!(short_r in local) && short_r != current) print r
       }
     }
-  ' |
-  fzf --height=40% --reverse --info=inline --preview="git branch-commits {}"
+  ' | (
+    if command -v fzf > /dev/null; then
+      fzf --height=40% --reverse --info=inline --preview="git branch-commits {}"
+    else
+      ${PROGDIR}/selecta
+    fi
+  )
 )
 
 # Check if branch is of pattern remotes/<remote>/<branch>
