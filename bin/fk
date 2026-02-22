@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Get processes with specific columns directly from ps (excluding VSZ, RSS, TTY, STAT)
+# Use --header-lines 1 to keep the ps header in fzf
+selected=$(
+  ps -eo user,pid,pcpu,pmem,start,time,args |
+  grep -v "dotfiles/bin/[f]k" |
+  fzf \
+    --height=40% \
+    --reverse \
+    --info=inline \
+    --multi \
+    --header-lines=1 \
+    --query="${1:-}" \
+    --bind="ctrl-a:select-all" |
+  awk '{print $2}'
+)
+
+# Kill selected processes
+if [[ -n "$selected" ]]; then
+  echo "$selected" | xargs kill
+fi
