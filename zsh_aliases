@@ -18,7 +18,7 @@ alias yesterday='date -d "yesterday" +%Y-%m-%d'
 alias now='date +%Y-%m-%d--%H-%M-%S'
 
 # == GIT ALIASES ==
-# Use Selecta to interactively select a branch to check out.
+alias aa='git add --all'
 alias ci='git commit -v'
 alias cia='git commit -v --amend'
 alias co='git checkout'
@@ -29,10 +29,8 @@ alias h=heroku
 alias p='git pull --ff-only'
 alias st='git status --short'
 
-alias po='pomodoro'
-
-# Quick ls, useful for when you're in a directory with a lot of files on e.g. a
-# Windows directory in WSL.
+# Quick ls, useful for when you're in a directory with a lot of files in a slow
+# file system, e.g. a Windows directory in WSL.
 alias ql='ls -1 --color=never'
 
 # Use eza for ll and l if it's available
@@ -47,6 +45,7 @@ fi
 
 alias tat='tmux at'
 alias vi='nvim'
+alias v='nvim'
 
 alias fabric=fabric-ai
 ai() {
